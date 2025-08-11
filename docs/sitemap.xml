@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Root/Landing Page -->
+  <url>
+    <loc>https://your-domain.com/</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="da" href="https://your-domain.com/da/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://your-domain.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://your-domain.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://your-domain.com/"/>
+  </url>
+  
+  <!-- Danish Version -->
+  <url>
+    <loc>https://your-domain.com/da/</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="da" href="https://your-domain.com/da/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://your-domain.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://your-domain.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://your-domain.com/"/>
+  </url>
+  
+  <!-- English Version -->
+  <url>
+    <loc>https://your-domain.com/en/</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="da" href="https://your-domain.com/da/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://your-domain.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://your-domain.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://your-domain.com/"/>
+  </url>
+  
+  <!-- German Version -->
+  <url>
+    <loc>https://your-domain.com/de/</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="da" href="https://your-domain.com/da/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://your-domain.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://your-domain.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://your-domain.com/"/>
+  </url>
+  
+</urlset>

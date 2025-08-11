@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://your-domain.com/sitemap.xml
+
+# Block access to sensitive files
+Disallow: /.git/
+Disallow: /assets/script.js
+
+# Allow all language versions
+Allow: /da/
+Allow: /en/
+Allow: /de/
+
+# Crawl-delay (optional, adjust as needed)
+Crawl-delay: 1
