@@ -22,7 +22,7 @@
         setTimeout(() => {
             // Only redirect if user hasn't interacted with language selector
             if (!sessionStorage.getItem('languageSelected')) {
-                window.location.href = `/${targetLang}/`;
+                window.location.href = `./${targetLang}/`;
             }
         }, 2000);
     }
