@@ -1,43 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Florel Fiskeri - Coastal Summer House Rental</title>
-    <meta name="description" content="Beautiful coastal summer house rental in Denmark. Perfect for families and fishing enthusiasts.">
-    <link rel="stylesheet" href="./assets/style.css">
-    <link rel="canonical" href="https://your-domain.com/">
-    <link rel="alternate" hreflang="da" href="https://your-domain.com/da/">
-    <link rel="alternate" hreflang="en" href="https://your-domain.com/en/">
-    <link rel="alternate" hreflang="de" href="https://your-domain.com/de/">
-    <link rel="alternate" hreflang="x-default" href="https://your-domain.com/">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Florel Fiskeri - Coastal Summer House Rental</title>
+  <meta name="description" content="Florel Fiskeri — cosy coastal summer house in Denmark. Family friendly, great for anglers and nature lovers.">
+  <link rel="stylesheet" href="./assets/style.css">
+
+  <!-- Canonical & language alternates (update if you move to a custom domain) -->
+  <link rel="canonical" href="https://platzdk.github.io/Florel/">
+  <link rel="alternate" hreflang="da" href="https://platzdk.github.io/Florel/da/">
+  <link rel="alternate" hreflang="en" href="https://platzdk.github.io/Florel/en/">
+  <link rel="alternate" hreflang="de" href="https://platzdk.github.io/Florel/de/">
+  <link rel="alternate" hreflang="x-default" href="https://platzdk.github.io/Florel/">
 </head>
 <body>
-    <div class="landing-container">
-        <header class="landing-header">
-            <h1>Florel Fiskeri</h1>
-            <p>Coastal Summer House Rental</p>
-        </header>
-        
-        <main class="language-selector">
-            <h2>Choose Your Language / Vælg dit sprog / Wählen Sie Ihre Sprache</h2>
-            <div class="language-options">
-                <a href="da/" class="language-link" data-lang="da">
-                    <span class="flag">🇩🇰</span>
-                    <span class="language">Dansk</span>
-                </a>
-                <a href="en/" class="language-link" data-lang="en">
-                    <span class="flag">🇬🇧</span>
-                    <span class="language">English</span>
-                </a>
-                <a href="de/" class="language-link" data-lang="de">
-                    <span class="flag">🇩🇪</span>
-                    <span class="language">Deutsch</span>
-                </a>
-            </div>
-        </main>
-    </div>
-    
-<script src="./assets/script.js"></script>
+  <div class="landing-container">
+    <header>
+      <h1>Florel Fiskeri</h1>
+      <p class="tagline">Coastal summer house — perfect for families and fishing enthusiasts</p>
+    </header>
+
+    <main>
+      <nav class="language-selector" aria-label="Language selector">
+        <h2 class="visually-hidden">Choose your language</h2>
+        <ul class="language-options" role="list">
+          <li role="listitem">
+            <a href="./da/" class="language-link" data-lang="da" aria-label="Dansk — vælg dansk">
+              <span class="flag" aria-hidden="true">🇩🇰</span>
+              <span class="language">Dansk</span>
+            </a>
+          </li>
+          <li role="listitem">
+            <a href="./en/" class="language-link" data-lang="en" aria-label="English — choose English">
+              <span class="flag" aria-hidden="true">🇬🇧</span>
+              <span class="language">English</span>
+            </a>
+          </li>
+          <li role="listitem">
+            <a href="./de/" class="language-link" data-lang="de" aria-label="Deutsch — wählen Sie Deutsch">
+              <span class="flag" aria-hidden="true">🇩🇪</span>
+              <span class="language">Deutsch</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </main>
+
+    <footer>
+      <p>© Florel Fiskeri</p>
+    </footer>
+  </div>
+
+  <script src="./assets/script.js" defer></script>
 </body>
 </html>
