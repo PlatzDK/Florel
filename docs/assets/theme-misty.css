@@ -1,0 +1,26 @@
+:root{
+  --site-primary:#5B7A86;
+  --site-secondary:#808A5B;
+  --site-accent:#D08B6A;
+  --site-neutral:#F2EEE9;
+  --site-bg:#F7F7F7;
+  --site-text:#2B3838;
+  --radius:12px;
+  --card-shadow:0 6px 18px rgba(43,56,56,0.06);
+}
+*{box-sizing:border-box}
+body{font-family:Inter,system-ui,Arial;margin:0;background:var(--site-bg);color:var(--site-text);padding:2rem}
+.container{max-width:1100px;margin:0 auto}
+.header{background:var(--site-primary);color:var(--site-neutral);padding:3.2rem;border-radius:var(--radius);box-shadow:var(--card-shadow)}
+.header h1{margin:0}
+.controls{margin-top:1rem;display:flex;gap:.75rem}
+.btn{padding:.6rem 1rem;border-radius:10px;border:0;cursor:pointer;font-weight:600}
+.btn-accent{background:var(--site-accent);color:white}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1rem}
+.card{background:var(--site-neutral);border-radius:12px;padding:1rem;box-shadow:var(--card-shadow)}
+.hero{background:
+  linear-gradient(180deg, rgba(91,122,134,0.45), rgba(91,122,134,0.12)),
+  url('../assets/images/hero-misty.jpg') center/cover no-repeat;
+  border-radius:var(--radius);padding:4rem 2rem;color:var(--site-neutral);margin-bottom:1rem}
+a{color:var(--site-secondary)}
+.footer{text-align:center;margin-top:2rem;color:rgba(43,56,56,.7)}
