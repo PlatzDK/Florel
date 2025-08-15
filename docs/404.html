@@ -1,39 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Not Found - Florel Fiskeri</title>
-    <meta name="description" content="The page you're looking for could not be found.">
-    <link rel="stylesheet" href="/assets/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Page not found — Florel Fiskeri</title>
+  <meta name="description" content="Page not found. Redirecting to Florel Fiskeri.">
+  <!-- Meta redirect fallback -->
+  <meta http-equiv="refresh" content="0; url=/Florel/">
+  <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
-    <div class="landing-container">
-        <header class="landing-header">
-            <h1>404</h1>
-            <p>Page Not Found</p>
-        </header>
-        
-        <main class="language-selector">
-            <h2>The page you're looking for doesn't exist.</h2>
-            <div class="language-options">
-                <a href="/da/" class="language-link">
-                    <span class="flag">🇩🇰</span>
-                    <span class="language">Dansk</span>
-                </a>
-                <a href="/en/" class="language-link">
-                    <span class="flag">🇬🇧</span>
-                    <span class="language">English</span>
-                </a>
-                <a href="/de/" class="language-link">
-                    <span class="flag">🇩🇪</span>
-                    <span class="language">Deutsch</span>
-                </a>
-            </div>
-            <p style="margin-top: 2rem; opacity: 0.8;">
-                <a href="/" style="color: white; text-decoration: underline;">Return to Homepage</a>
-            </p>
-        </main>
-    </div>
+  <div style="max-width:600px;margin:4rem auto;font-family:system-ui,Arial,Helvetica,sans-serif;text-align:center;">
+    <h1>Page not found</h1>
+    <p>We tried to redirect you to the Florel landing page. If your browser doesn't redirect automatically, <a href="/Florel/">click here to go to Florel</a>.</p>
+  </div>
+
+  <script>
+    // JS redirect fallback (forces client to correct base)
+    try {
+      if (window.location.pathname !== '/Florel/') {
+        window.location.replace('/Florel/');
+      }
+    } catch (e) {
+      // ignore — user can click the link above
+    }
+  </script>
 </body>
 </html>
