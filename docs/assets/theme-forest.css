@@ -1,0 +1,50 @@
+:root{
+  --site-primary:#2F4F37;
+  --site-secondary:#6B8B57;
+  --site-accent:#E1B12C;
+  --site-neutral:#EDE6DA;
+  --site-bg:#F6F4F0;
+  --site-text:#213127;
+  --radius:12px;
+  --card-shadow: 0 6px 18px rgba(33,49,39,0.08);
+  --gap:1rem;
+}
+*{box-sizing:border-box}
+body{
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin:0;
+  background:var(--site-bg);
+  color:var(--site-text);
+  line-height:1.45;
+  padding:2rem;
+}
+.container{max-width:1100px;margin:0 auto}
+.header{
+  background:linear-gradient(180deg, rgba(47,79,55,0.9), rgba(47,79,55,0.75));
+  color:var(--site-neutral);
+  padding:3.5rem 1.5rem;
+  border-radius:var(--radius);
+  margin-bottom:1.25rem;
+  box-shadow:var(--card-shadow);
+}
+.header h1{margin:0;font-size:2rem}
+.tagline{opacity:.95}
+.controls{display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap}
+.btn{padding:.6rem 1rem;border-radius:10px;border:0;cursor:pointer;font-weight:600}
+.btn-accent{background:var(--site-accent);color:var(--site-primary)}
+.btn-secondary{background:transparent;color:var(--site-neutral);border:2px solid rgba(237,230,218,.08)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--gap);margin-top:1.25rem}
+.card{background:var(--site-neutral);border-radius:12px;padding:1rem;box-shadow:var(--card-shadow)}
+.card h3{margin-top:0;color:var(--site-primary)}
+.hero{
+  background:
+    linear-gradient(180deg, rgba(47,79,55,0.45), rgba(47,79,55,0.12)),
+    url('../assets/images/hero-forest.jpg') center/cover no-repeat;
+  border-radius:var(--radius);
+  padding:4rem 2rem;
+  color:var(--site-neutral);
+  margin-bottom:1rem;
+}
+.small{font-size:.95rem;opacity:.95}
+.footer{margin-top:2rem;text-align:center;color:rgba(33,49,39,.7)}
+a{color:var(--site-secondary)}
