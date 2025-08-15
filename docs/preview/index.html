@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Florel — Theme preview</title>
+
+  <!-- Theme stylesheet (will be swapped by JS) -->
+  <link id="theme-stylesheet" rel="stylesheet" href="../../assets/theme-forest.css">
+
+  <style>
+    /* small page chrome to present the previews */
+    :root{
+      --ui-bg:#fff;
+      --ui-border:#e8e8e8;
+      --ui-radius:12px;
+      --gap:12px;
+      --muted:#666;
+    }
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial; margin:24px; background:#f6f7fb; color:#222}
+    .wrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:24px;}
+    .preview{background:linear-gradient(180deg,rgba(0,0,0,0.02),rgba(0,0,0,0.01));padding:20px;border-radius:12px;border:1px solid var(--ui-border)}
+    .controls{background:var(--ui-bg);padding:16px;border-radius:12px;border:1px solid var(--ui-border);height:fit-content}
+    .control-title{font-weight:700;margin:0 0 8px 0}
+    .theme-button{display:block;width:100%;padding:10px;border-radius:10px;border:0;margin-bottom:8px;cursor:pointer;font-weight:600}
+    .btn-forest{background:#2F4F37;color:#fff}
+    .btn-lakeside{background:#0E5F6A;color:#fff}
+    .btn-misty{background:#5B7A86;color:#fff}
+    .sample-hero{height:220px;border-radius:10px;padding:18px;color:inherit;display:flex;flex-direction:column;justify-content:flex-end;background-size:cover;background-position:center;margin-bottom:12px}
+    .sample-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+    .sample-card{padding:12px;border-radius:10px;background:rgba(255,255,255,0.85);box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+    .small{font-size:0.92rem;color:var(--muted)}
+    .link{display:inline-block;margin-top:12px;padding:8px 12px;border-radius:8px;background:#fff;border:1px solid var(--ui-border);text-decoration:none;color:inherit}
+    footer{margin-top:14px;color:var(--muted);font-size:.9rem}
+    @media (max-width:900px){.wrap{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="preview" id="preview-area">
+      <header style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+        <div>
+          <h1 style="margin:0;font-size:1.25rem">Florel Fiskeri — theme preview</h1>
+          <p class="small" style="margin-top:6px">Click a theme on the right to swap the preview. This is a draft for the teams — content is placeholder.</p>
+        </div>
+      </header>
+
+      <!-- hero: background image is optional; themes include hero url referencing ../assets/images/... -->
+      <section class="sample-hero" id="sample-hero" style="background:
+        linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.12)),
+        url('../../assets/images/hero-forest.jpg') center/cover no-repeat;">
+        <div style="max-width:720px">
+          <h2 style="margin:0;color:inherit">Cozy summer house in the woods</h2>
+          <p class="small" style="margin-top:6px">Forest, lake and a stream nearby — showing overlay + color contrast.</p>
+          <a href="#" class="link">Book stay</a>
+        </div>
+      </section>
+
+      <div class="sample-row" style="margin-top:12px">
+        <div class="sample-card">
+          <h3 style="margin:0 0 6px 0">Living room</h3>
+          <p class="small">Warm wood stove, comfy seating and forest views.</p>
+        </div>
+        <div class="sample-card">
+          <h3 style="margin:0 0 6px 0">The lake</h3>
+          <p class="small">A short walk to the small lake and stream for fishing.</p>
+        </div>
+        <div class="sample-card">
+          <h3 style="margin:0 0 6px 0">Outside</h3>
+          <p class="small">Terrace, grill and space for family activities.</p>
+        </div>
+      </div>
+
+      <footer>
+        <small>Share this URL with the team when live — they can switch themes instantly.</small>
+      </footer>
+    </div>
+
+    <aside class="controls">
+      <p class="control-title">Theme (click to preview)</p>
+      <button class="theme-button btn-forest" data-theme="forest" title="Forest Retreat">Forest Retreat</button>
+      <button class="theme-button btn-lakeside" data-theme="lakeside" title="Lakeside Calm">Lakeside Calm</button>
+      <button class="theme-button btn-misty" data-theme="misty" title="Misty Stream">Misty Stream</button>
+
+      <hr style="margin:12px 0;border:none;border-top:1px solid var(--ui-border)">
+      <p class="small">Notes</p>
+      <ul style="margin:8px 0 0 18px;color:var(--muted)">
+        <li>Hero images optional — if missing you will see the color overlay only.</li>
+        <li>Use the same page to compare themes quickly.</li>
+      </ul>
+
+      <a id="open-live" class="link" href="#" style="display:block;margin-top:12px;text-align:center">Open active preview</a>
+      <div style="margin-top:8px;font-size:.9rem;color:var(--muted)">
+        <p style="margin:6px 0 0 0">After merge, preview will be at:</p>
+        <p style="margin:6px 0 0 0"><code>https://platzdk.github.io/Florel/previews/</code></p>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    // theme -> css mapping (must match uploaded filenames)
+    const themeMap = {
+      forest: '../../assets/theme-forest.css',
+      lakeside: '../../assets/theme-lakeside.css',
+      misty: '../../assets/theme-misty.css'
+    };
+
+    const stylesheet = document.getElementById('theme-stylesheet');
+    const hero = document.getElementById('sample-hero');
+    const openLive = document.getElementById('open-live');
+
+    // hero images for visual cue (optional)
+    const heroMap = {
+      forest: '../../assets/images/hero-forest.jpg',
+      lakeside: '../../assets/images/hero-lake.jpg',
+      misty: '../../assets/images/hero-misty.jpg'
+    };
+
+    function setTheme(theme){
+      const href = themeMap[theme] || themeMap.forest;
+      stylesheet.setAttribute('href', href);
+
+      // switch hero bg image if available (no hard error if missing)
+      const img = heroMap[theme];
+      hero.style.background = `linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.12)), url('${img}') center/cover no-repeat`;
+
+      // remember selection in session so reviewers see same theme while browsing
+      try { sessionStorage.setItem('florel_preview_theme', theme); } catch(e){}
+    }
+
+    // attach handlers
+    document.querySelectorAll('.theme-button').forEach(btn=>{
+      btn.addEventListener('click', ()=> {
+        const theme = btn.getAttribute('data-theme');
+        setTheme(theme);
+      });
+    });
+
+    // load saved theme if any
+    try {
+      const saved = sessionStorage.getItem('florel_preview_theme');
+      if (saved && themeMap[saved]) setTheme(saved);
+    } catch(e){}
+
+    // "open live" link: points to merged preview folder root
+    openLive.href = window.location.origin + window.location.pathname.replace(/\/previews\/.*$/, '/previews/');
+
+    // ensure preview CSS loads failure-tolerant
+    stylesheet.addEventListener('error', () => {
+      // fallback: switch to forest if file missing
+      if (stylesheet.getAttribute('href') !== themeMap.forest) {
+        stylesheet.setAttribute('href', themeMap.forest);
+      }
+    });
+  </script>
+</body>
+</html>
