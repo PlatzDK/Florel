@@ -576,3 +576,29 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--primary-dark);
 }
     
+/* Additional Forest theme tweaks */
+:root {
+  --neutral-color: #EDE6DA;
+}
+/* Ensure hero text uses neutral color for readability */
+.hero h1,
+.hero p {
+  color: var(--neutral-color);
+}
+/* Forest-themed booking section */
+.booking {
+  background-color: var(--secondary-color);
+  color: var(--neutral-color);
+  text-align: center;
+}
+.booking h2,
+.booking p {
+  color: var(--neutral-color);
+}
+.booking .btn {
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+}
+.booking .btn:hover {
+  background-color: #C09718;
+}
