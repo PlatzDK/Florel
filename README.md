@@ -53,6 +53,31 @@ docs/
 - **Phone**: +45 12 34 56 78
 - **Location**: Danish Coast
 
+# Florel
+
+Simple static site for a forest cabin (Florel) with focus on fishing and nature.
+
+## Live site
+https://platzdk.github.io/Florel/
+
+## Theme
+- **Forest theme**: warm greens and earth tones reflecting the surrounding forest, lake and stream.
+
+## New content added
+- Hero taglines updated to reflect the forest/lake/stream location.
+- **Fishing & activities** section added to the main pages.
+- New pages:
+  - `/da/fiskeri.html` — Local fishing spots (Danish)
+  - `/en/fishing.html` — Local fishing spots (English)
+  - `/de/fischen.html` — Local fishing spots (Deutsch)
+- Booking section updated with note about fishing licence (fisketegn/day tickets).
+
+## How to deploy changes
+1. Paste the updated files into the `docs/` folder in the repository.
+2. Commit to a branch and open a PR.
+3. Merge to `main` and allow GitHub Pages to rebuild.
+
+
 ## License
 
 © 2025 Florel Fiskeri. All rights reserved.
