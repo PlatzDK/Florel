@@ -1,5 +1,6 @@
 /* CSS Reset and Base Styles */
 
+
 * {
     margin: 0;
     padding: 0;
@@ -606,7 +607,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Forest-themed site header styles */
 .site-header {
-  background-color: var(--primary-color);
+      background-color: var(--primary-color);
   color: var(--neutral-color);
 }
 .site-header .logo {
@@ -621,4 +622,50 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--accent-color);
   color: var(--primary-color);
   border-radius: 4px;
+}
+/* Forest theme: override landing and booking sections */
+:root {
+    --neutral-color: #EDE6DA;
+}
+.landing-container {
+    background: linear-gradient(180deg, rgba(47,79,55,0.8), rgba(47,79,55,0.6)), url('../assets/images/hero-forest.jpg') center/cover no-repeat;
+    color: var(--neutral-color);
+}
+.landing-container h1,
+.landing-container p,
+.landing-container h2 {
+    color: var(--neutral-color);
+}
+.language-options .language-link {
+    background-color: rgba(47,79,55,0.5);
+    border: 1px solid rgba(237,230,218,0.3);
+    color: var(--neutral-color);
+    transition: background-color 0.3s ease;
+}
+.language-options .language-link:hover,
+.language-options .language-link:focus {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+}
+.booking {
+    background: linear-gradient(180deg, rgba(47,79,55,0.8), rgba(47,79,55,0.6)), url('../assets/images/hero-forest.jpg') center/cover no-repeat;
+    color: var(--neutral-color);
+    text-align: center;
+    padding: 4rem 2rem;
+}
+.booking h2,
+.booking p {
+    color: var(--neutral-color);
+}
+.booking .btn,
+.booking .btn-primary {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+}
+.booking .btn:hover,
+.booking .btn-primary:hover {
+    background-color: #C09718;
 }
