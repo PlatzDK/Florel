@@ -510,3 +510,69 @@ main {
         padding: 2rem 0;
     }
 }
+/* Forest theme overrides */
+:root {
+  --primary-color: #2F4F37;
+  --secondary-color: #6B8B57;
+  --accent-color: #E1B12C;
+  --primary-dark: #223e2f;
+}
+
+/* Apply forest colours */
+body {
+  background-color: #F6F4F0;
+  color: var(--primary-color);
+}
+
+a {
+  color: var(--secondary-color);
+}
+a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+/* Primary buttons */
+.btn-primary {
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+}
+.btn-primary:hover {
+  background-color: #C09718;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-color);
+}
+
+/* Navigation */
+.site-header {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.language-switcher a:hover,
+.language-switcher a.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Hero Section with forest overlay */
+.hero {
+  background: linear-gradient(rgba(47,79,55,0.4), rgba(107,139,87,0.4)),
+              url('https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg?auto=compress&cs=tinysrgb&w=1920') center/cover;
+}
+
+/* Footer */
+.site-footer {
+  background-color: var(--primary-color);
+  color: #EDE6DA;
+}
+.footer-languages a {
+  color: #EDE6DA;
+}
+.footer-languages a:hover {
+  background-color: var(--primary-dark);
+}
+    
