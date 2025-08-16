@@ -8,10 +8,12 @@ A beautiful multilingual website for a Danish coastal summer house rental proper
 - **Mobile-First Design**: Responsive layout optimized for all devices
 - **SEO Optimized**: Complete with sitemap, meta tags, and semantic HTML
 - **GitHub Pages Ready**: Hosted from `/docs` folder
+- **Forest Theme**: Warm greens and earth tones inspired by the surrounding forest, lake and stream
+
 
 ## Live Website
 
-Visit the website at: `https://yourusername.github.io/repository-name/`
+Visit the website at: https://platzdk.github.io/Florel/
 
 ## Languages
 
