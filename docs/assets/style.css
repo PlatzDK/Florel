@@ -1,4 +1,5 @@
 /* CSS Reset and Base Styles */
+
 * {
     margin: 0;
     padding: 0;
@@ -601,4 +602,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 .booking .btn:hover {
   background-color: #C09718;
+}
+
+/* Forest-themed site header styles */
+.site-header {
+  background-color: var(--primary-color);
+  color: var(--neutral-color);
+}
+.site-header .logo {
+  color: var(--neutral-color);
+  font-weight: 700;
+}
+.site-header .language-switcher a {
+  color: var(--neutral-color);
+  padding: 0.2rem 0.5rem;
+}
+.site-header .language-switcher a.active {
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  border-radius: 4px;
 }
