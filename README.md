@@ -1,83 +1,35 @@
-# Florel Fiskeri - Coastal Summer House Rental
+# Florel – sommerhus og fishing retreat
 
-A beautiful multilingual website for a Danish coastal summer house rental property.
+Dette repo indeholder en simpel statisk hjemmeside for Florel, et skovsommerhus med adgang til sø og bæk. Siden retter sig mod både danske, engelske og tyske gæster.
 
-## Features
+## Live-URL
 
-- **Multilingual Support**: Danish, English, and German versions
-- **Mobile-First Design**: Responsive layout optimized for all devices
-- **SEO Optimized**: Complete with sitemap, meta tags, and semantic HTML
-- **GitHub Pages Ready**: Hosted from `/docs` folder
-- **Forest Theme**: Warm greens and earth tones inspired by the surrounding forest, lake and stream
+- Root (sprogvalg): [https://platzdk.github.io/Florel/](https://platzdk.github.io/Florel/)
+- Dansk: [https://platzdk.github.io/Florel/da/](https://platzdk.github.io/Florel/da/)
+- English: [https://platzdk.github.io/Florel/en/](https://platzdk.github.io/Florel/en/)
+- Deutsch: [https://platzdk.github.io/Florel/de/](https://platzdk.github.io/Florel/de/)
 
+## Sider og indhold
 
-## Live Website
+- **Root (`/`):** neutral landingsside med hero-sektion, kort tagline på tre sprog og knapper til at vælge Dansk/English/Deutsch. Indeholder hreflang links til alle sprogversioner.
+- **Dansk (`/da/`):** fuldt indhold om huset, aktiviteter, lokale fiskesteder, praktisk information, og booking. Indeholder canonical og hreflang-tags.
+- **English (`/en/`) og Deutsch (`/de/`):** tilsvarende sider med oversat indhold.
+- **Undersider med fiskesteder** (`/da/fiskeri.html`, `/en/fishing.html`, `/de/fischen.html`): lister de vigtigste søer, put & take-søer og floder med afstand.
 
-Visit the website at: https://platzdk.github.io/Florel/
+## Tema og design
 
-## Languages
+- Sitet anvender et “Forest theme” (`docs/assets/style.css`) med jordgrønne nuancer og guld-accent.
+- Alle HTML-sider linker til denne CSS-fil.
 
-- 🇩🇰 **Danish** (`/da/`) - Primary language
-- 🇬🇧 **English** (`/en/`) - International visitors
-- 🇩🇪 **German** (`/de/`) - German-speaking tourists
+## SEO-anbefalinger implementeret
 
-## Deployment
+- `rel="canonical"` og `rel="alternate" hreflang="..."` er sat i `<head>` på alle sider, så søgemaskiner forstår sprogversioner.
+- Korrekte `lang`-attributter på `<html>`-tagget.
+- Unikke meta descriptions på alle sider.
+- Klar titel og tagline for hver side.
 
-This website is configured for GitHub Pages deployment:
+## Sådan opdaterer du
 
-1. Push this repository to GitHub
-2. Go to repository Settings → Pages
-3. Set source to "Deploy from a branch"
-4. Select "main" branch and "/docs" folder
-5. Save and wait for deployment
-
-## Structure
-
-```
-docs/
-├── index.html          # Landing page with language selector
-├── da/index.html       # Danish version
-├── en/index.html       # English version  
-├── de/index.html       # German version
-├── assets/
-│   ├── style.css       # Main stylesheet
-│   └── script.js       # Language detection script
-├── sitemap.xml         # SEO sitemap
-├── robots.txt          # Search engine instructions
-└── 404.html           # Custom 404 page
-```
-
-## Contact Information
-
-- **Email**: info@florelfiskeri.dk
-- **Phone**: +45 12 34 56 78
-- **Location**: Danish Coast
-
-# Florel
-
-Simple static site for a forest cabin (Florel) with focus on fishing and nature.
-
-## Live site
-https://platzdk.github.io/Florel/
-
-## Theme
-- **Forest theme**: warm greens and earth tones reflecting the surrounding forest, lake and stream.
-
-## New content added
-- Hero taglines updated to reflect the forest/lake/stream location.
-- **Fishing & activities** section added to the main pages.
-- New pages:
-  - `/da/fiskeri.html` — Local fishing spots (Danish)
-  - `/en/fishing.html` — Local fishing spots (English)
-  - `/de/fischen.html` — Local fishing spots (Deutsch)
-- Booking section updated with note about fishing licence (fisketegn/day tickets).
-
-## How to deploy changes
-1. Paste the updated files into the `docs/` folder in the repository.
-2. Commit to a branch and open a PR.
-3. Merge to `main` and allow GitHub Pages to rebuild.
-
-
-## License
-
-© 2025 Florel Fiskeri. All rights reserved.
+1. Rediger HTML-filer i `docs/` efter behov.
+2. Sørg for at opdatere hreflang- og canonical-URL’er hvis domænet ændres.
+3. Commit ændringer til `main`-grenen. GitHub Pages bygger siden automatisk.
