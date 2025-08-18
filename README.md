@@ -16,6 +16,20 @@ Dette repo indeholder en simpel statisk hjemmeside for Florel, et skovsommerhus 
 - **English (`/en/`) og Deutsch (`/de/`):** tilsvarende sider med oversat indhold.
 - **Undersider med fiskesteder** (`/da/fiskeri.html`, `/en/fishing.html`, `/de/fischen.html`): lister de vigtigste søer, put & take-søer og floder med afstand.
 
+  ## Galleri
+
+Galleri-billeder er lagret i `docs/assets/images/` og følger navnekonvention:
+- `gallery_large_{NNN}_{slug}.webp` — stor version (lightbox) ~1600px
+- `gallery_thumb_{NNN}_{slug}.webp` — thumbnail til grid ~800px
+
+Manifest: `docs/assets/images/gallery.json` indeholder poster med captions på alle sprog.  
+Sitet indlæser manifest via `docs/assets/js/gallery.js` og bygger et responsivt grid og lightbox automatisk.
+
+Upload flow:
+1. Opret `gallery_thumb_###_slug.webp` og `gallery_large_###_slug.webp`
+2. Tilføj en entry i `gallery.json` (id, slug, thumb, large, caption{da,en,de}, credit, year, tags)
+3. Commit og push — GitHub Pages opdaterer sitet.
+
 ## Tema og design
 
 - Sitet anvender et “Forest theme” (`docs/assets/style.css`) med jordgrønne nuancer og guld-accent.
