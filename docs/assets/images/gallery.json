@@ -15,16 +15,72 @@
   },
   {
     "id": 2,
-    "slug": "stream",
-    "thumb": "gallery_thumb_002_stream.webp",
-    "large": "gallery_large_002_stream.webp",
+    "slug": "lake-view",
+    "thumb": "gallery_thumb_002_lake.webp",
+    "large": "gallery_large_002_lake.webp",
     "caption": {
-      "da": "Den stille å i nærheden",
-      "en": "The nearby stream",
-      "de": "Der nahe Bach"
+      "da": "Udsigt over søen",
+      "en": "View across the lake",
+      "de": "Blick über den See"
     },
     "credit": "Foto: Anna K",
     "year": 2024,
-    "tags": ["stream","nature"]
+    "tags": ["lake","view"]
+  },
+  {
+    "id": 3,
+    "slug": "duck-house",
+    "thumb": "gallery_thumb_003_lake.webp",
+    "large": "gallery_large_003_lake.webp",
+    "caption": {
+      "da": "Andehus i søen",
+      "en": "Duck house on the lake",
+      "de": "Entenhaus auf dem See"
+    },
+    "credit": "Foto: Jens Nielsen",
+    "year": 2024,
+    "tags": ["lake","wildlife"]
+  },
+  {
+    "id": 4,
+    "slug": "forest-edge",
+    "thumb": "gallery_thumb_005_lake.webp",
+    "large": "gallery_large_005_lake.webp",
+    "caption": {
+      "da": "Træer ved søbredden",
+      "en": "Trees by the lakeside",
+      "de": "Bäume am Seeufer"
+    },
+    "credit": "Foto: Jens Nielsen",
+    "year": 2024,
+    "tags": ["lake","forest"]
+  },
+  {
+    "id": 5,
+    "slug": "cabin-entrance",
+    "thumb": "gallery_thumb_006_lake.webp",
+    "large": "gallery_large_006_lake.webp",
+    "caption": {
+      "da": "Indgang til sommerhuset",
+      "en": "Entrance to the cabin",
+      "de": "Eingang zum Ferienhaus"
+    },
+    "credit": "Foto: Jens Nielsen",
+    "year": 2024,
+    "tags": ["house"]
+  },
+  {
+    "id": 6,
+    "slug": "sunset",
+    "thumb": "lake-sunset.jpg",
+    "large": "lake-sunset.jpg",
+    "caption": {
+      "da": "Solnedgang over søen",
+      "en": "Sunset by the lake",
+      "de": "Sonnenuntergang am See"
+    },
+    "credit": "Foto: Jens Nielsen",
+    "year": 2024,
+    "tags": ["lake","sunset"]
   }
 ]
