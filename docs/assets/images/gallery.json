@@ -15,16 +15,58 @@
   },
   {
     "id": 2,
-    "slug": "stream",
-    "thumb": "gallery_thumb_002_stream.webp",
-    "large": "gallery_large_002_stream.webp",
+    "slug": "lake",
+    "thumb": "gallery_thumb_002_lake.webp",
+    "large": "gallery_large_002_lake.webp",
     "caption": {
-      "da": "Den stille å i nærheden",
-      "en": "The nearby stream",
-      "de": "Der nahe Bach"
+      "da": "Udsigt over søen",
+      "en": "View of the lake",
+      "de": "Blick auf den See"
     },
     "credit": "Foto: Anna K",
     "year": 2024,
-    "tags": ["stream","nature"]
+    "tags": ["lake","nature"]
+  },
+  {
+    "id": 3,
+    "slug": "lake",
+    "thumb": "gallery_thumb_003_lake.webp",
+    "large": "gallery_large_003_lake.webp",
+    "caption": {
+      "da": "Søudsigt fra terrassen",
+      "en": "Lake view from the terrace",
+      "de": "Seeblick von der Terrasse"
+    },
+    "credit": "Foto: Anna K",
+    "year": 2024,
+    "tags": ["lake","view","terrace"]
+  },
+  {
+    "id": 5,
+    "slug": "lake",
+    "thumb": "gallery_thumb_005_lake.webp",
+    "large": "gallery_large_005_lake.webp",
+    "caption": {
+      "da": "Morgenidyl ved søen",
+      "en": "Morning by the lake",
+      "de": "Morgen am See"
+    },
+    "credit": "Foto: Anna K",
+    "year": 2024,
+    "tags": ["lake","nature","morning"]
+  },
+  {
+    "id": 6,
+    "slug": "lake",
+    "thumb": "gallery_thumb_006_lake.webp",
+    "large": "gallery_large_006_lake.webp",
+    "caption": {
+      "da": "Aftenstemning ved søen",
+      "en": "Evening by the lake",
+      "de": "Abend am See"
+    },
+    "credit": "Foto: Anna K",
+    "year": 2024,
+    "tags": ["lake","nature","evening"]
   }
 ]
