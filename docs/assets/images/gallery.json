@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "slug": "lake",
+    "thumb": "gallery_thumb_001_lake.webp",
+    "large": "gallery_large_001_lake.webp",
+    "caption": {
+      "da": "Sommerhuset udefra ved søen",
+      "en": "Cabin exterior by the lake",
+      "de": "Ferienhaus von außen am See"
+    },
+    "credit": "Foto: Jens Nielsen",
+    "year": 2024,
+    "tags": ["house","lake","forest"]
+  },
+  {
+    "id": 2,
+    "slug": "stream",
+    "thumb": "gallery_thumb_002_stream.webp",
+    "large": "gallery_large_002_stream.webp",
+    "caption": {
+      "da": "Den stille å i nærheden",
+      "en": "The nearby stream",
+      "de": "Der nahe Bach"
+    },
+    "credit": "Foto: Anna K",
+    "year": 2024,
+    "tags": ["stream","nature"]
+  }
+]
