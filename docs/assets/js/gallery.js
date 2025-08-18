@@ -1,5 +1,6 @@
-// docs/assets/js/gallery.js
-// Dynamisk gallery renderer — henter docs/assets/images/gallery.json
+/* docs/assets/js/gallery.js
+   Dynamisk gallery renderer — henter docs/assets/images/gallery.json
+*/
 (async () => {
   const candidatePaths = [
     './assets/images/gallery.json',
@@ -22,7 +23,6 @@
   }
   if (!manifest) { console.warn('Gallery: manifest not found at candidate paths'); return; }
 
-  // Ensure container exists
   let grid = document.getElementById('galleryGrid');
   if (!grid) {
     const sec = document.createElement('section');
@@ -64,7 +64,6 @@
       lbImg.src = e.target.dataset.full || e.target.src;
       lbCap.textContent = e.target.dataset.caption || '';
       lightbox.style.display = 'flex';
-      // prevent body scroll while LB open
       document.body.style.overflow = 'hidden';
     }
   });
