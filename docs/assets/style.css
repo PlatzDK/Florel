@@ -81,10 +81,10 @@ body{
   .hero{ padding:3.5rem 1rem; }
   .hero h2{ font-size:1.6rem; }
 }
-/* Gallery grid */
+/* ===== Gallery styles (appended) ===== */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1rem;
   margin-top: 1.5rem;
 }
@@ -93,9 +93,26 @@ body{
   height: auto;
   display: block;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-  transition: transform 0.3s ease;
+  box-shadow: 0 6px 18px rgba(16,24,20,0.06);
+  transition: transform 0.28s cubic-bezier(.2,.8,.2,1), box-shadow 0.28s;
+  cursor: pointer;
+  object-fit: cover;
 }
 .gallery img:hover {
-  transform: scale(1.05);
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 14px 30px rgba(8,12,8,0.12);
 }
+
+/* Lightbox fallback style for the injected LB container */
+#galleryLightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.86);
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 2rem;
+}
+#galleryLightbox img { max-width: 92%; max-height: 84%; border-radius: 8px; }
+#galleryLightbox .lb-caption { color: #fff; margin-top: 0.6rem; text-align:center; font-size: .95rem; }
