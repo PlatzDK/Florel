@@ -3,8 +3,8 @@
 */
 (async () => {
   const candidatePaths = [
-    './assets/images/gallery.json',
     '../assets/images/gallery.json',
+    '../../assets/images/gallery.json',
     '/Florel/docs/assets/images/gallery.json',
     '/docs/assets/images/gallery.json'
   ];
