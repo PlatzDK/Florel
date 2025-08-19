@@ -30,7 +30,8 @@
     sec.className = 'section container';
     sec.innerHTML = '<h2>Galleri</h2><div id="galleryGrid" class="gallery"></div>';
     const main = document.querySelector('main') || document.body;
-    main.appendChild(sec);
+    const activities = document.querySelector('#activities,#aktivitaeten');
+    main.insertBefore(sec, activities);
     grid = document.getElementById('galleryGrid');
   }
 
