@@ -108,10 +108,62 @@ body{
 #galleryLightbox img { max-width:92%; max-height:84%; border-radius:8px; }
 #galleryLightbox .lb-caption { color:#fff; margin-top:0.6rem; text-align:center; font-size:.95rem; }
 
-/* ===== Mailto prefill styles (appended) ===== */
-.mailto-form { background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 8px; max-width: 560px; }
-.mailto-form h3 { margin-top: 0; }
-.mailto-form label { display:block; margin-bottom:0.5rem; font-size:0.95rem; }
-.mailto-form input, .mailto-form textarea { width:100%; padding:0.5rem; border-radius:6px; border:1px solid rgba(0,0,0,0.08); margin-top:0.25rem; box-sizing:border-box; }
-.mailto-form .btn { display:inline-block; margin-top:0.5rem; }
-a.mailto-direct { color: inherit; text-decoration: underline; }
+/* ===== Permanent layout & theme overrides ===== */
+/* Variables */
+:root{
+  --content-max-width: 1100px;
+  --side-padding: 1rem;
+  --primary-forest: #2f4f37; /* forest primary color */
+  --muted: #5a6a57;
+}
+
+/* Container */
+.container {
+  max-width: var(--content-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--side-padding);
+  padding-right: var(--side-padding);
+  box-sizing: border-box;
+}
+
+/* Sections spacing */
+.section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+/* Ensure internal elements do not overflow and are centered */
+.section > * { max-width: var(--content-max-width); margin-left: auto; margin-right: auto; }
+
+/* Responsive typography */
+html { font-size: 16px; }
+@media (min-width: 1024px) { html { font-size: 18px; } }
+
+h1 { font-size: clamp(1.5rem, 2.6vw, 2.6rem); line-height: 1.1; color: var(--primary-forest); }
+h2 { font-size: clamp(1.25rem, 2.0vw, 1.8rem); color: var(--primary-forest); }
+h3 { color: var(--primary-forest); }
+
+/* Buttons */
+.btn { border-radius: 8px; padding: 0.6rem 1rem; }
+
+/* Gallery and mailto form safety */
+.gallery { gap: 1rem; margin-top: 1rem; }
+.gallery img { object-fit: cover; border-radius: 8px; }
+
+/* Mailto form styling (grid) */
+.mailto-form { background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 8px; width:100%; max-width:560px; }
+.mailto-form h3 { margin-top:0; }
+.mailto-form .grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:0.6rem; }
+@media (max-width:760px){ .mailto-form .grid-2 { grid-template-columns:1fr; } }
+
+/* Override problematic global color rules (force forest theme for headings) */
+h1,h2,h3, .section h2 { color: var(--primary-forest) !important; }
+
+/* Small screens */
+@media (max-width:600px){
+  :root { --side-padding: 0.9rem; }
+  .gallery img { height:160px; }
+  .section { padding-top: 2rem; padding-bottom: 2rem; }
+}
+

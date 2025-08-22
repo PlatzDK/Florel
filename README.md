@@ -30,16 +30,19 @@ Upload flow:
 2. Tilføj en entry i `gallery.json` (id, slug, thumb, large, caption{da,en,de}, credit, year, tags)
 3. Commit og push — GitHub Pages opdaterer sitet.
 
-### Mailto fallback / prefill
+### Mailto prefill (fallback)
 
-Vi tilbyder en "Send os e-mail" fallback hvor brugeren kan udfylde en lille prefill-form og åbne deres mailklient med et struktureret template. Koden ligger i:
+Vi har implementeret en "Send os e-mail" prefill som alternativ til formularen.  
+- JS: `docs/assets/js/mailto.js` (recipient er sat som `recipientUser` + `recipientDomain` i JS; rediger her for at ændre e-mail).  
+- UI: prefill forms er indsat i `docs/da/index.html`, `docs/en/index.html`, `docs/de/index.html` under booking-sektionen.  
+- CSS: styling appended i `docs/assets/style.css`.
 
-- JS: `docs/assets/js/mailto.js` (recipient er obfuscated i JS).
-- UI: prefill forms i `docs/da/index.html`, `docs/en/index.html`, `docs/de/index.html`.
-- CSS: appended i `docs/assets/style.css`.
+Test:
+1. Åbn en sprogside, udfyld navn, email og samtykke, klik "Åbn i mailapp".  
+2. Mailklienten åbner med struktureret emne og body.  
+3. For at ændre modtager, rediger `recipientUser` / `recipientDomain` i `docs/assets/js/mailto.js`.
 
-For at ændre modtager: rediger `recipientUser` og `recipientDomain` i `docs/assets/js/mailto.js`.  
-Test: åbn en sprogside, udfyld felter og tryk "Åbn i mailapp" — din mailklient skal åbne med forudfyldt emne + body.
+Bemærk: mailto fallback er obfuscated i JS for at reducere e-mail harvesting.
 
 Script paths:
 - Sprog sider (`docs/da/`, `docs/en/`, `docs/de/`) bruger: `<script src="../assets/js/gallery.js"></script>`
