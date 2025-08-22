@@ -30,6 +30,19 @@ Upload flow:
 2. Tilføj en entry i `gallery.json` (id, slug, thumb, large, caption{da,en,de}, credit, year, tags)
 3. Commit og push — GitHub Pages opdaterer sitet.
 
+### Galleri lightbox - UX & implementering
+
+Den interaktive lightbox er blevet opdateret til at vise billedet centreret med billed-fokus og caption placeret **under** billedet for bedre mobil- og desktop-oplevelse. Ændringer:
+
+- CSS: nye regler til `#galleryLightbox`, `.lb-wrap`, `.lb-imgwrap`, `.lb-caption`.
+- JS: `docs/assets/js/gallery.js` opdateret for at oprette struktureret lightbox, låse body scroll, samt luk via overlay / close knap / ESC.
+- Accessibility: `role="dialog"`, `aria-modal="true"` og fokusstyring er tilføjet.
+
+**Test:** kør lokal preview `cd docs && python3 -m http.server 8000` og kontroller lightboxfunktion på `/da/`, `/en/`, `/de/`.
+
+For at ændre layout: rediger CSS i `docs/assets/style.css` under "Lightbox" blokken. For at ændre tekst/struktur: se `docs/assets/js/gallery.js`.
+
+
 ### Mailto prefill (fallback)
 
 Vi har implementeret en "Send os e-mail" prefill som alternativ til formularen.  
