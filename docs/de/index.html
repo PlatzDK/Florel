@@ -70,12 +70,28 @@
       <h2>Buchen</h2>
       <p>Möchten Sie Ruhe in der Natur und erstklassiges Angeln? Buchen Sie hier — beachten Sie: Für viele Süßwassergewässer und Flussabschnitte benötigen Sie einen staatlichen Angelschein und lokale Tageskarten.</p>
       <p><a class="btn btn-primary" href="mailto:info@florelfiskeri.dk">Anfrage senden</a></p>
+      <!-- Prefill mailto form (German) -->
+      <form class="mailto-prefill-form mailto-form" aria-label="Reservierung per E-Mail">
+        <h3>Senden Sie uns stattdessen eine E-Mail</h3>
+        <label>Name* <input name="mt_name" type="text" required></label>
+        <label>E-Mail* <input name="mt_email" type="email" required></label>
+        <label>Telefon <input name="mt_phone" type="tel"></label>
+        <label>Anreise <input name="mt_arrival" type="date"></label>
+        <label>Abreise <input name="mt_departure" type="date"></label>
+        <label>Gäste <input name="mt_guests" type="number" min="1" max="50"></label>
+        <label>Nachricht <textarea name="mt_message" rows="3"></textarea></label>
+        <label><input name="mt_consent" type="checkbox" required> Ich bin mit der Verarbeitung meiner Daten einverstanden.</label>
+        <p><button class="btn" type="submit">In Mail-App öffnen</button></p>
+        <p class="mt-status" aria-live="polite"></p>
+      </form>
     </section>
   </main>
 
   <footer class="site-footer container">
     <p>© Florel</p>
+    <p><a class="mailto-direct" data-recipient="obfuscated" data-subject="Buchungsanfrage%20-%20Florel" href="#">Kontakt via E-Mail</a></p>
   </footer>
 <script src="../assets/js/gallery.js"></script>
+<script src="../assets/js/mailto.js"></script>
 </body>
 </html>
