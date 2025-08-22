@@ -219,3 +219,24 @@ h1,h2,h3, .section h2 { color: var(--primary-forest) !important; }
 .btn[disabled] { opacity:0.6; cursor:not-allowed; pointer-events:none; }
 .mt-status { margin-top:0.5rem; color:#2f4f37; font-weight:600; }
 .section.booking .mailto-form { margin:1.2rem auto 2rem; }
+
+/* ===== Phone + checkbox alignment styles ===== */
+.phone-row { display:flex; gap:0.5rem; align-items:center; }
+.phone-cc { width:110px; padding:0.4rem; border-radius:6px; border:1px solid rgba(47,79,55,0.12); background:#fff; }
+.phone-row input[type="tel"] { flex:1; }
+
+.field-help { font-size:0.85rem; color:var(--muted,#556655); margin-top:0.25rem; }
+.field-error { color:#b00020; font-size:0.9rem; margin-top:0.25rem; }
+
+/* Align consent checkbox & text nicely */
+.consent-row { display:flex; justify-content:flex-start; align-items:center; margin-top:0.75rem; }
+.consent { display:flex; align-items:center; gap:0.6rem; }
+.consent input[type="checkbox"] { width:18px; height:18px; margin:0; }
+.consent-text { display:inline-block; line-height:1.2; color:var(--muted,#556655); }
+
+/* small screens: stack */
+@media (max-width:760px) {
+  .phone-row { flex-direction:row; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .consent-row { justify-content:flex-start; }
+}
