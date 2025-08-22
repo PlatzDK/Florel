@@ -1,6 +1,60 @@
 // docs/assets/js/mailto.js
+
+// Utility helpers exposed for testing
+export function normalizePhone(s) {
+  return String(s || '').replace(/[^\d+]/g, '');
+}
+
+export function isValidPhoneNumber(number) {
+  if (!number) return false;
+  if (/^\+\d{6,15}$/.test(number)) return true;
+  if (/^\d{6,15}$/.test(number)) return true;
+  return false;
+}
+
+export function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || ''));
+}
+
+export function toggleValidation({ phoneInput, phoneCC, phoneError, submitBtn, form, msgs }) {
+  const val = phoneInput.value.trim();
+  const cc = phoneCC.value.trim();
+  let full = val;
+  if (cc && cc.startsWith('+') && !val.startsWith('+')) {
+    full = cc + val.replace(/^\+/, '');
+  }
+  if (/[a-zA-Z]/.test(full)) {
+    phoneError.textContent = msgs.invalidPhone;
+    phoneError.style.display = 'block';
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = 0.5;
+    return;
+  }
+  const norm = normalizePhone(full);
+  if (!norm) {
+    phoneError.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = 0.5;
+    return;
+  }
+  if (!isValidPhoneNumber(norm)) {
+    phoneError.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = 0.5;
+  } else {
+    phoneError.style.display = 'none';
+    const nameOk = !!(form.querySelector('[name="mt_name"]').value || '').trim();
+    const emailVal = (form.querySelector('[name="mt_email"]').value || '').trim();
+    const emailOk = isValidEmail(emailVal);
+    const consentOk = !!(form.querySelector('[name="mt_consent"]').checked);
+    submitBtn.disabled = !(nameOk && emailOk && consentOk);
+    submitBtn.style.opacity = submitBtn.disabled ? 0.5 : 1;
+  }
+}
+
+// Main script
 document.addEventListener('DOMContentLoaded', () => {
-  const recipientUser = 'info';    // EDIT: change here if needed
+  const recipientUser = 'info'; // EDIT: change here if needed
   const recipientDomain = 'florelfiskeri.dk';
   const recipient = recipientUser + '@' + recipientDomain;
 
@@ -25,21 +79,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const lang = (document.documentElement.lang || 'en').substring(0,2);
+  const lang = (document.documentElement.lang || 'en').substring(0, 2);
   const tpl = templates[lang] || templates.en;
   const msgs = messages[lang] || messages.en;
 
-  function encode(s){ return encodeURIComponent(String(s || '')).replace(/%20/g, '+'); }
+  function encode(s) {
+    return encodeURIComponent(String(s || '')).replace(/%20/g, '+');
+  }
 
   function buildMailto(fields) {
     let body = tpl.intro;
     body += `Name: ${encode(fields.name)}%0D%0A`;
     body += `Email: ${encode(fields.email)}%0D%0A`;
-    if(fields.phone) body += `Phone: ${encode(fields.phone)}%0D%0A`;
-    if(fields.arrival) body += `Arrival: ${encode(fields.arrival)}%0D%0A`;
-    if(fields.departure) body += `Departure: ${encode(fields.departure)}%0D%0A`;
-    if(fields.guests) body += `Guests: ${encode(fields.guests)}%0D%0A`;
-    if(fields.message) body += `%0D%0A${encode(fields.message)}%0D%0A`;
+    if (fields.phone) body += `Phone: ${encode(fields.phone)}%0D%0A`;
+    if (fields.arrival) body += `Arrival: ${encode(fields.arrival)}%0D%0A`;
+    if (fields.departure) body += `Departure: ${encode(fields.departure)}%0D%0A`;
+    if (fields.guests) body += `Guests: ${encode(fields.guests)}%0D%0A`;
+    if (fields.message) body += `%0D%0A${encode(fields.message)}%0D%0A`;
     body += `%0D%0A---%0D%0AI have given consent to process this data.`;
     const mailto = `mailto:${recipient}?subject=${encodeURIComponent(tpl.subject)}&body=${body}`;
     return mailto;
@@ -53,59 +109,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = form.querySelector('.mt-submit');
     const status = form.querySelector('.mt-status');
 
-    function normalizePhone(s) {
-      return String(s || '').replace(/[^\d+]/g, '');
-    }
+    const toggle = () => toggleValidation({ phoneInput, phoneCC, phoneError, submitBtn, form, msgs });
 
-    function isValidPhoneNumber(number) {
-      if (!number) return false;
-      if (/^\+\d{6,15}$/.test(number)) return true;
-      if (/^\d{6,15}$/.test(number)) return true;
-      return false;
-    }
-
-    const toggleValidation = () => {
-      const val = phoneInput.value.trim();
-      const cc = phoneCC.value.trim();
-      let full = val;
-      if (cc && cc.startsWith('+') && !val.startsWith('+')) {
-        full = cc + val.replace(/^\+/, '');
-      }
-      if (/[a-zA-Z]/.test(full)) {
-        phoneError.textContent = msgs.invalidPhone;
-        phoneError.style.display = 'block';
-        submitBtn.disabled = true;
-        submitBtn.style.opacity = 0.5;
-        return;
-      }
-      const norm = normalizePhone(full);
-      if (!norm) {
-        phoneError.style.display = 'none';
-        submitBtn.disabled = true;
-        submitBtn.style.opacity = 0.5;
-        return;
-      }
-      if (!isValidPhoneNumber(norm)) {
-        phoneError.style.display = 'none';
-        submitBtn.disabled = true;
-        submitBtn.style.opacity = 0.5;
-      } else {
-        phoneError.style.display = 'none';
-        const nameOk = !!(form.querySelector('[name="mt_name"]').value||'').trim();
-        const emailOk = !!(form.querySelector('[name="mt_email"]').value||'').trim();
-        const consentOk = !!(form.querySelector('[name="mt_consent"]').checked);
-        submitBtn.disabled = !(nameOk && emailOk && consentOk);
-        submitBtn.style.opacity = submitBtn.disabled ? 0.5 : 1;
-      }
-    };
-
-    phoneInput.addEventListener('input', toggleValidation);
-    phoneCC.addEventListener('change', toggleValidation);
+    phoneInput.addEventListener('input', toggle);
+    phoneCC.addEventListener('change', toggle);
     form.querySelectorAll('[name="mt_name"], [name="mt_email"], [name="mt_consent"]').forEach(el => {
-      el.addEventListener('input', toggleValidation);
-      el.addEventListener('change', toggleValidation);
+      el.addEventListener('input', toggle);
+      el.addEventListener('change', toggle);
     });
-    toggleValidation();
+    toggle();
 
     if (!form._mailtoBound) {
       form.addEventListener('submit', (ev) => {
@@ -120,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
         phoneFull = normalizePhone(phoneFull);
 
         const consent = !!form.querySelector('#mt_consent').checked;
-        if (!name || !email || !consent) {
+        if (!name || !email || !consent || !isValidEmail(email)) {
           status.textContent = msgs.missing;
           return;
         }
@@ -140,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
           message: form.querySelector('#mt_message').value.trim()
         };
 
-        try { if (typeof gtag === 'function') gtag('event','mailto_sent',{method:'prefill',lang}); } catch(e){}
+        try { if (typeof gtag === 'function') gtag('event', 'mailto_sent', { method: 'prefill', lang }); } catch (e) {}
         window.location.href = buildMailto(fields);
       });
       form._mailtoBound = true;
@@ -150,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.mailto-direct').forEach(a => {
     a.addEventListener('click', (e) => {
       e.preventDefault();
-      try{ if(typeof gtag === 'function') gtag('event','mailto_clicked',{method:'direct',lang}); }catch(e){}
+      try { if (typeof gtag === 'function') gtag('event', 'mailto_clicked', { method: 'direct', lang }); } catch (e) {}
       window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(a.dataset.subject || tpl.subject)}`;
     });
   });
