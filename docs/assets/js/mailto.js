@@ -10,8 +10,24 @@ document.addEventListener('DOMContentLoaded', () => {
     de: { subject: 'Buchungsanfrage - Florel', intro: 'Guten Tag,%0D%0AIch moechte eine Anfrage zur Buchung des Ferienhauses stellen.%0D%0A%0D%0A' }
   };
 
+  const messages = {
+    da: {
+      invalidPhone: 'Ugyldigt telefonnummer. Brug kun cifre og start med landekode (fx +45).',
+      missing: 'Udfyld navn, e-mail og accepter behandlingen.'
+    },
+    en: {
+      invalidPhone: 'Invalid phone number. Use only digits and start with country code (e.g. +45).',
+      missing: 'Please fill name, email and accept processing.'
+    },
+    de: {
+      invalidPhone: 'Ungültige Telefonnummer. Verwenden Sie nur Ziffern und beginnen Sie mit der Ländervorwahl (z.B. +45).',
+      missing: 'Bitte Name, E-Mail und Zustimmung ausfüllen.'
+    }
+  };
+
   const lang = (document.documentElement.lang || 'en').substring(0,2);
   const tpl = templates[lang] || templates.en;
+  const msgs = messages[lang] || messages.en;
 
   function encode(s){ return encodeURIComponent(String(s || '')).replace(/%20/g, '+'); }
 
@@ -29,27 +45,100 @@ document.addEventListener('DOMContentLoaded', () => {
     return mailto;
   }
 
+  // phone validation & submit enhancement
   document.querySelectorAll('.mailto-prefill-form').forEach(form => {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const fields = {
-        name: form.querySelector('[name="mt_name"]').value.trim(),
-        email: form.querySelector('[name="mt_email"]').value.trim(),
-        phone: form.querySelector('[name="mt_phone"]').value.trim(),
-        arrival: form.querySelector('[name="mt_arrival"]').value,
-        departure: form.querySelector('[name="mt_departure"]').value,
-        guests: form.querySelector('[name="mt_guests"]').value,
-        message: form.querySelector('[name="mt_message"]').value.trim(),
-        consent: form.querySelector('[name="mt_consent"]').checked
-      };
-      if(!fields.name || !fields.email || !fields.consent){
-        const s = form.querySelector('.mt-status'); if(s) s.textContent = 'Udfyld navn, e-mail og samtykke.';
+    const phoneInput = form.querySelector('#mt_phone');
+    const phoneCC = form.querySelector('#mt_phone_cc');
+    const phoneError = form.querySelector('#mt_phone_error');
+    const submitBtn = form.querySelector('.mt-submit');
+    const status = form.querySelector('.mt-status');
+
+    function normalizePhone(s) {
+      return String(s || '').replace(/[^\d+]/g, '');
+    }
+
+    function isValidPhoneNumber(number) {
+      if (!number) return false;
+      if (/^\+\d{6,15}$/.test(number)) return true;
+      if (/^\d{6,15}$/.test(number)) return true;
+      return false;
+    }
+
+    const toggleValidation = () => {
+      const val = phoneInput.value.trim();
+      const cc = phoneCC.value.trim();
+      let full = val;
+      if (cc && cc.startsWith('+') && !val.startsWith('+')) {
+        full = cc + val.replace(/^\+/, '');
+      }
+      const norm = normalizePhone(full);
+      if (!norm) {
+        phoneError.style.display = 'none';
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = 0.5;
         return;
       }
-      // analytics (optional)
-      try{ if(typeof gtag === 'function') gtag('event','mailto_initiated',{method:'prefill',lang}); }catch(e){}
-      window.location.href = buildMailto(fields);
+      if (!isValidPhoneNumber(norm)) {
+        phoneError.textContent = msgs.invalidPhone;
+        phoneError.style.display = 'block';
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = 0.5;
+      } else {
+        phoneError.style.display = 'none';
+        const nameOk = !!(form.querySelector('[name="mt_name"]').value||'').trim();
+        const emailOk = !!(form.querySelector('[name="mt_email"]').value||'').trim();
+        const consentOk = !!(form.querySelector('[name="mt_consent"]').checked);
+        submitBtn.disabled = !(nameOk && emailOk && consentOk);
+        submitBtn.style.opacity = submitBtn.disabled ? 0.5 : 1;
+      }
+    };
+
+    phoneInput.addEventListener('input', toggleValidation);
+    phoneCC.addEventListener('change', toggleValidation);
+    form.querySelectorAll('[name="mt_name"], [name="mt_email"], [name="mt_consent"]').forEach(el => {
+      el.addEventListener('input', toggleValidation);
+      el.addEventListener('change', toggleValidation);
     });
+    toggleValidation();
+
+    if (!form._mailtoBound) {
+      form.addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        status.textContent = '';
+        const name = (form.querySelector('#mt_name').value || '').trim();
+        const email = (form.querySelector('#mt_email').value || '').trim();
+        const phoneVal = (form.querySelector('#mt_phone').value || '').trim();
+        const cc = (form.querySelector('#mt_phone_cc').value || '').trim();
+        let phoneFull = phoneVal;
+        if (cc && cc.startsWith('+') && !phoneVal.startsWith('+')) phoneFull = cc + phoneVal.replace(/^\+/, '');
+        phoneFull = normalizePhone(phoneFull);
+
+        const consent = !!form.querySelector('#mt_consent').checked;
+        if (!name || !email || !consent) {
+          status.textContent = msgs.missing;
+          return;
+        }
+        if (!isValidPhoneNumber(phoneFull)) {
+          phoneError.textContent = msgs.invalidPhone;
+          phoneError.style.display = 'block';
+          return;
+        }
+
+        const fields = {
+          name,
+          email,
+          phone: phoneFull,
+          arrival: form.querySelector('#mt_arrival').value,
+          departure: form.querySelector('#mt_departure').value,
+          guests: form.querySelector('#mt_guests').value,
+          message: form.querySelector('#mt_message').value.trim()
+        };
+
+        try { if (typeof gtag === 'function') gtag('event','mailto_sent',{method:'prefill',lang}); } catch(e){}
+        window.location.href = buildMailto(fields);
+      });
+      form._mailtoBound = true;
+    }
   });
 
   document.querySelectorAll('.mailto-direct').forEach(a => {

@@ -44,6 +44,11 @@ Script paths:
 - Sprog sider (`docs/da/`, `docs/en/`, `docs/de/`) bruger: `<script src="../assets/js/gallery.js"></script>`
 - Root `docs/index.html` bruger: `<script src="./assets/js/gallery.js"></script>`
 
+## Kontakt/Reservation
+
+#### Telefonvalidering og landekode
+Vi kræver nu korrekt telefonformat og hjælper brugeren med landekode via en dropdown. Frontend validerer live og ved submit. Telefonnummer sendes i mailto-body som et normaliseret nummer (fx +4512345678). For justering af tilladte mønstre rediger `docs/assets/js/mailto.js` funktionen `isValidPhoneNumber`.
+
 ## Tema og design
 
 - Sitet anvender et “Forest theme” (`docs/assets/style.css`) med jordgrønne nuancer og guld-accent.

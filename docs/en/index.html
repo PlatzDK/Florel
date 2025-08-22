@@ -80,18 +80,43 @@
         <p>Want restful nature and great fishing? Book your stay here — note: for many freshwater waters and some river stretches you need both the national fishing license and local day permits.</p>
         <p><a class="btn btn-primary" href="mailto:info@florelfiskeri.dk">Send reservation enquiry</a></p>
         <!-- Prefill mailto form (English) -->
-        <form class="mailto-prefill-form mailto-form" aria-label="Reservation via email">
+        <form class="mailto-prefill-form mailto-form" aria-label="Reservation via email" novalidate>
           <h3>Send us an email instead</h3>
           <div class="grid-2">
-            <label>Name* <input name="mt_name" type="text" required></label>
-            <label>Email* <input name="mt_email" type="email" required></label>
-            <label>Phone <input name="mt_phone" type="tel"></label>
-            <label>Arrival <input name="mt_arrival" type="date"></label>
-            <label>Departure <input name="mt_departure" type="date"></label>
-            <label>Guests <input name="mt_guests" type="number" min="1" max="50"></label>
+            <label>Name* <input name="mt_name" id="mt_name" type="text" required></label>
+            <label>Email* <input name="mt_email" id="mt_email" type="email" required></label>
+
+            <label>Phone
+              <div class="phone-row">
+                <select name="mt_phone_cc" id="mt_phone_cc" class="phone-cc" aria-label="country code">
+                  <option value="+45">+45 (DK)</option>
+                  <option value="+46">+46 (SE)</option>
+                  <option value="+49">+49 (DE)</option>
+                  <option value="+44">+44 (UK)</option>
+                  <option value="+1">+1 (US)</option>
+                  <option value="">Other</option>
+                </select>
+                <input name="mt_phone" id="mt_phone" type="tel" inputmode="tel" placeholder="e.g. 555 1234" aria-describedby="mt_phone_help" />
+              </div>
+              <div id="mt_phone_help" class="field-help">Enter local number — choose country code on the left. Use only digits, spaces and dashes.</div>
+              <div id="mt_phone_error" class="field-error" aria-live="polite" style="display:none;"></div>
+            </label>
+
+            <label>Arrival <input name="mt_arrival" id="mt_arrival" type="date"></label>
+            <label>Departure <input name="mt_departure" id="mt_departure" type="date"></label>
+
+            <label>Guests <input name="mt_guests" id="mt_guests" type="number" min="1" max="50"></label>
           </div>
-          <label>Message <textarea name="mt_message" rows="3"></textarea></label>
-          <label class="consent"><input name="mt_consent" type="checkbox" required> I agree that my data is processed.</label>
+
+          <label>Message <textarea name="mt_message" id="mt_message" rows="3"></textarea></label>
+
+          <div class="consent-row">
+            <label class="consent">
+              <input name="mt_consent" id="mt_consent" type="checkbox" required />
+              <span class="consent-text">I agree that my data is processed.</span>
+            </label>
+          </div>
+
           <p><button class="btn mt-submit" type="submit">Open in mail app</button></p>
           <p class="mt-status" aria-live="polite"></p>
         </form>

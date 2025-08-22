@@ -80,18 +80,43 @@
         <p>Möchten Sie Ruhe in der Natur und erstklassiges Angeln? Buchen Sie hier — beachten Sie: Für viele Süßwassergewässer und Flussabschnitte benötigen Sie einen staatlichen Angelschein und lokale Tageskarten.</p>
         <p><a class="btn btn-primary" href="mailto:info@florelfiskeri.dk">Anfrage senden</a></p>
         <!-- Prefill mailto form (German) -->
-        <form class="mailto-prefill-form mailto-form" aria-label="Reservierung per E-Mail">
+        <form class="mailto-prefill-form mailto-form" aria-label="Reservierung per E-Mail" novalidate>
           <h3>Senden Sie uns stattdessen eine E-Mail</h3>
           <div class="grid-2">
-            <label>Name* <input name="mt_name" type="text" required></label>
-            <label>E-Mail* <input name="mt_email" type="email" required></label>
-            <label>Telefon <input name="mt_phone" type="tel"></label>
-            <label>Anreise <input name="mt_arrival" type="date"></label>
-            <label>Abreise <input name="mt_departure" type="date"></label>
-            <label>Gäste <input name="mt_guests" type="number" min="1" max="50"></label>
+            <label>Name* <input name="mt_name" id="mt_name" type="text" required></label>
+            <label>E-Mail* <input name="mt_email" id="mt_email" type="email" required></label>
+
+            <label>Telefon
+              <div class="phone-row">
+                <select name="mt_phone_cc" id="mt_phone_cc" class="phone-cc" aria-label="Ländervorwahl">
+                  <option value="+45">+45 (DK)</option>
+                  <option value="+46">+46 (SE)</option>
+                  <option value="+49">+49 (DE)</option>
+                  <option value="+44">+44 (UK)</option>
+                  <option value="+1">+1 (US)</option>
+                  <option value="">Andere</option>
+                </select>
+                <input name="mt_phone" id="mt_phone" type="tel" inputmode="tel" placeholder="z.B. 0151 2345678" aria-describedby="mt_phone_help" />
+              </div>
+              <div id="mt_phone_help" class="field-help">Geben Sie die lokale Nummer ein – wählen Sie die Ländervorwahl links. Verwenden Sie nur Ziffern, Leerzeichen und Bindestriche.</div>
+              <div id="mt_phone_error" class="field-error" aria-live="polite" style="display:none;"></div>
+            </label>
+
+            <label>Anreise <input name="mt_arrival" id="mt_arrival" type="date"></label>
+            <label>Abreise <input name="mt_departure" id="mt_departure" type="date"></label>
+
+            <label>Gäste <input name="mt_guests" id="mt_guests" type="number" min="1" max="50"></label>
           </div>
-          <label>Nachricht <textarea name="mt_message" rows="3"></textarea></label>
-          <label class="consent"><input name="mt_consent" type="checkbox" required> Ich bin mit der Verarbeitung meiner Daten einverstanden.</label>
+
+          <label>Nachricht <textarea name="mt_message" id="mt_message" rows="3"></textarea></label>
+
+          <div class="consent-row">
+            <label class="consent">
+              <input name="mt_consent" id="mt_consent" type="checkbox" required />
+              <span class="consent-text">Ich bin mit der Verarbeitung meiner Daten einverstanden.</span>
+            </label>
+          </div>
+
           <p><button class="btn mt-submit" type="submit">In Mail-App öffnen</button></p>
           <p class="mt-status" aria-live="polite"></p>
         </form>
