@@ -108,3 +108,10 @@ body{
 #galleryLightbox img { max-width:92%; max-height:84%; border-radius:8px; }
 #galleryLightbox .lb-caption { color:#fff; margin-top:0.6rem; text-align:center; font-size:.95rem; }
 
+/* ===== Mailto prefill styles (appended) ===== */
+.mailto-form { background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 8px; max-width: 560px; }
+.mailto-form h3 { margin-top: 0; }
+.mailto-form label { display:block; margin-bottom:0.5rem; font-size:0.95rem; }
+.mailto-form input, .mailto-form textarea { width:100%; padding:0.5rem; border-radius:6px; border:1px solid rgba(0,0,0,0.08); margin-top:0.25rem; box-sizing:border-box; }
+.mailto-form .btn { display:inline-block; margin-top:0.5rem; }
+a.mailto-direct { color: inherit; text-decoration: underline; }

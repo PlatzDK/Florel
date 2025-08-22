@@ -30,6 +30,17 @@ Upload flow:
 2. Tilføj en entry i `gallery.json` (id, slug, thumb, large, caption{da,en,de}, credit, year, tags)
 3. Commit og push — GitHub Pages opdaterer sitet.
 
+### Mailto fallback / prefill
+
+Vi tilbyder en "Send os e-mail" fallback hvor brugeren kan udfylde en lille prefill-form og åbne deres mailklient med et struktureret template. Koden ligger i:
+
+- JS: `docs/assets/js/mailto.js` (recipient er obfuscated i JS).
+- UI: prefill forms i `docs/da/index.html`, `docs/en/index.html`, `docs/de/index.html`.
+- CSS: appended i `docs/assets/style.css`.
+
+For at ændre modtager: rediger `recipientUser` og `recipientDomain` i `docs/assets/js/mailto.js`.  
+Test: åbn en sprogside, udfyld felter og tryk "Åbn i mailapp" — din mailklient skal åbne med forudfyldt emne + body.
+
 Script paths:
 - Sprog sider (`docs/da/`, `docs/en/`, `docs/de/`) bruger: `<script src="../assets/js/gallery.js"></script>`
 - Root `docs/index.html` bruger: `<script src="./assets/js/gallery.js"></script>`

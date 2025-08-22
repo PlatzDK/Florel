@@ -70,12 +70,28 @@
       <h2>Ready to book?</h2>
       <p>Want restful nature and great fishing? Book your stay here — note: for many freshwater waters and some river stretches you need both the national fishing license and local day permits.</p>
       <p><a class="btn btn-primary" href="mailto:info@florelfiskeri.dk">Send reservation enquiry</a></p>
+      <!-- Prefill mailto form (English) -->
+      <form class="mailto-prefill-form mailto-form" aria-label="Reservation via email">
+        <h3>Send us an email instead</h3>
+        <label>Name* <input name="mt_name" type="text" required></label>
+        <label>Email* <input name="mt_email" type="email" required></label>
+        <label>Phone <input name="mt_phone" type="tel"></label>
+        <label>Arrival <input name="mt_arrival" type="date"></label>
+        <label>Departure <input name="mt_departure" type="date"></label>
+        <label>Guests <input name="mt_guests" type="number" min="1" max="50"></label>
+        <label>Message <textarea name="mt_message" rows="3"></textarea></label>
+        <label><input name="mt_consent" type="checkbox" required> I agree that my data is processed.</label>
+        <p><button class="btn" type="submit">Open in mail app</button></p>
+        <p class="mt-status" aria-live="polite"></p>
+      </form>
     </section>
   </main>
 
   <footer class="site-footer container">
     <p>© Florel Fishing</p>
+    <p><a class="mailto-direct" data-recipient="obfuscated" data-subject="Reservation%20request%20-%20Florel" href="#">Contact via email</a></p>
   </footer>
 <script src="../assets/js/gallery.js"></script>
+<script src="../assets/js/mailto.js"></script>
 </body>
 </html>
