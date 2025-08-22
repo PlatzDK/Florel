@@ -23,7 +23,7 @@
     </div>
   </header>
 
-  <main>
+  <main class="site-main">
     <section class="hero">
       <div class="hero-inner container">
         <h2>Florel Fiskeri</h2>
@@ -32,65 +32,79 @@
       </div>
     </section>
 
-    <section id="galleri" class="section container">
-      <h2>Galleri</h2>
-      <div id="galleryGrid" class="gallery"></div>
+    <section id="galleri" class="section">
+      <div class="container">
+        <h2>Galleri</h2>
+        <div id="galleryGrid" class="gallery"></div>
+      </div>
     </section>
 
-    <section id="activities" class="section container">
-      <h2>Aktiviteter for lystfiskere</h2>
-      <p>Danmark byder på alsidige fiskemuligheder: kyst- og havfiskeri, å- og søfiskeri samt put &amp; take-søer.</p>
-      <ul>
-        <li>Kystfiskeri efter havørred, hornfisk og makrel (forår / sensommer / efterår).</li>
-        <li>Søfiskeri: gedde, aborre, sandart, søørred og ål.</li>
-        <li>Åfiskeri i klare strømmende åer — dagkort påkrævet.</li>
-        <li>Put &amp; take: familievenligt, ofte uden nationalt fisketegn.</li>
-        <li>Bådfiskeri, kajak eller belly-boat, hvor tilladt.</li>
-      </ul>
+    <section id="activities" class="section">
+      <div class="container">
+        <h2>Aktiviteter for lystfiskere</h2>
+        <p>Danmark byder på alsidige fiskemuligheder: kyst- og havfiskeri, å- og søfiskeri samt put &amp; take-søer.</p>
+        <ul>
+          <li>Kystfiskeri efter havørred, hornfisk og makrel (forår / sensommer / efterår).</li>
+          <li>Søfiskeri: gedde, aborre, sandart, søørred og ål.</li>
+          <li>Åfiskeri i klare strømmende åer — dagkort påkrævet.</li>
+          <li>Put &amp; take: familievenligt, ofte uden nationalt fisketegn.</li>
+          <li>Bådfiskeri, kajak eller belly-boat, hvor tilladt.</li>
+        </ul>
+      </div>
     </section>
 
-    <section id="local" class="section container">
-      <h2>Lokale fiskesteder</h2>
-      <ul>
-        <li><strong>Bølling Sø</strong> (≈2 km): frit fiskeri fra land; gedde, aborre; shelters og kano/robåd.</li>
-        <li><strong>Skyggehale Put &amp; Take</strong> (≈5 km): familievenligt; toilet og rensebord; ørredudsætning.</li>
-        <li><strong>Silkeborgsøerne / Langsø (Gudenå)</strong> (≈15 km): store søer; dagkort + lokale regler.</li>
-        <li><strong>Tollundgaard Put &amp; Take (Pårup)</strong> (≈10 km): klassisk put &amp; take.</li>
-        <li><strong>Karup Å</strong> (≈30 km): elvefiskeri; kendt for havørred; dagkort.</li>
-        <li><strong>Hjarbæk Fjord (Limfjorden)</strong> (≈55 km): fjord- og kystfiskeri.</li>
-      </ul>
-      <p><a class="btn" href="fiskeri.html">Læs mere om fiskesteder</a></p>
+    <section id="local" class="section">
+      <div class="container">
+        <h2>Lokale fiskesteder</h2>
+        <ul>
+          <li><strong>Bølling Sø</strong> (≈2 km): frit fiskeri fra land; gedde, aborre; shelters og kano/robåd.</li>
+          <li><strong>Skyggehale Put &amp; Take</strong> (≈5 km): familievenligt; toilet og rensebord; ørredudsætning.</li>
+          <li><strong>Silkeborgsøerne / Langsø (Gudenå)</strong> (≈15 km): store søer; dagkort + lokale regler.</li>
+          <li><strong>Tollundgaard Put &amp; Take (Pårup)</strong> (≈10 km): klassisk put &amp; take.</li>
+          <li><strong>Karup Å</strong> (≈30 km): elvefiskeri; kendt for havørred; dagkort.</li>
+          <li><strong>Hjarbæk Fjord (Limfjorden)</strong> (≈55 km): fjord- og kystfiskeri.</li>
+        </ul>
+        <p><a class="btn" href="fiskeri.html">Læs mere om fiskesteder</a></p>
+      </div>
     </section>
 
-    <section id="practical" class="section container">
-      <h2>Praktisk info &amp; guides</h2>
-      <p>Der findes båd- og kajakudlejning i nærheden, samt lokale grejbutikker. Book en lokal guide (Fishing in Denmark / Riverfisher) for at få de bedste stræk og teknikker. Kontakt os for hjælp til dagkort.</p>
+    <section id="practical" class="section">
+      <div class="container">
+        <h2>Praktisk info &amp; guides</h2>
+        <p>Der findes båd- og kajakudlejning i nærheden, samt lokale grejbutikker. Book en lokal guide (Fishing in Denmark / Riverfisher) for at få de bedste stræk og teknikker. Kontakt os for hjælp til dagkort.</p>
+      </div>
     </section>
 
-    <section class="section booking container">
-      <h2>Reservér dit ophold</h2>
-      <p>Vil I kombinere afslapning og fiskeri? Book opholdet her — og husk: til ferskvands- og særlige å-stræk kræves ofte både statsligt fisketegn og lokalt dagkort.</p>
-      <p><a class="btn btn-primary" href="mailto:info@florelfiskeri.dk">Send reservationsforespørgsel</a></p>
-      <!-- Prefill mailto form (Danish) -->
-      <form class="mailto-prefill-form mailto-form" aria-label="Reservation via email">
-        <h3>Send os en e-mail i stedet</h3>
-        <label>Navn* <input name="mt_name" type="text" required></label>
-        <label>Email* <input name="mt_email" type="email" required></label>
-        <label>Telefon <input name="mt_phone" type="tel"></label>
-        <label>Ankomst <input name="mt_arrival" type="date"></label>
-        <label>Afrejse <input name="mt_departure" type="date"></label>
-        <label>Antal gæster <input name="mt_guests" type="number" min="1" max="50"></label>
-        <label>Ønsker <textarea name="mt_message" rows="3"></textarea></label>
-        <label><input name="mt_consent" type="checkbox" required> Jeg accepterer at mine oplysninger behandles.</label>
-        <p><button class="btn" type="submit">Åbn i mailapp</button></p>
-        <p class="mt-status" aria-live="polite"></p>
-      </form>
+    <section class="section booking">
+      <div class="container">
+        <h2>Reservér dit ophold</h2>
+        <p>Vil I kombinere afslapning og fiskeri? Book opholdet her — og husk: til ferskvands- og særlige å-stræk kræves ofte både statsligt fisketegn og lokalt dagkort.</p>
+        <p><a class="btn btn-primary" href="mailto:info@florelfiskeri.dk">Send reservationsforespørgsel</a></p>
+        <!-- Prefill mailto form (Danish) -->
+        <form class="mailto-prefill-form mailto-form" aria-label="Reservation via email">
+          <h3>Send os en e-mail i stedet</h3>
+          <div class="grid-2">
+            <label>Navn* <input name="mt_name" type="text" required></label>
+            <label>Email* <input name="mt_email" type="email" required></label>
+            <label>Telefon <input name="mt_phone" type="tel"></label>
+            <label>Ankomst <input name="mt_arrival" type="date"></label>
+            <label>Afrejse <input name="mt_departure" type="date"></label>
+            <label>Antal gæster <input name="mt_guests" type="number" min="1" max="50"></label>
+          </div>
+          <label>Ønsker <textarea name="mt_message" rows="3"></textarea></label>
+          <label class="consent"><input name="mt_consent" type="checkbox" required> Jeg accepterer at mine oplysninger behandles.</label>
+          <p><button class="btn" type="submit">Åbn i mailapp</button></p>
+          <p class="mt-status" aria-live="polite"></p>
+        </form>
+      </div>
     </section>
   </main>
 
-  <footer class="site-footer container">
-    <p>© Florel Fiskeri</p>
-    <p><a class="mailto-direct" data-recipient="obfuscated" data-subject="Reservationsforesp%C3%B8rgsel%20-%20Florel" href="#">Kontakt via e-mail</a></p>
+  <footer class="site-footer">
+    <div class="container">
+      <p>© Florel Fiskeri</p>
+      <p><a class="mailto-direct" data-subject="Reservationsforespørgsel - Florel" href="#">Kontakt via e-mail</a></p>
+    </div>
   </footer>
   <script src="../assets/js/gallery.js"></script>
   <script src="../assets/js/mailto.js"></script>
