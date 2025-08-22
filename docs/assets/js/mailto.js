@@ -71,6 +71,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (cc && cc.startsWith('+') && !val.startsWith('+')) {
         full = cc + val.replace(/^\+/, '');
       }
+      if (/[a-zA-Z]/.test(full)) {
+        phoneError.textContent = msgs.invalidPhone;
+        phoneError.style.display = 'block';
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = 0.5;
+        return;
+      }
       const norm = normalizePhone(full);
       if (!norm) {
         phoneError.style.display = 'none';
@@ -79,8 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       if (!isValidPhoneNumber(norm)) {
-        phoneError.textContent = msgs.invalidPhone;
-        phoneError.style.display = 'block';
+        phoneError.style.display = 'none';
         submitBtn.disabled = true;
         submitBtn.style.opacity = 0.5;
       } else {
