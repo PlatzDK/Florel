@@ -13,15 +13,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const messages = {
     da: {
       invalidPhone: 'Ugyldigt telefonnummer. Brug kun cifre og start med landekode (fx +45).',
-      missing: 'Udfyld navn, e-mail og accepter behandlingen.'
+      missing: 'Udfyld navn, e-mail og accepter behandlingen.',
+      invalidEmail: 'Ugyldig e-mail-adresse.'
     },
     en: {
       invalidPhone: 'Invalid phone number. Use only digits and start with country code (e.g. +45).',
-      missing: 'Please fill name, email and accept processing.'
+      missing: 'Please fill name, email and accept processing.',
+      invalidEmail: 'Invalid email address.'
     },
     de: {
       invalidPhone: 'Ungültige Telefonnummer. Verwenden Sie nur Ziffern und beginnen Sie mit der Ländervorwahl (z.B. +45).',
-      missing: 'Bitte Name, E-Mail und Zustimmung ausfüllen.'
+      missing: 'Bitte Name, E-Mail und Zustimmung ausfüllen.',
+      invalidEmail: 'Ungültige E-Mail-Adresse.'
     }
   };
 
@@ -64,6 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return false;
     }
 
+    function isValidEmail(email) {
+      return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(email || '').trim());
+    }
+
     const toggleValidation = () => {
       const val = phoneInput.value.trim();
       const cc = phoneCC.value.trim();
@@ -72,25 +79,18 @@ document.addEventListener('DOMContentLoaded', () => {
         full = cc + val.replace(/^\+/, '');
       }
       const norm = normalizePhone(full);
-      if (!norm) {
-        phoneError.style.display = 'none';
-        submitBtn.disabled = true;
-        submitBtn.style.opacity = 0.5;
-        return;
-      }
-      if (!isValidPhoneNumber(norm)) {
+      const nameOk = !!(form.querySelector('[name="mt_name"]').value||'').trim();
+      const emailVal = (form.querySelector('[name="mt_email"]').value||'').trim();
+      const emailOk = isValidEmail(emailVal);
+      const consentOk = !!(form.querySelector('[name="mt_consent"]').checked);
+      if (norm && !isValidPhoneNumber(norm)) {
         phoneError.textContent = msgs.invalidPhone;
         phoneError.style.display = 'block';
-        submitBtn.disabled = true;
-        submitBtn.style.opacity = 0.5;
       } else {
         phoneError.style.display = 'none';
-        const nameOk = !!(form.querySelector('[name="mt_name"]').value||'').trim();
-        const emailOk = !!(form.querySelector('[name="mt_email"]').value||'').trim();
-        const consentOk = !!(form.querySelector('[name="mt_consent"]').checked);
-        submitBtn.disabled = !(nameOk && emailOk && consentOk);
-        submitBtn.style.opacity = submitBtn.disabled ? 0.5 : 1;
       }
+      submitBtn.disabled = !(nameOk && emailOk && consentOk && (norm === '' || isValidPhoneNumber(norm)));
+      submitBtn.style.opacity = submitBtn.disabled ? 0.5 : 1;
     };
 
     phoneInput.addEventListener('input', toggleValidation);
@@ -118,11 +118,16 @@ document.addEventListener('DOMContentLoaded', () => {
           status.textContent = msgs.missing;
           return;
         }
-        if (!isValidPhoneNumber(phoneFull)) {
+        if (!isValidEmail(email)) {
+          status.textContent = msgs.invalidEmail;
+          return;
+        }
+        if (phoneFull && !isValidPhoneNumber(phoneFull)) {
           phoneError.textContent = msgs.invalidPhone;
           phoneError.style.display = 'block';
           return;
         }
+        phoneError.style.display = 'none';
 
         const fields = {
           name,
