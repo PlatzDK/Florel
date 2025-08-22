@@ -11,8 +11,9 @@
   <link rel="alternate" hreflang="de" href="https://platzdk.github.io/Florel/de/">
   <link rel="alternate" hreflang="x-default" href="https://platzdk.github.io/Florel/">
   <link rel="stylesheet" href="../assets/style.css">
+  <link rel="preload" as="image" href="../assets/images/lake-sunset.jpg">
 </head>
-  
+
 <body>
   <header class="site-header">
     <div class="container">
@@ -23,14 +24,21 @@
     </div>
   </header>
 
-  <main class="site-main">
-    <section class="hero">
-      <div class="hero-inner container">
-        <h2>Florel Fiskeri</h2>
-        <p class="tagline">Sommerhus midt i skoven ved sø og å. Oplev afslappende naturoplevelser og fantastiske muligheder for lystfiskeri — fra put &amp; take og søfiskeri til kyst- og åfiskeri inden for kort rækkevidde.</p>
-        <p class="cta"><a class="btn btn-primary" href="mailto:info@florelfiskeri.dk">Send reservationsforespørgsel</a></p>
+  <header class="hero" role="banner" aria-label="Florel hero">
+    <div class="hero-bg" style="background-image: linear-gradient(rgba(20,30,20,0.35), rgba(20,30,20,0.15)), url('../assets/images/lake-sunset.jpg');">
+      <div class="container" style="padding:6rem 0; text-align:center;">
+        <h1 style="font-size:2.1rem; color:#fff; margin:0 0 0.6rem; text-shadow: 0 4px 18px rgba(0,0,0,0.45);">
+          Florel Fiskeri
+        </h1>
+        <p class="lead" style="color: rgba(255,255,255,0.95); max-width: 60ch; margin:0 auto 1rem;">
+          Sommerhus i tæt skov med adgang til sø og å — det perfekte sted for familier og lystfiskere.
+        </p>
+        <a href="#reservation" class="btn-primary cta" aria-label="Reserver dit ophold">Reserver dit ophold</a>
       </div>
-    </section>
+    </div>
+  </header>
+
+  <main id="main-content" class="site-main">
 
     <section id="galleri" class="section">
       <div class="container">
@@ -75,7 +83,7 @@
       </div>
     </section>
 
-    <section class="section booking">
+    <section id="reservation" class="section booking">
       <div class="container">
         <h2>Reservér dit ophold</h2>
         <p>Vil I kombinere afslapning og fiskeri? Book opholdet her — og husk: til ferskvands- og særlige å-stræk kræves ofte både statsligt fisketegn og lokalt dagkort.</p>
