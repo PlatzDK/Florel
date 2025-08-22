@@ -11,6 +11,7 @@
   <link rel="alternate" hreflang="de" href="https://platzdk.github.io/Florel/de/">
   <link rel="alternate" hreflang="x-default" href="https://platzdk.github.io/Florel/">
   <link rel="stylesheet" href="../assets/style.css">
+  <link rel="preload" as="image" href="../assets/images/lake-sunset.jpg">
 </head>
 <body>
   <header class="site-header">
@@ -22,14 +23,21 @@
     </div>
   </header>
 
-  <main class="site-main">
-    <section class="hero">
-      <div class="hero-inner container">
-        <h2>Florel Fishing Retreat</h2>
-        <p class="tagline">Forest cabin by lake and stream. Enjoy peaceful nature and excellent fishing — from put &amp; take lakes and river fishing to coastal angling, all within easy reach.</p>
-        <p class="cta"><a class="btn btn-primary" href="mailto:info@florelfiskeri.dk">Send reservation enquiry</a></p>
+  <header class="hero" role="banner" aria-label="Florel hero">
+    <div class="hero-bg" style="background-image: linear-gradient(rgba(20,30,20,0.35), rgba(20,30,20,0.15)), url('../assets/images/lake-sunset.jpg');">
+      <div class="container" style="padding:6rem 0; text-align:center;">
+        <h1 style="font-size:2.1rem; color:#fff; margin:0 0 0.6rem; text-shadow: 0 4px 18px rgba(0,0,0,0.45);">
+          Florel Fishing Retreat
+        </h1>
+        <p class="lead" style="color: rgba(255,255,255,0.95); max-width: 60ch; margin:0 auto 1rem;">
+          Forest cabin in dense woods with access to lake and stream — the perfect place for families and anglers.
+        </p>
+        <a href="#reservation" class="btn-primary cta" aria-label="Book your stay">Book your stay</a>
       </div>
-    </section>
+    </div>
+  </header>
+
+  <main id="main-content" class="site-main">
 
     <section id="galleri" class="section">
       <div class="container">
@@ -74,7 +82,7 @@
       </div>
     </section>
 
-    <section class="section booking">
+    <section id="reservation" class="section booking">
       <div class="container">
         <h2>Ready to book?</h2>
         <p>Want restful nature and great fishing? Book your stay here — note: for many freshwater waters and some river stretches you need both the national fishing license and local day permits.</p>

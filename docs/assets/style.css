@@ -1,3 +1,46 @@
+/* ===== THEME VARIABLES & LAYOUT (Quick-wins) ===== */
+:root{
+  --primary-forest: #2f4f37;
+  --muted: #556a58;
+  --accent: #c99c19;
+  --bg: #f5f7f4;
+  --content-max-width: 1100px;
+  --side-padding: 1rem;
+}
+
+/* Global page bg */
+body { background-color: var(--bg); color: #173025; }
+
+/* Container for readable line-length and centered content */
+.container {
+  max-width: var(--content-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--side-padding);
+  padding-right: var(--side-padding);
+  box-sizing: border-box;
+}
+
+/* Section spacing */
+.section { padding-top: 3rem; padding-bottom: 3rem; }
+
+/* Paragraph readability */
+p { line-height: 1.6; max-width: 70ch; margin-left: auto; margin-right: auto; }
+
+/* CTA primary style (used for hero) */
+.btn-primary {
+  background: var(--accent);
+  color: #071b11;
+  padding: 0.9rem 1.25rem;
+  border-radius: 10px;
+  font-weight: 700;
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+.btn-primary:focus { outline: 3px solid rgba(47,79,55,0.14); outline-offset: 3px; }
+
 /* docs/assets/style.css
    Forest theme overrides for Florel
    - Uses external hero image so you don't need to upload a local file.
