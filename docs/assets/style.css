@@ -70,6 +70,8 @@ body{
 }
 .site-header .logo{ color: var(--neutral-color); font-weight:700; }
 .language-switcher a{ color: var(--neutral-color); margin-left:0.6rem; text-decoration:none; }
+.page-nav{ margin-top:0.5rem; }
+.page-nav a{ color: var(--neutral-color); margin-right:0.6rem; text-decoration:none; }
 
 /* Hero — use an external forest/woodland image + overlay */
 .hero{
