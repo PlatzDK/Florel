@@ -15,6 +15,7 @@ Dette repo indeholder en simpel statisk hjemmeside for Florel, et skovsommerhus 
 - **Dansk (`/da/`):** fuldt indhold om huset, aktiviteter, lokale fiskesteder, praktisk information, og booking. Indeholder canonical og hreflang-tags.
 - **English (`/en/`) og Deutsch (`/de/`):** tilsvarende sider med oversat indhold.
 - **Undersider med fiskesteder** (`/da/fiskeri.html`, `/en/fishing.html`, `/de/fischen.html`): lister de vigtigste søer, put & take-søer og floder med afstand.
+- Alle sprogforsider indeholder sektionerne Intro, lokale fiskesteder, fiskeri med/uden båd, guides & grejbutikker, klubber & konkurrencer, naturoplevelser og praktisk information.
 
   ## Galleri
 
