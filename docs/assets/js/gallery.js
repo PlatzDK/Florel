@@ -53,12 +53,20 @@ if (!lightbox) {
   closeBtn.innerHTML = '&times;';
   lightbox.appendChild(closeBtn);
 
-  const imgWrap = document.createElement('div'); imgWrap.className = 'lb-imgwrap';
-  const lbImg = document.createElement('img'); lbImg.className = 'lb-img'; lbImg.alt = '';
+
+  // Image wrapper
+  const imgWrap = document.createElement('div');
+  imgWrap.className = 'lb-imgwrap';
+  // Large image
+  const lbImg = document.createElement('img');
+  lbImg.className = 'lb-img';
+  lbImg.alt = '';
   imgWrap.appendChild(lbImg);
-
-  const lbCap = document.createElement('div'); lbCap.className = 'lb-caption'; lbCap.textContent = '';
-
+  // Caption under image
+  const lbCap = document.createElement('div');
+  lbCap.className = 'lb-caption';
+  lbCap.textContent = '';
+  // Structure: wrap > imgWrap > img, wrap > lbCap
   wrap.appendChild(imgWrap);
   wrap.appendChild(lbCap);
   lightbox.appendChild(wrap);
@@ -68,10 +76,16 @@ if (!lightbox) {
     lbImg.src = src;
     lbImg.alt = altText || '';
     lbCap.textContent = captionText || '';
+    // Center image and caption always
+    imgWrap.style.display = 'flex';
+    imgWrap.style.alignItems = 'center';
+    imgWrap.style.justifyContent = 'center';
+    lbCap.style.textAlign = 'center';
     lightbox.style.display = 'flex';
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
-    wrap.setAttribute('tabindex', '-1'); wrap.focus();
+    wrap.setAttribute('tabindex', '-1');
+    wrap.focus();
   }
   function closeLightbox() {
     lbImg.src = '';
