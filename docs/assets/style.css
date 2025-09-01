@@ -14,18 +14,16 @@ body { background-color: var(--bg); color: #173025; }
 /* Container for readable line-length and centered content */
 .container {
   max-width: var(--content-max-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--side-padding);
-  padding-right: var(--side-padding);
+  margin: 0 auto;
+  padding: 0 var(--side-padding);
   box-sizing: border-box;
 }
 
 /* Section spacing */
-.section { padding-top: 3rem; padding-bottom: 3rem; }
+.section { padding: 2.5rem 0; }
 
 /* Paragraph readability */
-p { line-height: 1.6; max-width: 70ch; margin-left: auto; margin-right: auto; }
+p { line-height: 1.6; max-width: 70ch; }
 
 /* CTA primary style (used for hero) */
 .btn-primary {
