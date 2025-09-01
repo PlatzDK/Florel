@@ -3,6 +3,9 @@
   line-height: 1.5;
   font-weight: 400;
 
+  --content-max-width: 1100px;
+  --side-padding: 1rem;
+
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
@@ -28,6 +31,22 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+}
+
+.container {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 var(--side-padding);
+  box-sizing: border-box;
+}
+
+.section {
+  padding: 2.5rem 0;
+}
+
+p {
+  line-height: 1.6;
+  max-width: 70ch;
 }
 
 h1 {
