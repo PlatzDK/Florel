@@ -254,17 +254,40 @@ h1,h2,h3, .section h2 { color: var(--primary-forest) !important; }
 }
 #galleryLightbox .lb-imgwrap {
   width: 100%;
-  display:flex; align-items:center; justify-content:center;
-  overflow:hidden; border-radius:12px; background:rgba(0,0,0,0.05);
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.05);
+  box-sizing: border-box;
 }
 #galleryLightbox img.lb-img {
-  max-width:100%; max-height:78vh; height:auto; display:block; border-radius:8px;
-  box-shadow:0 8px 28px rgba(0,0,0,0.6); object-fit:contain;
+  max-width: 98vw;
+  max-height: 70vh;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.6);
+  object-fit: contain;
+  background: #fff;
 }
 #galleryLightbox .lb-caption {
-  width:100%; color:#fff; font-size:0.98rem;
-  background: rgba(0,0,0,0.45); padding:0.6rem 0.8rem; border-radius:8px;
-  text-align:left; box-sizing:border-box; max-height:12vh; overflow:auto;
+  width: 100%;
+  color: #fff;
+  font-size: 1.05rem;
+  background: rgba(0,0,0,0.55);
+  padding: 0.7rem 1rem 0.8rem 1rem;
+  border-radius: 8px;
+  text-align: center;
+  box-sizing: border-box;
+  max-width: 98vw;
+  margin: 0.5rem auto 0 auto;
+  max-height: 14vh;
+  overflow: auto;
+  word-break: break-word;
 }
 #galleryLightbox .lb-close {
   position:absolute; top:14px; right:14px;
@@ -272,10 +295,10 @@ h1,h2,h3, .section h2 { color: var(--primary-forest) !important; }
   width:40px; height:40px; font-size:20px; cursor:pointer; z-index:10001;
 }
 @media (max-width:620px) {
-  #galleryLightbox { padding:1rem; }
-  #galleryLightbox .lb-wrap { max-width:98%; max-height:98vh; }
-  #galleryLightbox img.lb-img { max-height:70vh; }
-  #galleryLightbox .lb-caption { font-size:0.95rem; max-height:18vh; padding:0.5rem; }
+  #galleryLightbox { padding: 0.5rem; }
+  #galleryLightbox .lb-wrap { max-width: 99vw; max-height: 99vh; }
+  #galleryLightbox img.lb-img { max-width: 98vw; max-height: 48vh; }
+  #galleryLightbox .lb-caption { font-size: 0.97rem; max-height: 22vh; padding: 0.5rem 0.5rem 0.7rem 0.5rem; }
 }
 
 /* ===== Mailto form — visual fixes ===== */
