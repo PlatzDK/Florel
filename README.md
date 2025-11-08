@@ -1,69 +1,57 @@
-# Florel – sommerhus og fishing retreat
+# Skovkrogen 37 – Sommerhus for lystfiskere
 
-Dette repo indeholder en simpel statisk hjemmeside for Florel, et skovsommerhus med adgang til sø og bæk. Siden retter sig mod både danske, engelske og tyske gæster.
+Et hurtigt, tilgængeligt og SEO-optimeret Next.js-site for Skovkrogen 37.
 
-## Live-URL
+## Tilpas billeder
 
-- Root (sprogvalg): [https://platzdk.github.io/Florel/](https://platzdk.github.io/Florel/)
-- Dansk: [https://platzdk.github.io/Florel/da/](https://platzdk.github.io/Florel/da/)
-- English: [https://platzdk.github.io/Florel/en/](https://platzdk.github.io/Florel/en/)
-- Deutsch: [https://platzdk.github.io/Florel/de/](https://platzdk.github.io/Florel/de/)
+- Galleri-data ligger i `data/gallery.json`. Tilføj dine egne filer i `public/images/gallery` og sæt `src`-feltet for hvert element til fx `/images/gallery/gallery-001.jpg`. Hvis `src` er `null`, vises den indbyggede SVG-placeholder.
+- Hero- og hus-illustrationerne defineres i `src/lib/placeholders.ts` og bruges i `app/page.tsx` og `app/(pages)/sommerhuset/page.tsx`. Udskift værdierne med filstier til egne billeder, når de er klar.
+- Open Graph billedet genereres dynamisk i `app/opengraph-image.tsx`. Tilpas layoutet eller erstat funktionen med statisk fil efter behov.
 
-## Sider og indhold
+## Rediger tekster og data
 
-- **Root (`/`):** neutral landingsside med hero-sektion, kort tagline på tre sprog og knapper til at vælge Dansk/English/Deutsch. Indeholder hreflang links til alle sprogversioner.
-- **Dansk (`/da/`):** fuldt indhold om huset, aktiviteter, lokale fiskesteder, praktisk information, og booking. Indeholder canonical og hreflang-tags.
-- **English (`/en/`) og Deutsch (`/de/`):** tilsvarende sider med oversat indhold.
-- **Undersider med fiskesteder** (`/da/fiskeri.html`, `/en/fishing.html`, `/de/fischen.html`): lister de vigtigste søer, put & take-søer og floder med afstand.
-- Alle sprogforsider starter med en introduktion uden overskrift og indeholder sektionerne lokale fiskesteder, fiskeri med/uden båd, guides & grejbutikker, klubber & konkurrencer, naturoplevelser og praktisk information.
+- Justér indhold i JSON-filerne under `/data`:
+  - `faq.json` for spørgsmål og svar.
+  - `pricing.json` for sæsonpriser.
+  - `fishing.json` for fiskepladser og tips.
+  - `testimonials.json` for gæstecitater.
+  - `gallery.json` for billedtekster og kilder.
+- Øvrige tekster findes i komponenter og sider under `/app` og `/src/components`.
 
-  ## Galleri
+## Konfigurer kontaktformularen
 
-Galleri-billeder er lagret i `docs/assets/images/` og følger navnekonvention:
-- `gallery_large_{NNN}_{slug}.webp` — stor version (lightbox) ~1600px
-- `gallery_thumb_{NNN}_{slug}.webp` — thumbnail til grid ~800px
+1. Tilføj følgende miljøvariabler i en `.env.local`:
 
-Manifest: `docs/assets/images/gallery.json` indeholder poster med captions på alle sprog.
-Sitet indlæser manifest via `docs/assets/js/gallery.js` og bygger et responsivt grid og lightbox automatisk.
+   ```env
+   SMTP_HOST=smtp.mailserver.dk
+   SMTP_PORT=587
+   SMTP_USER=brugernavn
+   SMTP_PASS=adgangskode
+   SMTP_FROM=kontakt@skovkrogen37.dk
+   ```
 
-Upload flow:
-1. Opret `gallery_thumb_###_slug.webp` og `gallery_large_###_slug.webp`
-2. Tilføj en entry i `gallery.json` (id, slug, thumb, large, caption{da,en,de}, credit, year, tags)
-3. Commit og push — GitHub Pages opdaterer sitet.
+2. Formularen sender til `kontakt@skovkrogen37.dk` via `/api/contact`. Tilpas adressen efter behov.
 
-### Galleri lightbox & Mailto prefill
+## Udvikling
 
-Lightbox er opdateret til et centreret layout med caption vist *under* billedet. Implementering:
-- CSS: `#galleryLightbox` blok i `docs/assets/style.css`
-- JS: lightbox logik i `docs/assets/js/gallery.js` (luk via overlay, × eller ESC, body scroll låses)
-- Mailto prefill: små forms i `docs/*/index.html` med `class="mailto-prefill-form"`. JS bygges i `docs/assets/js/mailto.js`.
+```bash
+npm install
+npm run dev
+```
 
-Test: kør `cd docs && python3 -m http.server 8000` og test `/da/`, `/en/`, `/de/`.
-For at ændre modtager, rediger recipient i mailto script.
+## Build og deployment på Netlify
 
-Script paths:
-- Sprog sider (`docs/da/`, `docs/en/`, `docs/de/`) bruger: `<script src="../assets/js/gallery.js"></script>`
-- Root `docs/index.html` bruger: `<script src="./assets/js/gallery.js"></script>`
+1. Kør `npm run build` for at generere en produktionbuild.
+2. På Netlify vælges "Next.js" som build preset. Brug kommandoen `npm run build` og public folder `.next` håndteres automatisk.
+3. Tilføj miljøvariablerne i Netlify Dashboard under Site settings → Build & deploy → Environment.
+4. Aktivér Next.js runtime på Netlify (automatisk ved brug af build preset).
 
-## Kontakt/Reservation
+## Linting
 
-#### Telefonvalidering og landekode
-Vi kræver nu korrekt telefonformat og hjælper brugeren med landekode via en dropdown. Frontend validerer live og ved submit. Telefonnummer sendes i mailto-body som et normaliseret nummer (fx +4512345678). For justering af tilladte mønstre rediger `docs/assets/js/mailto.js` funktionen `isValidPhoneNumber`.
+```bash
+npm run lint
+```
 
-## Tema og design
+## Licens
 
-- Sitet anvender et “Forest theme” (`docs/assets/style.css`) med jordgrønne nuancer og guld-accent.
-- Alle HTML-sider linker til denne CSS-fil.
-
-## SEO-anbefalinger implementeret
-
-- `rel="canonical"` og `rel="alternate" hreflang="..."` er sat i `<head>` på alle sider, så søgemaskiner forstår sprogversioner.
-- Korrekte `lang`-attributter på `<html>`-tagget.
-- Unikke meta descriptions på alle sider.
-- Klar titel og tagline for hver side.
-
-## Sådan opdaterer du
-
-1. Rediger HTML-filer i `docs/` efter behov.
-2. Sørg for at opdatere hreflang- og canonical-URL’er hvis domænet ændres.
-3. Commit ændringer til `main`-grenen. GitHub Pages bygger siden automatisk.
+© 2025 Skovkrogen 37 – Sommerhus for lystfiskere
