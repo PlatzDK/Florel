@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
+import { localizePath } from "@/lib/i18n/utils";
 
-export const metadata: Metadata = {
-  title: "Cookiepolitik",
-  description: "Se hvilke cookies Skovkrogen 37 anvender på websitet.",
-  alternates: {
-    canonical: "/cookiepolitik"
-  }
-};
+export function generateMetadata({ params }: { params: { locale: Locale } }): Metadata {
+  const locale = isLocale(params.locale) ? params.locale : defaultLocale;
+  return {
+    title: "Cookiepolitik",
+    description: "Se hvilke cookies Skovkrogen 37 anvender på websitet.",
+    alternates: {
+      canonical: localizePath(locale, "/cookiepolitik")
+    }
+  };
+}
 
 export default function CookiepolitikPage(): JSX.Element {
   return (

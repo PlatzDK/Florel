@@ -8,25 +8,31 @@ import { CtaBanner } from "@/components/cta-banner";
 import { LogoRow } from "@/components/logo-row";
 import { siteConfig } from "@/lib/site-config";
 import { heroPlaceholder } from "@/lib/placeholders";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
+import { localizePath } from "@/lib/i18n/utils";
 
-export const metadata: Metadata = {
-  title: "Sommerhus for lystfiskere midt i naturen",
-  description:
-    "Bo tæt på søer, åer og put & take – med plads til familie, udstyr og ro i Skovkrogen 37 i Midtjylland.",
-  alternates: {
-    canonical: "/"
-  }
-};
+export function generateMetadata({ params }: { params: { locale: Locale } }): Metadata {
+  const locale = isLocale(params.locale) ? params.locale : defaultLocale;
+  return {
+    title: "Sommerhus for lystfiskere midt i naturen",
+    description:
+      "Bo tæt på søer, åer og put & take – med plads til familie, udstyr og ro i Skovkrogen 37 i Midtjylland.",
+    alternates: {
+      canonical: localizePath(locale, "/")
+    }
+  };
+}
 
-export default function HomePage(): JSX.Element {
+export default function HomePage({ params }: { params: { locale: Locale } }): JSX.Element {
+  const locale = isLocale(params.locale) ? params.locale : defaultLocale;
   return (
     <div className="space-y-12">
       <section className="bg-secondary">
         <Hero
           title="Sommerhus for lystfiskere midt i naturen"
           subtitle="Bo tæt på søer, åer og put & take – med plads til familie, udstyr og ro."
-          primaryCta={{ label: "Se huset", href: "/sommerhuset" }}
-          secondaryCta={{ label: "Kontakt os", href: "/kontakt" }}
+          primaryCta={{ label: "Se huset", href: localizePath(locale, "/sommerhuset") }}
+          secondaryCta={{ label: "Kontakt os", href: localizePath(locale, "/kontakt") }}
           imageSrc={heroPlaceholder}
           imageAlt="Illustreret fisker der gør fluen klar ved søbredden"
           proof={<LogoRow />}

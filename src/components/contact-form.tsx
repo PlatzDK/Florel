@@ -1,15 +1,23 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { FormEvent, useMemo, useState } from "react";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
+import { localizePath } from "@/lib/i18n/utils";
 
 /**
  * Contact form for booking enquiries with client-side validation.
  */
 export function ContactForm(): JSX.Element {
   const router = useRouter();
+  const pathname = usePathname();
   const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const locale: Locale = useMemo(() => {
+    const segment = pathname.split("/").filter(Boolean)[0];
+    return isLocale(segment) ? segment : defaultLocale;
+  }, [pathname]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -48,7 +56,7 @@ export function ContactForm(): JSX.Element {
         throw new Error("Serverfejl");
       }
 
-      router.push("/tak");
+      router.push(localizePath(locale, "/tak"));
     } catch (error) {
       setErrors({ general: "Noget gik galt. Prøv igen eller kontakt os direkte." });
     } finally {

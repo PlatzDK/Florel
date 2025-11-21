@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
+import { localizePath } from "@/lib/i18n/utils";
 
-export const metadata: Metadata = {
-  title: "Lejebetingelser",
-  description: "Læs vilkår for leje af Skovkrogen 37.",
-  alternates: {
-    canonical: "/vilkaar"
-  }
-};
+export function generateMetadata({ params }: { params: { locale: Locale } }): Metadata {
+  const locale = isLocale(params.locale) ? params.locale : defaultLocale;
+  return {
+    title: "Lejebetingelser",
+    description: "Læs vilkår for leje af Skovkrogen 37.",
+    alternates: {
+      canonical: localizePath(locale, "/vilkaar")
+    }
+  };
+}
 
 export default function VilkaarPage(): JSX.Element {
   return (

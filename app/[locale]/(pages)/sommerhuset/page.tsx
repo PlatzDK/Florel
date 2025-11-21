@@ -2,14 +2,19 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { housePlaceholder } from "@/lib/placeholders";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
+import { localizePath } from "@/lib/i18n/utils";
 
-export const metadata: Metadata = {
-  title: "Sommerhuset",
-  description: "Moderne feriehus fra 2023 med tre soveværelser, stor terrasse og faciliteter til lystfiskere.",
-  alternates: {
-    canonical: "/sommerhuset"
-  }
-};
+export function generateMetadata({ params }: { params: { locale: Locale } }): Metadata {
+  const locale = isLocale(params.locale) ? params.locale : defaultLocale;
+  return {
+    title: "Sommerhuset",
+    description: "Moderne feriehus fra 2023 med tre soveværelser, stor terrasse og faciliteter til lystfiskere.",
+    alternates: {
+      canonical: localizePath(locale, "/sommerhuset")
+    }
+  };
+}
 
 const facilities = [
   { name: "Fluefiskesæt", available: true },
@@ -20,7 +25,8 @@ const facilities = [
   { name: "Opvaskemaskine", available: true }
 ];
 
-export default function SommerhusetPage(): JSX.Element {
+export default function SommerhusetPage({ params }: { params: { locale: Locale } }): JSX.Element {
+  const locale = isLocale(params.locale) ? params.locale : defaultLocale;
   return (
     <div className="container-responsive space-y-12 py-16">
       <header className="space-y-4">
@@ -58,7 +64,7 @@ export default function SommerhusetPage(): JSX.Element {
               ))}
             </tbody>
           </table>
-          <Link href="/galleri" className="btn btn-primary w-full rounded-full px-5 py-3 text-sm">
+          <Link href={localizePath(locale, "/galleri")} className="btn btn-primary w-full rounded-full px-5 py-3 text-sm">
             Se flere billeder
           </Link>
         </aside>

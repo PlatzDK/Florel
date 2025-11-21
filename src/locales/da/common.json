@@ -1,0 +1,40 @@
+{
+  "brand": "Skovkrogen 37",
+  "tagline": "Sommerhus for lystfiskere",
+  "navigation": [
+    { "name": "Hjem", "href": "/" },
+    { "name": "Sommerhuset", "href": "/sommerhuset" },
+    { "name": "Fiskeri", "href": "/fiskeri" },
+    { "name": "Galleri", "href": "/galleri" },
+    { "name": "Priser", "href": "/priser" },
+    { "name": "FAQ", "href": "/faq" },
+    { "name": "Kontakt", "href": "/kontakt" }
+  ],
+  "headerCta": "Send forespørgsel",
+  "mobileNavLabel": "Mobilnavigation",
+  "mainNavLabel": "Hovednavigation",
+  "menu": {
+    "open": "Åbn menu",
+    "close": "Luk menu"
+  },
+  "language": {
+    "label": "Skift sprog",
+    "da": "Dansk",
+    "en": "Engelsk"
+  },
+  "siteDescription": "Oplev Midtjyllands bedste fiskeri fra et moderne og roligt sommerhus – tæt på søer, åer og put & take.",
+  "ogAlt": "Skovkrogen 37 – Sommerhus for lystfiskere",
+  "footer": {
+    "copyright": "© 2025 Skovkrogen 37 – Sommerhus for lystfiskere",
+    "contact": "Kontakt",
+    "information": "Information",
+    "terms": "Vilkår",
+    "privacy": "Persondata",
+    "cookies": "Cookiepolitik"
+  },
+  "social": {
+    "facebook": "Facebook",
+    "instagram": "Instagram"
+  },
+  "skipLink": "Spring til indhold"
+}

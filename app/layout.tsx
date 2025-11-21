@@ -7,42 +7,63 @@ import { CookieBanner } from "@/components/cookie-banner";
 import { Analytics } from "@/components/analytics";
 import { siteConfig } from "@/lib/site-config";
 import Script from "next/script";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-poppins", display: "swap" });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
-  title: {
-    default: siteConfig.name,
-    template: "%s | Skovkrogen 37"
-  },
-  description: siteConfig.description,
-  openGraph: {
-    title: siteConfig.name,
-    description: siteConfig.description,
-    url: siteConfig.url,
-    siteName: siteConfig.shortName,
-    locale: "da_DK",
-    type: "website",
-    images: [
-      {
-        url: "/opengraph-image",
-        width: 1200,
-        height: 630,
-        alt: "Skovkrogen 37 – Sommerhus for lystfiskere"
-      }
-    ]
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: ["/opengraph-image"]
-  }
-};
+export async function generateMetadata({
+  params
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const locale: Locale = isLocale(params?.locale) ? params.locale : defaultLocale;
+  const dictionary = getDictionary(locale);
+  const ogLocale = locale === "da" ? "da_DK" : "en_US";
 
-export default function RootLayout({ children }: { children: React.ReactNode }): JSX.Element {
+  return {
+    metadataBase: new URL(siteConfig.url),
+    title: {
+      default: siteConfig.name,
+      template: `%s | ${dictionary.common.brand}`
+    },
+    description: dictionary.common.siteDescription,
+    openGraph: {
+      title: siteConfig.name,
+      description: dictionary.common.siteDescription,
+      url: `${siteConfig.url}/${locale}`,
+      siteName: siteConfig.shortName,
+      locale: ogLocale,
+      type: "website",
+      images: [
+        {
+          url: "/opengraph-image",
+          width: 1200,
+          height: 630,
+          alt: dictionary.common.ogAlt
+        }
+      ]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: siteConfig.name,
+      description: dictionary.common.siteDescription,
+      images: ["/opengraph-image"]
+    }
+  };
+}
+
+export default async function RootLayout({
+  children,
+  params
+}: {
+  children: React.ReactNode;
+  params: { locale: string };
+}): Promise<JSX.Element> {
+  const locale: Locale = isLocale(params?.locale) ? params.locale : defaultLocale;
+  const dictionary = getDictionary(locale);
+
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -75,16 +96,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
   } as const;
 
   return (
-    <html lang="da" className={`${inter.variable} ${poppins.variable}`}>
+    <html lang={locale} className={`${inter.variable} ${poppins.variable}`}>
       <body>
         <a href="#main" className="skip-link">
-          Spring til indhold
+          {dictionary.common.skipLink}
         </a>
         <Analytics />
         <CookieBanner />
-        <Header />
+        <Header locale={locale} dictionary={dictionary.common} />
         <main id="main">{children}</main>
-        <Footer />
+        <Footer dictionary={dictionary.common} locale={locale} />
         <Script id="schema-organization" type="application/ld+json">
           {JSON.stringify(organizationSchema)}
         </Script>

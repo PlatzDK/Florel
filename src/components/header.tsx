@@ -1,19 +1,39 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { navigation } from "@/lib/navigation";
+import type { Locale } from "@/lib/i18n/config";
 
 /**
  * Props for the Header component.
  * Handles sticky navigation with mobile menu toggle and CTA button.
  */
-export function Header(): JSX.Element {
+type HeaderProps = {
+  locale: Locale;
+  dictionary: {
+    brand: string;
+    tagline: string;
+    navigation: { name: string; href: string }[];
+    headerCta: string;
+    mobileNavLabel: string;
+    mainNavLabel: string;
+    menu: { open: string; close: string };
+    language: { label: string; da: string; en: string };
+  };
+};
+
+export function Header({ locale, dictionary }: HeaderProps): JSX.Element {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const localizedPath = (href: string) => {
+    if (href === "/") return `/${locale}`;
+    return `/${locale}${href}`;
+  };
 
   useEffect(() => {
     const onScroll = () => {
@@ -35,26 +55,44 @@ export function Header(): JSX.Element {
       }`}
     >
       <div className="container-responsive flex items-center justify-between py-4">
-        <Link href="/" className="flex items-center gap-2 font-heading text-xl font-semibold">
+        <Link href={`/${locale}`} className="flex items-center gap-2 font-heading text-xl font-semibold">
           <span aria-hidden>🎣</span>
-          Skovkrogen 37
+          {dictionary.brand}
         </Link>
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Hovednavigation">
-          {navigation.map((item) => (
+        <nav className="hidden items-center gap-6 lg:flex" aria-label={dictionary.mainNavLabel}>
+          {dictionary.navigation.map((item) => (
             <Link
               key={item.href}
-              href={item.href}
+              href={localizedPath(item.href)}
               className={`text-sm font-medium transition-colors hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
-                pathname === item.href ? "text-accent" : "text-primary"
+                pathname === localizedPath(item.href) ? "text-accent" : "text-primary"
               }`}
             >
               {item.name}
             </Link>
           ))}
         </nav>
-        <div className="hidden lg:flex">
-          <Link href="/kontakt" className="btn btn-primary rounded-full px-5 py-2 text-sm">
-            Send forespørgsel
+        <div className="hidden items-center gap-3 lg:flex">
+          <label className="sr-only" htmlFor="locale-switcher">
+            {dictionary.language.label}
+          </label>
+          <select
+            id="locale-switcher"
+            className="rounded-full border border-primary/20 bg-white px-3 py-2 text-sm text-primary shadow-sm focus:outline-none focus:ring-2 focus:ring-accent"
+            value={locale}
+            onChange={(event) => {
+              const targetLocale = event.target.value as Locale;
+              const segments = pathname.split("/").filter(Boolean);
+              const rest = segments.slice(1).join("/");
+              const nextPath = `/${targetLocale}${rest ? `/${rest}` : ""}`;
+              router.push(nextPath);
+            }}
+          >
+            <option value="da">{dictionary.language.da}</option>
+            <option value="en">{dictionary.language.en}</option>
+          </select>
+          <Link href={localizedPath("/kontakt")} className="btn btn-primary rounded-full px-5 py-2 text-sm">
+            {dictionary.headerCta}
           </Link>
         </div>
         <button
@@ -63,7 +101,7 @@ export function Header(): JSX.Element {
           onClick={() => setMobileOpen((prev) => !prev)}
           aria-expanded={mobileOpen}
           aria-controls="mobile-menu"
-          aria-label={mobileOpen ? "Luk menu" : "Åbn menu"}
+          aria-label={mobileOpen ? dictionary.menu.close : dictionary.menu.open}
         >
           {mobileOpen ? <X className="h-6 w-6" aria-hidden /> : <Menu className="h-6 w-6" aria-hidden />}
         </button>
@@ -72,18 +110,40 @@ export function Header(): JSX.Element {
         id="mobile-menu"
         className={`lg:hidden ${mobileOpen ? "block" : "hidden"} border-t border-primary/10 bg-secondary`}
       >
-        <nav className="container-responsive flex flex-col gap-4 py-6" aria-label="Mobilnavigation">
-          {navigation.map((item) => (
+        <nav className="container-responsive flex flex-col gap-4 py-6" aria-label={dictionary.mobileNavLabel}>
+          {dictionary.navigation.map((item) => (
             <Link
               key={item.href}
-              href={item.href}
-              className={`text-base font-medium ${pathname === item.href ? "text-accent" : "text-primary"}`}
+              href={localizedPath(item.href)}
+              className={`text-base font-medium ${
+                pathname === localizedPath(item.href) ? "text-accent" : "text-primary"
+              }`}
             >
               {item.name}
             </Link>
           ))}
-          <Link href="/kontakt" className="btn btn-primary rounded-full px-5 py-3 text-center text-base">
-            Send forespørgsel
+          <div className="flex items-center justify-between">
+            <label className="text-sm text-primary" htmlFor="locale-switcher-mobile">
+              {dictionary.language.label}
+            </label>
+            <select
+              id="locale-switcher-mobile"
+              className="rounded-full border border-primary/20 bg-white px-3 py-2 text-sm text-primary shadow-sm focus:outline-none focus:ring-2 focus:ring-accent"
+              value={locale}
+              onChange={(event) => {
+                const targetLocale = event.target.value as Locale;
+                const segments = pathname.split("/").filter(Boolean);
+                const rest = segments.slice(1).join("/");
+                const nextPath = `/${targetLocale}${rest ? `/${rest}` : ""}`;
+                router.push(nextPath);
+              }}
+            >
+              <option value="da">{dictionary.language.da}</option>
+              <option value="en">{dictionary.language.en}</option>
+            </select>
+          </div>
+          <Link href={localizedPath("/kontakt")} className="btn btn-primary rounded-full px-5 py-3 text-center text-base">
+            {dictionary.headerCta}
           </Link>
         </nav>
       </div>
