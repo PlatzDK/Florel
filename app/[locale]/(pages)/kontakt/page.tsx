@@ -2,14 +2,19 @@ import type { Metadata } from "next";
 import { ContactForm } from "@/components/contact-form";
 import { MapEmbed } from "@/components/map-embed";
 import { siteConfig } from "@/lib/site-config";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
+import { localizePath } from "@/lib/i18n/utils";
 
-export const metadata: Metadata = {
-  title: "Kontakt",
-  description: "Send en bookingforespørgsel til Skovkrogen 37 og få svar inden for 24 timer.",
-  alternates: {
-    canonical: "/kontakt"
-  }
-};
+export function generateMetadata({ params }: { params: { locale: Locale } }): Metadata {
+  const locale = isLocale(params.locale) ? params.locale : defaultLocale;
+  return {
+    title: "Kontakt",
+    description: "Send en bookingforespørgsel til Skovkrogen 37 og få svar inden for 24 timer.",
+    alternates: {
+      canonical: localizePath(locale, "/kontakt")
+    }
+  };
+}
 
 export default function KontaktPage(): JSX.Element {
   return (

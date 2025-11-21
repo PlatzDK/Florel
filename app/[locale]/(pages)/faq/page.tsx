@@ -1,14 +1,19 @@
 import type { Metadata } from "next";
 import { FaqAccordion } from "@/components/faq-accordion";
 import faqs from "../../../data/faq.json";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
+import { localizePath } from "@/lib/i18n/utils";
 
-export const metadata: Metadata = {
-  title: "FAQ",
-  description: "Få svar på spørgsmål om fiskeri, booking, faciliteter og praktiske forhold i Skovkrogen 37.",
-  alternates: {
-    canonical: "/faq"
-  }
-};
+export function generateMetadata({ params }: { params: { locale: Locale } }): Metadata {
+  const locale = isLocale(params.locale) ? params.locale : defaultLocale;
+  return {
+    title: "FAQ",
+    description: "Få svar på spørgsmål om fiskeri, booking, faciliteter og praktiske forhold i Skovkrogen 37.",
+    alternates: {
+      canonical: localizePath(locale, "/faq")
+    }
+  };
+}
 
 export default function FaqPage(): JSX.Element {
   const faqSchema = {

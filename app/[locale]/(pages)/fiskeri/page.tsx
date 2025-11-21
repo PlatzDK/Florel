@@ -1,14 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import fishing from "../../../data/fishing.json";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
+import { localizePath } from "@/lib/i18n/utils";
 
-export const metadata: Metadata = {
-  title: "Fiskeri",
-  description: "Find de bedste put & take søer, å-stræk og søfiskeri indenfor 30 minutter fra Skovkrogen 37.",
-  alternates: {
-    canonical: "/fiskeri"
-  }
-};
+export function generateMetadata({ params }: { params: { locale: Locale } }): Metadata {
+  const locale = isLocale(params.locale) ? params.locale : defaultLocale;
+  return {
+    title: "Fiskeri",
+    description: "Find de bedste put & take søer, å-stræk og søfiskeri indenfor 30 minutter fra Skovkrogen 37.",
+    alternates: {
+      canonical: localizePath(locale, "/fiskeri")
+    }
+  };
+}
 
 export default function FiskeriPage(): JSX.Element {
   return (

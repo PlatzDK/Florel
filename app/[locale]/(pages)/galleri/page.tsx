@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
 import { GalleryGrid } from "@/components/gallery-grid";
+import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
+import { localizePath } from "@/lib/i18n/utils";
 
-export const metadata: Metadata = {
-  title: "Galleri",
-  description: "Se stemninger fra Skovkrogen 37, naturen omkring Bølling Sø og fiskerioplevelser.",
-  alternates: {
-    canonical: "/galleri"
-  }
-};
+export function generateMetadata({ params }: { params: { locale: Locale } }): Metadata {
+  const locale = isLocale(params.locale) ? params.locale : defaultLocale;
+  return {
+    title: "Galleri",
+    description: "Se stemninger fra Skovkrogen 37, naturen omkring Bølling Sø og fiskerioplevelser.",
+    alternates: {
+      canonical: localizePath(locale, "/galleri")
+    }
+  };
+}
 
 export default function GalleriPage(): JSX.Element {
   return (
