@@ -3,18 +3,24 @@
     "name": "Lavsæson",
     "period": "november – marts",
     "price": "fra 3.200 kr/uge",
+    "weeklyRate": 3200,
+    "nightlyRate": 460,
     "description": "Rolige vintermåneder med god plads ved fiskevandet og hyggelige aftener ved brændeovnen."
   },
   {
     "name": "Mellemsæson",
     "period": "april – juni & september – oktober",
     "price": "fra 4.200 kr/uge",
+    "weeklyRate": 4200,
+    "nightlyRate": 600,
     "description": "Forår og efterår med variation i arterne og mildt vejr til både fiskeri og udflugter."
   },
   {
     "name": "Højsæson",
     "period": "juli, august & helligdage",
     "price": "fra 5.500 kr/uge",
+    "weeklyRate": 5500,
+    "nightlyRate": 785,
     "description": "Sommerstemning, lange lyse dage og masser af aktiviteter for hele familien."
   }
 ]

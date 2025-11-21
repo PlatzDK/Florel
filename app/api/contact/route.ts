@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { estimatePrice, formatCurrency } from "@/lib/pricing";
+import { isRangeAvailable, parseDate } from "@/lib/availability";
 
 export async function POST(request: Request) {
   try {
@@ -9,6 +11,22 @@ export async function POST(request: Request) {
     if (!name || !email || !message) {
       return NextResponse.json({ error: "Manglende felter" }, { status: 400 });
     }
+
+    if (!arrival || !departure) {
+      return NextResponse.json({ error: "Vælg både ankomst og afrejse", field: "dates" }, { status: 400 });
+    }
+
+    const arrivalDate = parseDate(arrival);
+    const departureDate = parseDate(departure);
+
+    if (!isRangeAvailable(arrivalDate, departureDate)) {
+      return NextResponse.json({ error: "Datoerne er optaget eller ugyldige", field: "dates" }, { status: 400 });
+    }
+
+    const quote = estimatePrice(arrivalDate, departureDate);
+    const priceText = quote
+      ? `${formatCurrency(quote.total)} (${quote.nights} nætter, ${quote.tier.name})`
+      : "Ingen prisberegning";
 
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
@@ -20,7 +38,7 @@ export async function POST(request: Request) {
       }
     });
 
-    const textContent = `Ny forespørgsel fra ${name}\n\nEmail: ${email}\nTelefon: ${phone}\nAnkomst: ${arrival}\nAfrejse: ${departure}\n\nBesked:\n${message}`;
+    const textContent = `Ny forespørgsel fra ${name}\n\nEmail: ${email}\nTelefon: ${phone}\nAnkomst: ${arrival}\nAfrejse: ${departure}\nEstimeret pris: ${priceText}\n\nBesked:\n${message}`;
 
     await transporter.sendMail({
       from: process.env.SMTP_FROM ?? "kontakt@skovkrogen37.dk",
@@ -29,7 +47,7 @@ export async function POST(request: Request) {
       text: textContent
     });
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, quote });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: "Serverfejl" }, { status: 500 });

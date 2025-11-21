@@ -19,7 +19,8 @@ export default function KontaktPage(): JSX.Element {
           <header>
             <h1 className="section-title">Send forespørgsel</h1>
             <p className="section-subtitle">
-              Udfyld formularen – vi bekræfter ledighed og pris hurtigst muligt. Du kan også ringe eller skrive direkte til os.
+              Vælg ønskede datoer i kalenderen og send din besked – vi bekræfter ledighed og pris hurtigst muligt. Du kan også
+              ringe eller skrive direkte til os.
             </p>
           </header>
           <ContactForm />

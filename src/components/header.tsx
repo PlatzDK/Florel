@@ -53,7 +53,7 @@ export function Header(): JSX.Element {
           ))}
         </nav>
         <div className="hidden lg:flex">
-          <Link href="/kontakt" className="btn btn-primary rounded-full px-5 py-2 text-sm">
+          <Link href="/kontakt#booking" className="btn btn-primary rounded-full px-5 py-2 text-sm">
             Send forespørgsel
           </Link>
         </div>
@@ -82,7 +82,7 @@ export function Header(): JSX.Element {
               {item.name}
             </Link>
           ))}
-          <Link href="/kontakt" className="btn btn-primary rounded-full px-5 py-3 text-center text-base">
+          <Link href="/kontakt#booking" className="btn btn-primary rounded-full px-5 py-3 text-center text-base">
             Send forespørgsel
           </Link>
         </nav>

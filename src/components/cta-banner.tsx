@@ -12,7 +12,7 @@ export function CtaBanner(): JSX.Element {
             <h2 className="font-heading text-2xl font-semibold">Klar til næste fisketur?</h2>
             <p className="text-sm text-white/80">Send en forespørgsel, så vender vi tilbage inden for ét døgn.</p>
           </div>
-          <Link href="/kontakt" className="btn btn-secondary rounded-full border-white px-6 py-3 text-base text-white">
+          <Link href="/kontakt#booking" className="btn btn-secondary rounded-full border-white px-6 py-3 text-base text-white">
             Send forespørgsel nu
           </Link>
         </div>

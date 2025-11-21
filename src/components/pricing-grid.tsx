@@ -18,7 +18,7 @@ export function PricingGrid(): JSX.Element {
             <p className="font-heading text-2xl text-primary">{tier.price}</p>
             <p className="text-sm text-primary/80">{tier.description}</p>
             <p className="text-xs uppercase tracking-wide text-primary/60">Periode: {tier.period}</p>
-            <Link href="/kontakt" className="btn btn-primary mt-4 rounded-full px-5 py-3 text-sm">
+            <Link href="/kontakt#booking" className="btn btn-primary mt-4 rounded-full px-5 py-3 text-sm">
               Send forespørgsel
             </Link>
           </article>

@@ -2,6 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
+import { BookingCalendar } from "./booking-calendar";
+import { estimatePrice, formatCurrency } from "@/lib/pricing";
+import { isRangeAvailable, parseDate } from "@/lib/availability";
 
 /**
  * Contact form for booking enquiries with client-side validation.
@@ -10,6 +13,22 @@ export function ContactForm(): JSX.Element {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [dates, setDates] = useState<{ arrival: string | null; departure: string | null }>({ arrival: null, departure: null });
+  const [priceText, setPriceText] = useState<string | null>(null);
+
+  const handleDateChange = ({ arrival, departure }: { arrival: string | null; departure: string | null }) => {
+    setDates({ arrival, departure });
+    if (arrival && departure) {
+      const quote = estimatePrice(parseDate(arrival), parseDate(departure));
+      if (quote) {
+        setPriceText(
+          `Estimeret pris for ${quote.nights} nætter i ${quote.tier.name.toLowerCase()}: ${formatCurrency(quote.total)}`
+        );
+        return;
+      }
+    }
+    setPriceText(null);
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -20,8 +39,8 @@ export function ContactForm(): JSX.Element {
       name: String(formData.get("name") ?? ""),
       email: String(formData.get("email") ?? ""),
       phone: String(formData.get("phone") ?? ""),
-      arrival: String(formData.get("arrival") ?? ""),
-      departure: String(formData.get("departure") ?? ""),
+      arrival: dates.arrival,
+      departure: dates.departure,
       message: String(formData.get("message") ?? ""),
       consent: formData.get("consent") === "on"
     };
@@ -32,6 +51,11 @@ export function ContactForm(): JSX.Element {
     if (!data.email.includes("@")) newErrors.email = "Angiv en gyldig e-mail";
     if (!data.message.trim()) newErrors.message = "Fortæl os om dine planer";
     if (!data.consent) newErrors.consent = "Vi skal bruge dit samtykke";
+    if (!data.arrival || !data.departure) {
+      newErrors.dates = "Vælg ankomst og afrejse";
+    } else if (!isRangeAvailable(parseDate(data.arrival), parseDate(data.departure))) {
+      newErrors.dates = "Datoerne er optaget eller ugyldige. Vælg en anden periode.";
+    }
 
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) return;
@@ -44,8 +68,11 @@ export function ContactForm(): JSX.Element {
         body: JSON.stringify(data)
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error("Serverfejl");
+        setErrors(result?.field ? { [result.field]: result.error } : { general: result?.error ?? "Serverfejl" });
+        return;
       }
 
       router.push("/tak");
@@ -59,6 +86,15 @@ export function ContactForm(): JSX.Element {
   return (
     <form className="space-y-5" onSubmit={handleSubmit} noValidate>
       {errors.general && <p className="text-sm text-red-600">{errors.general}</p>}
+      <div id="booking" className="space-y-3 rounded-2xl border border-primary/10 bg-white p-4 shadow-sm">
+        <div className="flex flex-col gap-1">
+          <p className="text-sm font-semibold text-primary">Vælg datoer</p>
+          <p className="text-xs text-primary/70">Kalenderen viser optagede perioder. Vi vender tilbage med endelig bekræftelse.</p>
+        </div>
+        <BookingCalendar onChange={handleDateChange} />
+        {errors.dates && <p className="text-xs text-red-600">{errors.dates}</p>}
+        {priceText && <p className="text-xs font-semibold text-primary">{priceText}</p>}
+      </div>
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-primary">
           Navn
@@ -94,30 +130,6 @@ export function ContactForm(): JSX.Element {
             id="phone"
             name="phone"
             type="tel"
-            className="mt-1 w-full rounded-lg border border-primary/20 bg-white px-4 py-3 text-sm shadow-sm"
-          />
-        </div>
-      </div>
-      <div className="grid gap-4 md:grid-cols-2">
-        <div>
-          <label htmlFor="arrival" className="block text-sm font-medium text-primary">
-            Ankomstdato
-          </label>
-          <input
-            id="arrival"
-            name="arrival"
-            type="date"
-            className="mt-1 w-full rounded-lg border border-primary/20 bg-white px-4 py-3 text-sm shadow-sm"
-          />
-        </div>
-        <div>
-          <label htmlFor="departure" className="block text-sm font-medium text-primary">
-            Afrejsedato
-          </label>
-          <input
-            id="departure"
-            name="departure"
-            type="date"
             className="mt-1 w-full rounded-lg border border-primary/20 bg-white px-4 py-3 text-sm shadow-sm"
           />
         </div>
