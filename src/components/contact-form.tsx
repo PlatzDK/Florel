@@ -42,7 +42,20 @@ export function ContactForm(): JSX.Element {
     if (!data.consent) newErrors.consent = "Vi skal bruge dit samtykke";
 
     setErrors(newErrors);
-    if (Object.keys(newErrors).length > 0) return;
+    if (Object.keys(newErrors).length > 0) {
+      const firstErrorKey = Object.keys(newErrors)[0];
+      const errorFieldId: Record<string, string> = {
+        name: "name",
+        email: "email",
+        message: "message",
+        consent: "consent"
+      };
+      const targetId = errorFieldId[firstErrorKey];
+      if (targetId) {
+        document.getElementById(targetId)?.focus();
+      }
+      return;
+    }
 
     try {
       setSubmitting(true);
@@ -66,7 +79,11 @@ export function ContactForm(): JSX.Element {
 
   return (
     <form className="space-y-5" onSubmit={handleSubmit} noValidate>
-      {errors.general && <p className="text-sm text-red-600">{errors.general}</p>}
+      {errors.general && (
+        <p className="text-sm text-red-600" role="alert">
+          {errors.general}
+        </p>
+      )}
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-primary">
           Navn
@@ -77,8 +94,14 @@ export function ContactForm(): JSX.Element {
           type="text"
           className="mt-1 w-full rounded-lg border border-primary/20 bg-white px-4 py-3 text-sm shadow-sm"
           required
+          aria-invalid={Boolean(errors.name)}
+          aria-describedby={errors.name ? "name-error" : undefined}
         />
-        {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
+        {errors.name && (
+          <p className="mt-1 text-xs text-red-600" id="name-error" role="alert">
+            {errors.name}
+          </p>
+        )}
       </div>
       <div className="grid gap-4 md:grid-cols-2">
         <div>
@@ -91,8 +114,14 @@ export function ContactForm(): JSX.Element {
             type="email"
             className="mt-1 w-full rounded-lg border border-primary/20 bg-white px-4 py-3 text-sm shadow-sm"
             required
+            aria-invalid={Boolean(errors.email)}
+            aria-describedby={errors.email ? "email-error" : undefined}
           />
-          {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
+          {errors.email && (
+            <p className="mt-1 text-xs text-red-600" id="email-error" role="alert">
+              {errors.email}
+            </p>
+          )}
         </div>
         <div>
           <label htmlFor="phone" className="block text-sm font-medium text-primary">
@@ -130,18 +159,24 @@ export function ContactForm(): JSX.Element {
           />
         </div>
       </div>
-      <div>
-        <label htmlFor="message" className="block text-sm font-medium text-primary">
-          Besked
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          rows={4}
-          className="mt-1 w-full rounded-lg border border-primary/20 bg-white px-4 py-3 text-sm shadow-sm"
-          required
-        />
-        {errors.message && <p className="mt-1 text-xs text-red-600">{errors.message}</p>}
+        <div>
+          <label htmlFor="message" className="block text-sm font-medium text-primary">
+            Besked
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            rows={4}
+            className="mt-1 w-full rounded-lg border border-primary/20 bg-white px-4 py-3 text-sm shadow-sm"
+            required
+            aria-invalid={Boolean(errors.message)}
+            aria-describedby={errors.message ? "message-error" : undefined}
+          />
+        {errors.message && (
+          <p className="mt-1 text-xs text-red-600" id="message-error" role="alert">
+            {errors.message}
+          </p>
+        )}
       </div>
       <div className="flex items-start gap-3">
         <input
@@ -150,16 +185,26 @@ export function ContactForm(): JSX.Element {
           type="checkbox"
           className="mt-1 h-5 w-5 rounded border-primary/30 text-primary focus:ring-accent"
           required
+          aria-invalid={Boolean(errors.consent)}
+          aria-describedby={errors.consent ? "consent-error" : "consent-helper"}
         />
         <label htmlFor="consent" className="text-sm text-primary/80">
           Jeg accepterer, at Skovkrogen 37 må kontakte mig om min forespørgsel og gemme mine oplysninger.
+          <span className="mt-1 block text-xs text-primary/70" id="consent-helper">
+            Vi kan først sende din forespørgsel, når felterne er udfyldt og du har givet samtykke.
+          </span>
         </label>
       </div>
-      {errors.consent && <p className="text-xs text-red-600">{errors.consent}</p>}
+      {errors.consent && (
+        <p className="text-xs text-red-600" id="consent-error" role="alert">
+          {errors.consent}
+        </p>
+      )}
       <button
         type="submit"
         className="btn btn-primary rounded-full px-6 py-3 text-base"
         disabled={submitting}
+        aria-disabled={submitting}
       >
         {submitting ? "Sender..." : "Send forespørgsel"}
       </button>

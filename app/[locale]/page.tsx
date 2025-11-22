@@ -3,6 +3,8 @@ import { Hero } from "@/components/hero";
 import { ProofBar } from "@/components/proof-bar";
 import { FeatureCards } from "@/components/feature-cards";
 import { FeatureSections } from "@/components/feature-sections";
+import { AboutHouseSection } from "@/components/about-house";
+import { LocalFishingHighlights } from "@/components/local-fishing-highlights";
 import { TestimonialSlider } from "@/components/testimonial-slider";
 import { CtaBanner } from "@/components/cta-banner";
 import { LogoRow } from "@/components/logo-row";
@@ -43,6 +45,8 @@ export default function HomePage({ params }: { params: { locale: Locale } }): JS
       </section>
       <FeatureCards />
       <FeatureSections />
+      <AboutHouseSection locale={locale} />
+      <LocalFishingHighlights locale={locale} />
       <section className="container-responsive space-y-8 py-16">
         <div>
           <h2 className="section-title">Hvorfor vælge Skovkrogen 37?</h2>

@@ -3,7 +3,7 @@
   "tagline": "Sommerhus for lystfiskere",
   "navigation": [
     { "name": "Hjem", "href": "/" },
-    { "name": "Sommerhuset", "href": "/sommerhuset" },
+    { "name": "Sommerhuset", "href": "/#about-house" },
     { "name": "Fiskeri", "href": "/fiskeri" },
     { "name": "Galleri", "href": "/galleri" },
     { "name": "Priser", "href": "/priser" },

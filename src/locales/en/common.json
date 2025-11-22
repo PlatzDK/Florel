@@ -3,7 +3,7 @@
   "tagline": "Holiday home for anglers",
   "navigation": [
     { "name": "Home", "href": "/" },
-    { "name": "The house", "href": "/sommerhuset" },
+    { "name": "The house", "href": "/#about-house" },
     { "name": "Fishing", "href": "/fiskeri" },
     { "name": "Gallery", "href": "/galleri" },
     { "name": "Prices", "href": "/priser" },
