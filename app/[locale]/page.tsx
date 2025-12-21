@@ -65,6 +65,31 @@ export default function HomePage({ params }: { params: { locale: Locale } }): JS
         </div>
       </section>
 
+      {/* Gallery Section */}
+      <section className="py-24 bg-gray-50">
+        <div className="container-responsive">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-primary mb-4">Oplev stemningen</h2>
+            <p className="text-primary/70 max-w-2xl mx-auto">
+              Et kig indenfor i Skovkrogen 37 og den omkringliggende natur.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6].map((num) => (
+              <div key={num} className="relative aspect-square overflow-hidden rounded-xl shadow-md group">
+                <img
+                  src={`/images/gallery/gallery-00${num}.webp`}
+                  alt={`Skovkrogen galleribillede ${num}`}
+                  className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 bg-secondary text-primary">
         <div className="container-responsive text-center">
