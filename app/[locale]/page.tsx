@@ -1,13 +1,5 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/hero";
-import { ProofBar } from "@/components/proof-bar";
-import { FeatureCards } from "@/components/feature-cards";
-import { FeatureSections } from "@/components/feature-sections";
-import { AboutHouseSection } from "@/components/about-house";
-import { LocalFishingHighlights } from "@/components/local-fishing-highlights";
-import { TestimonialSlider } from "@/components/testimonial-slider";
-import { CtaBanner } from "@/components/cta-banner";
-import { LogoRow } from "@/components/logo-row";
 import { siteConfig } from "@/lib/site-config";
 import { heroPlaceholder } from "@/lib/placeholders";
 import { defaultLocale, isLocale, type Locale } from "@/lib/i18n/config";
@@ -16,9 +8,8 @@ import { localizePath } from "@/lib/i18n/utils";
 export function generateMetadata({ params }: { params: { locale: Locale } }): Metadata {
   const locale = isLocale(params.locale) ? params.locale : defaultLocale;
   return {
-    title: "Sommerhus for lystfiskere midt i naturen",
-    description:
-      "Bo tæt på søer, åer og put & take – med plads til familie, udstyr og ro i Skovkrogen 37 i Midtjylland.",
+    title: "Skovkrogen 37 | Sommerhus i særklasse",
+    description: "Bo tæt på søer, åer og put & take – med plads til familie, udstyr og ro i Skovkrogen 37 i Midtjylland.",
     alternates: {
       canonical: localizePath(locale, "/")
     }
@@ -27,50 +18,69 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
 
 export default function HomePage({ params }: { params: { locale: Locale } }): JSX.Element {
   const locale = isLocale(params.locale) ? params.locale : defaultLocale;
+
   return (
-    <div className="space-y-12">
-      <section className="bg-secondary">
-        <Hero
-          title="Sommerhus for lystfiskere midt i naturen"
-          subtitle="Bo tæt på søer, åer og put & take – med plads til familie, udstyr og ro."
-          primaryCta={{ label: "Se huset", href: localizePath(locale, "/sommerhuset") }}
-          secondaryCta={{ label: "Kontakt os", href: localizePath(locale, "/kontakt") }}
-          imageSrc={heroPlaceholder}
-          imageAlt="Illustreret fisker der gør fluen klar ved søbredden"
-          proof={<LogoRow />}
-        />
-        <div className="container-responsive pb-16">
-          <ProofBar />
+    <div className="flex flex-col min-h-screen">
+      <Hero
+        title="Lystfiskerens Paradis"
+        subtitle="Drømmer du om den store fangst? Skovkrogen 37 tilbyder den perfekte base med renserum, fryser og kort afstand til Gudenåen."
+        primaryCta={{ label: "Se Dage & Priser", href: localizePath(locale, "/booking") }}
+        secondaryCta={{ label: "Læs om huset", href: localizePath(locale, "/huset") }}
+        imageSrc={heroPlaceholder}
+        imageAlt="Skovkrogen 37 facade"
+      />
+
+      {/* Tightened Feature Section */}
+      <section className="py-24 bg-white">
+        <div className="container-responsive">
+          <div className="grid md:grid-cols-3 gap-12 text-center md:text-left">
+            <div className="space-y-4">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-secondary/20 text-secondary mb-4">
+                🎣
+              </div>
+              <h3 className="text-xl font-bold text-primary">Fiskeri i verdensklasse</h3>
+              <p className="text-primary/70 leading-relaxed">
+                Med Gudenåen i baghaven og Silkeborgsøerne tæt på, er du garanteret smukke naturoplevelser og gode chancer for fangst.
+              </p>
+            </div>
+            <div className="space-y-4">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-secondary/20 text-secondary mb-4">
+                🏡
+              </div>
+              <h3 className="text-xl font-bold text-primary">Faciliteter i top</h3>
+              <p className="text-primary/70 leading-relaxed">
+                Huset er indrettet til lystfiskere: Stort grovkøkken, dybfryser til fangsten og tørrerum til waders og udstyr.
+              </p>
+            </div>
+            <div className="space-y-4">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-secondary/20 text-secondary mb-4">
+                🔥
+              </div>
+              <h3 className="text-xl font-bold text-primary">Hygge & Afslapning</h3>
+              <p className="text-primary/70 leading-relaxed">
+                Når stængerne er pakket væk, kan du nyde brændeovnen, varmepumpen og den lynhurtige fiberforbindelse.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
-      <FeatureCards />
-      <FeatureSections />
-      <AboutHouseSection locale={locale} />
-      <LocalFishingHighlights locale={locale} />
-      <section className="container-responsive space-y-8 py-16">
-        <div>
-          <h2 className="section-title">Hvorfor vælge Skovkrogen 37?</h2>
-          <p className="section-subtitle">
-            {siteConfig.shortName} er bygget i 2023 og indrettet til fiskere med grej, familie og behov for komfort. Du får en rolig base og let adgang til Midtjyllands bedste spots.
+
+      {/* CTA Section */}
+      <section className="py-20 bg-secondary text-primary">
+        <div className="container-responsive text-center">
+          <h2 className="text-3xl font-bold mb-6">Klar til din næste tur?</h2>
+          <p className="max-w-2xl mx-auto mb-8 text-lg opacity-90">
+            Skovkrogen 37 er populær i sæsonen. Tjek kalenderen og book din uge før den er væk.
           </p>
+          <a
+            href={localizePath(locale, "/booking")}
+            className="inline-block bg-primary text-white font-bold py-4 px-8 rounded-lg hover:bg-primary/90 transition-colors shadow-lg"
+          >
+            Se ledighed & Book
+          </a>
         </div>
-        <ul className="grid gap-6 md:grid-cols-3">
-          <li className="card space-y-2">
-            <h3 className="font-heading text-xl text-primary">Fiskeri i topklasse</h3>
-            <p className="text-sm text-primary/80">Put & take, sø og å indenfor 10 km – og vi deler gerne vores favoritpladser.</p>
-          </li>
-          <li className="card space-y-2">
-            <h3 className="font-heading text-xl text-primary">Komfortabel base</h3>
-            <p className="text-sm text-primary/80">Nyt hus med gode senge, stor terrasse, grill og redskabsrum med lås.</p>
-          </li>
-          <li className="card space-y-2">
-            <h3 className="font-heading text-xl text-primary">Familievenligt</h3>
-            <p className="text-sm text-primary/80">Plads til 6 personer, højstol og brætspil – tæt på Silkeborg og Himmelbjerget.</p>
-          </li>
-        </ul>
       </section>
-      <TestimonialSlider />
-      <CtaBanner />
     </div>
   );
 }
+
