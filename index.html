@@ -1,79 +1,208 @@
 <!DOCTYPE html>
-<html lang="da">
+<html lang="da" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skovkrogen 37 | Sommerhus for lystfiskere</title>
+    <title>SKOVKROGEN 37 | ARCHITECTURAL ESCAPE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+        }
+
+        .scrolly-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
 
-    <!-- Hero Section -->
-    <div class="relative bg-teal-900 text-white overflow-hidden">
-        <div class="absolute inset-0">
-            <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" 
-                 alt="Background" class="w-full h-full object-cover opacity-30">
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav
+        class="fixed top-0 w-full z-50 mix-blend-difference text-white px-8 py-6 flex justify-between items-center transition-all duration-300">
+        <div class="text-xs font-bold tracking-[0.2em] uppercase">Skovkrogen 37</div>
+        <div class="hidden md:flex gap-12 text-xs font-semibold tracking-[0.2em] uppercase">
+            <a href="#about" class="hover:text-gray-400 transition">About</a>
+            <a href="#gallery" class="hover:text-gray-400 transition">Gallery</a>
+            <a href="#features" class="hover:text-gray-400 transition">Facilities</a>
         </div>
-        <div class="relative max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
-            <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl mb-6">
-                Lystfiskerens Paradis
+        <a href="#booking"
+            class="border border-white/30 px-6 py-2 rounded-full text-xs font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition duration-300">
+            Book Now
+        </a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1449156493391-d2cfa28e468b?q=80&w=2000&auto=format&fit=crop"
+                alt="Moody Cabin"
+                class="w-full h-full object-cover opacity-60 scale-105 animate-[pulse_10s_ease-in-out_infinite] transition-transform duration-[20s] hover:scale-100">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80 z-10"></div>
+
+        <!-- Content -->
+        <div class="relative z-20 text-center px-4 max-w-5xl mx-auto">
+            <h2 class="text-xs md:text-sm font-bold tracking-[0.3em] uppercase mb-6 text-gray-300">The Nordic Escape
+            </h2>
+            <h1 class="text-5xl md:text-7xl lg:text-9xl font-extrabold tracking-tighter uppercase leading-none mb-8">
+                Nature<br><span class="text-gray-500">Reimagined</span>
             </h1>
-            <p class="mt-4 text-xl max-w-3xl mx-auto text-gray-200">
-                Drømmer du om den store fangst? Skovkrogen 37 tilbyder den perfekte base med renserum, fryser og kort afstand til Gudenåen.
+            <p class="max-w-xl mx-auto text-gray-400 text-sm md:text-base font-light leading-relaxed mb-12">
+                A sanctuary for anglers and nature lovers. Designed for silence, focus, and the perfect catch.
             </p>
-            <div class="mt-10 flex gap-4">
-                <a href="#booking" class="bg-yellow-500 hover:bg-yellow-400 text-teal-900 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105">
-                    Se Ledighed & Priser
-                </a>
-                <a href="#gallery" class="bg-transparent border-2 border-white hover:bg-white hover:text-teal-900 font-bold py-3 px-8 rounded-full transition">
-                    Se Billeder
-                </a>
-            </div>
         </div>
-    </div>
 
-    <!-- Features -->
-    <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-3 gap-12 text-center">
-            <div class="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition">
-                <div class="text-5xl mb-4">🎣</div>
-                <h3 class="text-xl font-bold mb-2">Verdensklasse Fiskeri</h3>
-                <p class="text-gray-600">Gudenåen i baghaven og Silkeborgsøerne tæt på garanterer gode chancer for fangst.</p>
-            </div>
-            <div class="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition">
-                <div class="text-5xl mb-4">🏡</div>
-                <h3 class="text-xl font-bold mb-2">Fisker-Venligt Hus</h3>
-                <p class="text-gray-600">Udendørs renserum, stor kummefryser og tørrerum til waders og udstyr.</p>
-            </div>
-            <div class="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition">
-                <div class="text-5xl mb-4">🔥</div>
-                <h3 class="text-xl font-bold mb-2">Ren Hygge</h3>
-                <p class="text-gray-600">Brændeovn, hurtigt fiberinternet og plads til hele familien efter en dag ved vandet.</p>
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2">
+            <span class="text-[10px] tracking-[0.2em] uppercase text-gray-500">Scroll</span>
+            <div class="w-[1px] h-12 bg-gray-700 overflow-hidden">
+                <div class="w-full h-1/2 bg-white animate-bounce"></div>
             </div>
         </div>
     </section>
 
-    <!-- Gallery (Placeholder) -->
-    <section id="gallery" class="py-20 bg-gray-100">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-12">Stemningsbilleder</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <img src="https://images.unsplash.com/photo-1499336315816-097655dcfbda?auto=format&fit=crop&w=800&q=80" class="rounded-lg shadow-md hover:opacity-90 transition object-cover h-64 w-full">
-                <img src="https://images.unsplash.com/photo-1516937941348-c09e554b9631?auto=format&fit=crop&w=800&q=80" class="rounded-lg shadow-md hover:opacity-90 transition object-cover h-64 w-full">
-                <img src="https://images.unsplash.com/photo-1599590984817-0c15f45b64a8?auto=format&fit=crop&w=800&q=80" class="rounded-lg shadow-md hover:opacity-90 transition object-cover h-64 w-full">
+    <!-- ABOUT / INTRO SECTION -->
+    <section id="about" class="scrolly-section relative bg-[#0a0a0a] border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div class="space-y-8">
+                <h3 class="text-4xl md:text-6xl font-bold uppercase tracking-tight leading-none">
+                    Disconnect<br>to Reconnect
+                </h3>
+                <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-md border-l border-white/10 pl-6">
+                    Skovkrogen 37 is not just a rental. It's an architectural dialogue with the forest.
+                    Located minutes from the Gudenå river, it offers a functional luxury designed specifically for the
+                    modern angler.
+                </p>
+                <div class="grid grid-cols-2 gap-8 pt-8">
+                    <div>
+                        <div class="text-3xl font-bold text-white mb-2">12km</div>
+                        <div class="text-xs uppercase tracking-widest text-gray-500">River Access</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-white mb-2">100%</div>
+                        <div class="text-xs uppercase tracking-widest text-gray-500">Privacy</div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative h-[600px] w-full group overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?q=80&w=1200&auto=format&fit=crop"
+                    class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700 ease-out scale-100 group-hover:scale-105"
+                    alt="Interior Detail">
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-teal-950 text-gray-400 py-12 text-center">
-        <p>&copy; 2024 Skovkrogen 37. Alle rettigheder forbeholdes.</p>
-        <p class="mt-2 text-sm">Skovkrogen 37, 8600 Silkeborg</p>
+    <!-- GALLERY GRID (Yodezeen Style - Masonry-ish) -->
+    <section id="gallery" class="py-32 bg-[#0a0a0a]">
+        <div class="px-6 mb-16 flex justify-between items-end border-b border-white/10 pb-8 mx-6">
+            <h2 class="text-4xl md:text-6xl font-bold uppercase tracking-tight">Gallery</h2>
+            <span class="text-xs tracking-[0.2em] text-gray-500 hidden md:block">01 — INTERIOR & EXTERIOR</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 px-4 h-auto">
+            <!-- Large Hero Item -->
+            <div class="md:col-span-8 relative aspect-[16/9] group overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?q=80&w=1600&auto=format&fit=crop"
+                    class="w-full h-full object-cover transition duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                    alt="Living Room">
+                <div class="absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition duration-500">
+                    <span class="text-xs font-bold tracking-widest uppercase bg-white text-black px-3 py-1">Living
+                        Space</span>
+                </div>
+            </div>
+
+            <!-- Tall Item -->
+            <div class="md:col-span-4 relative aspect-[3/4] group overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=800&auto=format&fit=crop"
+                    class="w-full h-full object-cover transition duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                    alt="Kitchen">
+                <div class="absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition duration-500">
+                    <span
+                        class="text-xs font-bold tracking-widest uppercase bg-white text-black px-3 py-1">Kitchen</span>
+                </div>
+            </div>
+
+            <!-- Wide Item -->
+            <div class="md:col-span-5 relative aspect-[4/3] group overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=1000&auto=format&fit=crop"
+                    class="w-full h-full object-cover transition duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                    alt="Detail">
+            </div>
+
+            <!-- Large Item -->
+            <div class="md:col-span-7 relative aspect-[16/9] group overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1542718610-a1d656d1884c?q=80&w=1600&auto=format&fit=crop"
+                    class="w-full h-full object-cover transition duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                    alt="Nature">
+                <div class="absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition duration-500">
+                    <span
+                        class="text-xs font-bold tracking-widest uppercase bg-white text-black px-3 py-1">Surroundings</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FACILITIES (Minimal List) -->
+    <section id="features" class="py-32 bg-[#0d0d0d] border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-xs font-bold tracking-[0.3em] uppercase text-gray-500 mb-16">Designed for Anglers</h2>
+
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="group border-t border-white/10 pt-8 hover:border-white transition duration-500">
+                    <h3 class="text-2xl font-bold uppercase mb-4 group-hover:text-gray-300">Cleaning Station</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Dedicated outdoor facility with running water and
+                        stainless steel surfaces for preparing your catch.</p>
+                </div>
+                <div class="group border-t border-white/10 pt-8 hover:border-white transition duration-500">
+                    <h3 class="text-2xl font-bold uppercase mb-4 group-hover:text-gray-300">Deep Freeze</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Industrial grade freezer capacity ensures your
+                        catch stays pristine until you return home.</p>
+                </div>
+                <div class="group border-t border-white/10 pt-8 hover:border-white transition duration-500">
+                    <h3 class="text-2xl font-bold uppercase mb-4 group-hover:text-gray-300">Gear Drying</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Ventilated storage specifically designed for
+                        waders, rods, and tackle to dry overnight.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER / CTA -->
+    <footer id="booking"
+        class="relative py-32 bg-black overflow-hidden flex flex-col items-center justify-center text-center px-6">
+        <div class="absolute inset-0 z-0 opacity-20">
+            <img src="https://images.unsplash.com/photo-1504280509243-48907c0c96cc?q=80&w=2000&auto=format&fit=crop"
+                class="w-full h-full object-cover grayscale">
+        </div>
+
+        <div class="relative z-10 max-w-2xl mx-auto">
+            <h2 class="text-5xl md:text-8xl font-bold uppercase tracking-tighter mb-8 text-white">
+                Book Your<br>Session
+            </h2>
+            <p class="text-gray-400 mb-12">Experience the silence. Master the river.</p>
+            <a href="mailto:kontakt@skovkrogen37.dk"
+                class="inline-block border border-white px-12 py-4 rounded-full text-sm font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition duration-300">
+                Check Availability
+            </a>
+        </div>
+
+        <div
+            class="absolute bottom-6 w-full flex justify-between px-8 text-[10px] uppercase tracking-widest text-gray-600">
+            <span>&copy; 2024 Skovkrogen</span>
+            <span>Silkeborg, Denmark</span>
+        </div>
     </footer>
 
 </body>
+
 </html>
