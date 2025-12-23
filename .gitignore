@@ -39,3 +39,4 @@ pip-delete-this-directory.txt
 # Project specific
 artifacts/
 agent_memory.json
+gallery_data.json
