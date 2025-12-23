@@ -125,7 +125,8 @@
                 </div>
             </div>
             <div class="relative h-[600px] w-full group overflow-hidden rounded-sm">
-                <img src="https://images.unsplash.com/photo-1542718610-a1d656d1884c?q=80&w=1200&auto=format&fit=crop"
+                <img id="about-image"
+                    src="https://images.unsplash.com/photo-1542718610-a1d656d1884c?q=80&w=1200&auto=format&fit=crop"
                     class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-700 ease-out scale-100 group-hover:scale-105"
                     alt="Interior Detail">
                 <div class="absolute inset-0 bg-teal/20 mix-blend-multiply"></div>
@@ -227,9 +228,16 @@
                         if (heroImg) heroImg.src = data.cover[0];
                     }
 
+                    // Handle About Image
+                    if (data.about && data.about.length > 0) {
+                        const aboutImg = document.getElementById('about-image');
+                        if (aboutImg) aboutImg.src = data.about[0];
+                    }
+
                     // Collect all images
                     Object.entries(data).forEach(([key, imgs]) => {
                         if (key === 'cover') return; // Skip cover in grid as it is used in header
+                        if (key === 'about') return; // Skip about in grid
                         const displayCat = catMap[key] || key.charAt(0).toUpperCase() + key.slice(1);
                         imgs.forEach(src => images.push({ src, category: displayCat }));
                     });
