@@ -1,6 +1,16 @@
 import os
 import json
 
+import sys
+
+# Ensure we can import from the same directory
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+try:
+    from optimize_images import optimize_images
+except ImportError:
+    optimize_images = None
+
 GALLERY_DIR = 'assets/images/gallery'
 OUTPUT_FILE = 'gallery_data.json'
 
@@ -17,6 +27,10 @@ def generate_gallery_json():
         else:
             print(f"Directory {GALLERY_DIR} not found.")
             return
+
+    if optimize_images:
+        print("Running image optimization...")
+        optimize_images()
 
     for category in os.listdir(GALLERY_DIR):
         if category.startswith('.'): continue

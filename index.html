@@ -266,13 +266,15 @@
 
                         div.innerHTML = `
                             <img src="${safeSrc}" 
+                                 loading="lazy"
+                                 decoding="async"
                                  class="w-full h-full object-cover transition duration-700 group-hover:scale-105 opacity-70 group-hover:opacity-100"
                                  alt="${img.category}">
-                            <div class="absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition duration-500">
-                                <span class="text-xs font-bold tracking-widest uppercase bg-rust text-white px-3 py-1">
-                                    ${img.category}
-                                </span>
-                            </div>
+                                <div class="absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition duration-500">
+                                    <span class="text-xs font-bold tracking-widest uppercase bg-rust text-white px-3 py-1">
+                                        ${img.category}
+                                    </span>
+                                </div>
                         `;
                         container.appendChild(div);
                     });
