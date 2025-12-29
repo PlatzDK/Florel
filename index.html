@@ -215,14 +215,48 @@
         </div>
 
         <div class="relative z-10 max-w-2xl mx-auto">
-            <h2 class="text-5xl md:text-8xl font-bold uppercase tracking-tighter mb-8 text-sand">
-                Book Your<br>Session
+            <h2 class="text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-4 text-sand">
+                Request Access
             </h2>
-            <p class="text-smoke mb-12">Experience the silence. Master the river.</p>
-            <a href="mailto:kontakt@skovkrogen37.dk"
-                class="inline-block border border-copper px-12 py-4 rounded-full text-sm font-bold tracking-[0.2em] uppercase text-copper hover:bg-copper hover:text-white transition duration-300">
-                Check Availability
-            </a>
+            <p class="text-smoke mb-12 italic">"We value privacy and peace - contact us for availability."</p>
+
+            <form action="https://api.web3forms.com/submit" method="POST"
+                class="w-full text-left space-y-6 bg-forest/80 backdrop-blur-md p-8 md:p-12 border border-white/5 rounded-sm">
+                <!-- Replace with your actual Access Key from Web3Forms -->
+                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-[10px] uppercase tracking-widest text-slate font-bold">Name</label>
+                        <input type="text" name="name" required
+                            class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] uppercase tracking-widest text-slate font-bold">Email</label>
+                        <input type="email" name="email" required
+                            class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm">
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] uppercase tracking-widest text-slate font-bold">Desired Dates</label>
+                    <input type="text" name="dates" placeholder="e.g. Week 42"
+                        class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm">
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] uppercase tracking-widest text-slate font-bold">Message (Optional)</label>
+                    <textarea name="message" rows="3"
+                        class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm"></textarea>
+                </div>
+
+                <div class="text-center pt-4">
+                    <button type="submit"
+                        class="inline-block border border-copper px-12 py-4 rounded-full text-sm font-bold tracking-[0.2em] uppercase text-copper hover:bg-copper hover:text-white transition duration-300">
+                        Send Request
+                    </button>
+                </div>
+            </form>
         </div>
 
         <div
