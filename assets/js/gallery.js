@@ -58,18 +58,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Using encodeURI to ensure spaces/chars in filenames don't break
                 const safeSrc = encodeURI(img.src);
 
-                div.innerHTML = `
-                    <img src="${safeSrc}" 
-                            loading="lazy"
-                            decoding="async"
-                            class="w-full h-full object-cover transition duration-700 group-hover:scale-105 opacity-70 group-hover:opacity-100"
-                            alt="${img.category}">
-                        <div class="absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition duration-500">
-                            <span class="text-xs font-bold tracking-widest uppercase bg-rust text-white px-3 py-1">
-                                ${img.category}
-                            </span>
-                        </div>
-                `;
+                // Create Image
+                const imageEl = document.createElement('img');
+                imageEl.src = safeSrc;
+                imageEl.loading = 'lazy';
+                imageEl.decoding = 'async';
+                imageEl.className = 'w-full h-full object-cover transition duration-700 group-hover:scale-105 opacity-70 group-hover:opacity-100';
+                imageEl.alt = img.category;
+
+                // Create Overlay Container
+                const overlayEl = document.createElement('div');
+                overlayEl.className = 'absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition duration-500';
+
+                // Create Badge/Label
+                const badgeEl = document.createElement('span');
+                badgeEl.className = 'text-xs font-bold tracking-widest uppercase bg-rust text-white px-3 py-1';
+                badgeEl.textContent = img.category; // Safe text insertion
+
+                // Assemble
+                overlayEl.appendChild(badgeEl);
+                div.appendChild(imageEl);
+                div.appendChild(overlayEl);
+
                 container.appendChild(div);
             });
         })
