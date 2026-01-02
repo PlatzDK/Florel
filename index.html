@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SKOVKROGEN 37 | NATURE REIMAGINED</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.5"
+        integrity="sha384-r6SdLxFNrT+/0GxNHTD+RxE7wK3cZsdzxOJp1T7+PN1TNyyrDk6jn1RDdlObV95f"
+        crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -210,6 +212,8 @@
                 class="w-full text-left space-y-6 bg-forest/80 backdrop-blur-md p-8 md:p-12 border border-white/5 rounded-sm">
                 <!-- Replace with your actual Access Key from Web3Forms -->
                 <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                <!-- Honeypot for spam bots -->
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="space-y-2">
