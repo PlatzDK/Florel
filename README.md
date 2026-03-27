@@ -1,4 +1,4 @@
-# Florel
+# Florel - Skovkrogen 37 Website
 
 Static website for the Skovkrogen 37 rental property.
 
@@ -7,7 +7,7 @@ Static website for the Skovkrogen 37 rental property.
 This repository is a plain HTML/CSS/JS site. You can open `index.html` directly in a browser, or use a simple local server:
 
 ```bash
-cd <project-root>
+cd Florel
 python3 -m http.server 8000
 ```
 
@@ -20,7 +20,7 @@ The gallery is loaded from `gallery_data.json`, generated from image folders in 
 Generate or refresh the manifest with:
 
 ```bash
-cd <project-root>
+cd Florel
 python3 scripts/generate_gallery.py
 ```
 
