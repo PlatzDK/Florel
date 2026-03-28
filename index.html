@@ -199,52 +199,100 @@
         class="relative py-32 bg-peat overflow-hidden flex flex-col items-center justify-center text-center px-6 border-t border-white/5">
         <div class="absolute inset-0 z-0 opacity-10">
             <img src="https://images.unsplash.com/photo-1621801306639-651faa92437b?q=80&w=2000&auto=format&fit=crop"
-                class="w-full h-full object-cover">
+                class="w-full h-full object-cover" alt="">
         </div>
 
-        <div class="relative z-10 max-w-2xl mx-auto">
+        <div class="relative z-10 max-w-2xl mx-auto w-full">
             <h2 class="text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-4 text-sand">
-                Request Access
+                Request a Stay
             </h2>
-            <p class="text-smoke mb-12 italic">"We value privacy and peace - contact us for availability."</p>
+            <p class="text-smoke mb-12 italic">"We value privacy and peace — contact us for availability."</p>
 
-            <form action="https://api.web3forms.com/submit" method="POST"
-                class="w-full text-left space-y-6 bg-forest/80 backdrop-blur-md p-8 md:p-12 border border-white/5 rounded-sm">
+            <form id="booking-form" action="https://api.web3forms.com/submit" method="POST"
+                class="w-full text-left space-y-6 bg-forest/80 backdrop-blur-md p-8 md:p-12 border border-white/5 rounded-sm"
+                novalidate>
                 <!-- Replace with your actual Access Key from Web3Forms -->
                 <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                <input type="hidden" name="subject" value="Booking Request – Skovkrogen 37">
+                <input type="hidden" name="from_name" value="Skovkrogen 37 Bookings">
                 <!-- Honeypot for spam bots -->
                 <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
+                <!-- Name + Email -->
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="space-y-2">
-                        <label class="text-[10px] uppercase tracking-widest text-slate font-bold">Name</label>
-                        <input type="text" name="name" required
-                            class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm">
+                        <label class="text-[10px] uppercase tracking-widest text-slate font-bold">
+                            Name <span class="text-copper">*</span>
+                        </label>
+                        <input type="text" name="name" required placeholder="Your full name"
+                            class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm placeholder:text-smoke/50">
                     </div>
                     <div class="space-y-2">
-                        <label class="text-[10px] uppercase tracking-widest text-slate font-bold">Email</label>
-                        <input type="email" name="email" required
-                            class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm">
+                        <label class="text-[10px] uppercase tracking-widest text-slate font-bold">
+                            Email <span class="text-copper">*</span>
+                        </label>
+                        <input type="email" name="email" required placeholder="your@email.com"
+                            class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm placeholder:text-smoke/50">
                     </div>
                 </div>
 
-                <div class="space-y-2">
-                    <label class="text-[10px] uppercase tracking-widest text-slate font-bold">Desired Dates</label>
-                    <input type="text" name="dates" placeholder="e.g. Week 42"
-                        class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm">
+                <!-- Phone + Guests -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-[10px] uppercase tracking-widest text-slate font-bold">Phone (Optional)</label>
+                        <input type="tel" name="phone" placeholder="+45 00 00 00 00"
+                            class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm placeholder:text-smoke/50">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] uppercase tracking-widest text-slate font-bold">
+                            Number of Guests <span class="text-copper">*</span>
+                        </label>
+                        <select name="guests" required
+                            class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm booking-select">
+                            <option value="" disabled selected>Select…</option>
+                            <option value="1">1 person</option>
+                            <option value="2">2 people</option>
+                            <option value="3">3 people</option>
+                            <option value="4">4 people</option>
+                            <option value="5">5 people</option>
+                            <option value="6">6 people</option>
+                        </select>
+                    </div>
                 </div>
 
+                <!-- Check-in + Check-out -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-[10px] uppercase tracking-widest text-slate font-bold">
+                            Check-in <span class="text-copper">*</span>
+                        </label>
+                        <input type="date" name="check_in" required
+                            class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm booking-date">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] uppercase tracking-widest text-slate font-bold">
+                            Check-out <span class="text-copper">*</span>
+                        </label>
+                        <input type="date" name="check_out" required
+                            class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm booking-date">
+                    </div>
+                </div>
+
+                <!-- Message -->
                 <div class="space-y-2">
                     <label class="text-[10px] uppercase tracking-widest text-slate font-bold">Message (Optional)</label>
-                    <textarea name="message" rows="3"
-                        class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm"></textarea>
+                    <textarea name="message" rows="3" maxlength="1000"
+                        placeholder="Tell us about your trip, fishing goals, or any special requirements…"
+                        class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm placeholder:text-smoke/50 resize-none"></textarea>
                 </div>
 
-                <div class="text-center pt-4">
-                    <button type="submit"
-                        class="inline-block border border-copper px-12 py-4 rounded-full text-sm font-bold tracking-[0.2em] uppercase text-copper hover:bg-copper hover:text-white transition duration-300">
+                <!-- Submit -->
+                <div class="text-center pt-4 booking-form-footer">
+                    <button type="submit" id="booking-submit"
+                        class="inline-block border border-copper px-12 py-4 rounded-full text-sm font-bold tracking-[0.2em] uppercase text-copper hover:bg-copper hover:text-white transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
                         Send Request
                     </button>
+                    <p class="text-[10px] text-smoke/60 mt-4 tracking-wider">We typically respond within 24 hours.</p>
                 </div>
             </form>
         </div>
@@ -257,6 +305,7 @@
     </footer>
 
     <script src="assets/js/gallery.js"></script>
+    <script src="assets/js/booking.js"></script>
 </body>
 
 </html>

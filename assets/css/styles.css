@@ -11,3 +11,25 @@ body {
     flex-direction: column;
     justify-content: center;
 }
+
+/* Dark-theme date pickers */
+.booking-date::-webkit-calendar-picker-indicator {
+    filter: invert(1) opacity(0.45);
+    cursor: pointer;
+}
+
+.booking-date::-webkit-calendar-picker-indicator:hover {
+    filter: invert(1) opacity(0.9);
+}
+
+/* Dark-theme select dropdown */
+.booking-select {
+    color-scheme: dark;
+}
+
+.booking-select option {
+    background-color: #1A1E1C;
+    /* peat */
+    color: #E3DDD3;
+    /* sand */
+}
