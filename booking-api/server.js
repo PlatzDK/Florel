@@ -23,9 +23,6 @@ const {
     SITE_URL = 'https://platzdk.github.io/Florel',
     PORT = '3000',
     ALLOWED_ORIGINS = '',
-    // Optional: when set, every booking submission must include this code.
-    // Share it verbally with trusted guests. Leave unset to disable the gate.
-    BOOKING_ACCESS_CODE = '',
 } = process.env;
 
 const requiredEnv = ['SMTP_HOST', 'SMTP_USER', 'SMTP_PASS', 'ADMIN_EMAIL', 'API_BASE_URL'];
@@ -325,23 +322,7 @@ app.get('/health', (_req, res) => res.json({ status: 'ok' }));
 
 // POST /api/booking – submit a new booking request
 app.post('/api/booking', bookingLimiter, async (req, res) => {
-    const { name, email, phone, checkin, checkout, guests, message, accessCode } = req.body || {};
-
-    // Access code gate – when BOOKING_ACCESS_CODE is configured, every submission
-    // must supply the correct code. Hash both sides to equal-length, fixed-size
-    // buffers before comparing, avoiding length-padding bypass and ensuring the
-    // comparison itself is constant-time with no string-comparison leak.
-    if (BOOKING_ACCESS_CODE) {
-        const supplied = String(accessCode || '');
-        const hashSupplied = crypto.createHash('sha256').update(supplied).digest();
-        const hashExpected = crypto.createHash('sha256').update(BOOKING_ACCESS_CODE).digest();
-        const match = crypto.timingSafeEqual(hashSupplied, hashExpected);
-        if (!match) {
-            return res.status(403).json({
-                error: 'Ugyldig adgangskode. Kontakt os direkte for at forespørge om en ledig periode.',
-            });
-        }
-    }
+    const { name, email, phone, checkin, checkout, guests, message } = req.body || {};
 
     // Input validation
     const errors = [];
