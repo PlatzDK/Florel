@@ -52,6 +52,18 @@ cp .env.example .env
 | `SITE_URL` | URL of the main website |
 | `PORT` | Port the server listens on (default: `3000`) |
 | `ALLOWED_ORIGINS` | Comma-separated list of allowed origins for CORS (e.g. `https://platzdk.github.io`) |
+| `BOOKING_ACCESS_CODE` | **Optional.** A short code word shared verbally with trusted guests. When set, every booking submission must include the correct code or it is rejected. Leave empty to disable the gate. |
+
+### Access code — protecting occupancy privacy
+
+Because the booking form is publicly accessible, anyone could submit date requests to probe when the property is vacant — a potential security risk for an unattended cabin.
+
+Setting `BOOKING_ACCESS_CODE` to a short word or phrase (e.g. `karup24`) and sharing it verbally with guests you've already spoken to means that:
+
+- Genuine guests type the code into the **Adgangskode** field on the form and proceed normally.
+- Random internet visitors cannot submit bookings, so they cannot infer occupancy from approvals or rejections.
+
+The code is compared server-side using a constant-time algorithm to prevent timing attacks.
 
 ### 3. Start the server
 

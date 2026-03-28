@@ -64,6 +64,7 @@
             checkout: getValue('checkout'),
             guests: getValue('guests'),
             message: getValue('message'),
+            accessCode: getValue('accessCode'),
         };
 
         try {
