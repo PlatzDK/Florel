@@ -202,48 +202,99 @@
                 class="w-full h-full object-cover">
         </div>
 
-        <div class="relative z-10 max-w-2xl mx-auto">
+        <div class="relative z-10 max-w-2xl mx-auto w-full">
             <h2 class="text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-4 text-sand">
-                Request Access
+                Anmod om adgang
             </h2>
-            <p class="text-smoke mb-12 italic">"We value privacy and peace - contact us for availability."</p>
+            <p class="text-smoke mb-12 italic">"Vi værner om ro og privatliv – skriv til os for at høre om ledige perioder."</p>
 
-            <form action="https://api.web3forms.com/submit" method="POST"
+            <!-- Success message (hidden by default) -->
+            <div id="booking-success" class="hidden w-full text-left bg-forest/80 backdrop-blur-md p-8 md:p-12 border border-copper/30 rounded-sm">
+                <div class="flex items-start gap-4">
+                    <span class="text-copper text-2xl leading-none">✓</span>
+                    <div>
+                        <p class="text-sand font-semibold text-lg mb-2">Forespørgsel modtaget</p>
+                        <p class="text-smoke text-sm leading-relaxed">
+                            Tak for din henvendelse. Vi vender tilbage hurtigst muligt med en bekræftelse eller afslag – hold øje med din indbakke.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error message (hidden by default) -->
+            <div id="booking-error" class="hidden w-full text-left bg-forest/80 backdrop-blur-md p-6 border border-rust/40 rounded-sm mb-6">
+                <p class="text-rust text-sm" id="booking-error-text"></p>
+            </div>
+
+            <form id="booking-form"
+                data-api-url="https://booking.skovkrogen.dk"
                 class="w-full text-left space-y-6 bg-forest/80 backdrop-blur-md p-8 md:p-12 border border-white/5 rounded-sm">
-                <!-- Replace with your actual Access Key from Web3Forms -->
-                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-                <!-- Honeypot for spam bots -->
-                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                <!-- Honeypot field – filled only by bots -->
+                <input type="text" name="website" class="hidden" aria-hidden="true" tabindex="-1" autocomplete="off">
 
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="space-y-2">
-                        <label class="text-[10px] uppercase tracking-widest text-slate font-bold">Name</label>
-                        <input type="text" name="name" required
+                        <label for="bf-name" class="text-[10px] uppercase tracking-widest text-slate font-bold">Navn <span class="text-copper">*</span></label>
+                        <input id="bf-name" type="text" name="name" required autocomplete="name" minlength="2" maxlength="100"
                             class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm">
                     </div>
                     <div class="space-y-2">
-                        <label class="text-[10px] uppercase tracking-widest text-slate font-bold">Email</label>
-                        <input type="email" name="email" required
+                        <label for="bf-email" class="text-[10px] uppercase tracking-widest text-slate font-bold">E-mail <span class="text-copper">*</span></label>
+                        <input id="bf-email" type="email" name="email" required autocomplete="email" maxlength="200"
                             class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm">
                     </div>
                 </div>
 
                 <div class="space-y-2">
-                    <label class="text-[10px] uppercase tracking-widest text-slate font-bold">Desired Dates</label>
-                    <input type="text" name="dates" placeholder="e.g. Week 42"
-                        class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm">
+                    <label for="bf-phone" class="text-[10px] uppercase tracking-widest text-slate font-bold">Telefon</label>
+                    <input id="bf-phone" type="tel" name="phone" autocomplete="tel" maxlength="30"
+                        class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm"
+                        placeholder="+45 12 34 56 78">
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label for="bf-checkin" class="text-[10px] uppercase tracking-widest text-slate font-bold">Ankomst <span class="text-copper">*</span></label>
+                        <input id="bf-checkin" type="date" name="checkin" required
+                            class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm">
+                    </div>
+                    <div class="space-y-2">
+                        <label for="bf-checkout" class="text-[10px] uppercase tracking-widest text-slate font-bold">Afrejse <span class="text-copper">*</span></label>
+                        <input id="bf-checkout" type="date" name="checkout" required
+                            class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm">
+                    </div>
                 </div>
 
                 <div class="space-y-2">
-                    <label class="text-[10px] uppercase tracking-widest text-slate font-bold">Message (Optional)</label>
-                    <textarea name="message" rows="3"
-                        class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm"></textarea>
+                    <label for="bf-guests" class="text-[10px] uppercase tracking-widest text-slate font-bold">Antal gæster <span class="text-copper">*</span></label>
+                    <select id="bf-guests" name="guests" required
+                        class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm appearance-none">
+                        <option value="" disabled selected>Vælg antal</option>
+                        <option value="1">1 person</option>
+                        <option value="2">2 personer</option>
+                        <option value="3">3 personer</option>
+                        <option value="4">4 personer</option>
+                        <option value="5">5 personer</option>
+                        <option value="6">6 personer</option>
+                    </select>
+                </div>
+
+                <div class="space-y-2">
+                    <label for="bf-message" class="text-[10px] uppercase tracking-widest text-slate font-bold">Besked (valgfri)</label>
+                    <textarea id="bf-message" name="message" rows="3" maxlength="1000"
+                        class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm resize-none"
+                        placeholder="Fortæl os gerne lidt om jer og jeres fiskeerfaring…"></textarea>
                 </div>
 
                 <div class="text-center pt-4">
-                    <button type="submit"
-                        class="inline-block border border-copper px-12 py-4 rounded-full text-sm font-bold tracking-[0.2em] uppercase text-copper hover:bg-copper hover:text-white transition duration-300">
-                        Send Request
+                    <button id="booking-submit" type="submit"
+                        class="inline-flex items-center gap-3 border border-copper px-12 py-4 rounded-full text-sm font-bold tracking-[0.2em] uppercase text-copper hover:bg-copper hover:text-white transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <span id="booking-submit-text">Send forespørgsel</span>
+                        <svg id="booking-spinner" class="hidden animate-spin w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                        </svg>
                     </button>
                 </div>
             </form>
@@ -257,6 +308,7 @@
     </footer>
 
     <script src="assets/js/gallery.js"></script>
+    <script src="assets/js/booking.js"></script>
 </body>
 
 </html>
