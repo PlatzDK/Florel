@@ -102,6 +102,16 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(e => {
             console.error("Could not load gallery", e);
-            if (container) container.innerHTML = '<div class="md:col-span-12 text-center text-smoke py-20">Gallery unavailable.</div>';
+            if (container) {
+                const t = window.__i18n || {};
+                const errorMsg = t['gallery.error.unavailable'] || 'Gallery unavailable.';
+
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'md:col-span-12 text-center text-smoke py-20';
+                errorDiv.textContent = errorMsg;
+
+                container.innerHTML = '';
+                container.appendChild(errorDiv);
+            }
         });
 });
