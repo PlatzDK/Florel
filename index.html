@@ -46,14 +46,24 @@
         class="fixed top-0 w-full z-50 text-sand px-8 py-6 flex justify-between items-center transition-all duration-300 bg-gradient-to-b from-forest/80 to-transparent backdrop-blur-[2px]">
         <div class="text-xs font-bold tracking-[0.2em] uppercase text-copper">Skovkrogen 37</div>
         <div class="hidden md:flex gap-12 text-xs font-semibold tracking-[0.2em] uppercase text-smoke">
-            <a href="#about" class="hover:text-sand transition-colors duration-300">About</a>
-            <a href="#gallery" class="hover:text-sand transition-colors duration-300">Gallery</a>
-            <a href="#features" class="hover:text-sand transition-colors duration-300">Facilities</a>
+            <a href="#about" class="hover:text-sand transition-colors duration-300" data-i18n="nav.about">About</a>
+            <a href="#gallery" class="hover:text-sand transition-colors duration-300" data-i18n="nav.gallery">Gallery</a>
+            <a href="#features" class="hover:text-sand transition-colors duration-300" data-i18n="nav.facilities">Facilities</a>
         </div>
-        <a href="#booking"
-            class="border border-white/20 px-6 py-2 rounded-full text-xs font-bold tracking-[0.2em] uppercase text-sand hover:bg-copper hover:border-copper hover:text-white transition duration-300">
-            Book Now
-        </a>
+        <div class="flex items-center gap-4">
+            <div class="flex items-center gap-1 text-[10px] tracking-[0.15em] uppercase" aria-label="Select language">
+                <button data-lang-btn="da" class="text-sand font-bold px-1 transition-colors hover:text-sand" aria-label="Dansk">DA</button>
+                <span class="text-slate/40" aria-hidden="true">|</span>
+                <button data-lang-btn="en" class="text-smoke px-1 transition-colors hover:text-sand" aria-label="English">EN</button>
+                <span class="text-slate/40" aria-hidden="true">|</span>
+                <button data-lang-btn="de" class="text-smoke px-1 transition-colors hover:text-sand" aria-label="Deutsch">DE</button>
+            </div>
+            <a href="#booking"
+                class="border border-white/20 px-6 py-2 rounded-full text-xs font-bold tracking-[0.2em] uppercase text-sand hover:bg-copper hover:border-copper hover:text-white transition duration-300"
+                data-i18n="nav.book">
+                Book Now
+            </a>
+        </div>
     </nav>
 
     <!-- HERO SECTION -->
@@ -69,20 +79,21 @@
 
         <!-- Content -->
         <div class="relative z-20 text-center px-4 max-w-5xl mx-auto">
-            <h2 class="text-xs md:text-sm font-bold tracking-[0.3em] uppercase mb-6 text-copper">The Angler's Sanctuary
+            <h2 class="text-xs md:text-sm font-bold tracking-[0.3em] uppercase mb-6 text-copper" data-i18n="hero.tagline">The Angler's Sanctuary
             </h2>
             <h1
                 class="text-4xl md:text-6xl lg:text-8xl font-extrabold tracking-tighter uppercase leading-none mb-8 text-sand">
-                The Karup Å<br><span class="text-slate opacity-70">Tributary Hideaway</span>
+                <span data-i18n="hero.title">The Karup Å</span><br><span class="text-slate opacity-70" data-i18n="hero.subtitle">Tributary Hideaway</span>
             </h1>
-            <p class="max-w-xl mx-auto text-smoke text-sm md:text-base font-light leading-relaxed mb-12">
-                Direct access to Skygge Å. Native Brown Trout & Sea Trout on location.<br>20 km to Silkeborg.
+            <p class="max-w-xl mx-auto text-smoke text-sm md:text-base font-light leading-relaxed mb-12"
+                data-i18n-html="hero.description">
+                Direct access to Skygge Å. Native Brown Trout &amp; Sea Trout on location.<br>20 km to Silkeborg.
             </p>
         </div>
 
         <!-- Scroll Indicator -->
         <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2">
-            <span class="text-[10px] tracking-[0.2em] uppercase text-smoke">Scroll</span>
+            <span class="text-[10px] tracking-[0.2em] uppercase text-smoke" data-i18n="hero.scroll">Scroll</span>
             <div class="w-[1px] h-12 bg-slate overflow-hidden">
                 <div class="w-full h-1/2 bg-copper animate-bounce"></div>
             </div>
@@ -94,50 +105,50 @@
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
             <div class="space-y-8">
                 <h3 class="text-4xl md:text-5xl font-bold uppercase tracking-tight leading-none text-sand mb-8">
-                    The <span class="text-rust">Stats</span>
+                    <span data-i18n="about.title.pre">The</span> <span class="text-rust" data-i18n="about.title.main">Stats</span>
                 </h3>
 
                 <div class="grid grid-cols-1 gap-6">
                     <!-- Vand -->
                     <div class="border-l-2 border-slate/30 pl-4 hover:border-copper transition-colors duration-300">
-                        <div class="text-[10px] uppercase tracking-[0.2em] text-rust mb-1">Vand</div>
-                        <div class="text-sand text-base font-semibold">Skygge Å (Karup Å system) + Egen sø</div>
-                        <div class="text-smoke text-xs italic mt-1">Fiskeret på grunden</div>
+                        <div class="text-[10px] uppercase tracking-[0.2em] text-rust mb-1" data-i18n="about.water.label">Vand</div>
+                        <div class="text-sand text-base font-semibold" data-i18n="about.water.value">Skygge Å (Karup Å system) + Egen sø</div>
+                        <div class="text-smoke text-xs italic mt-1" data-i18n="about.water.note">Fiskeret på grunden</div>
                     </div>
 
                     <!-- Arter -->
                     <div class="border-l-2 border-slate/30 pl-4 hover:border-copper transition-colors duration-300">
-                        <div class="text-[10px] uppercase tracking-[0.2em] text-rust mb-1">Arter</div>
-                        <div class="text-sand text-base font-semibold">Havørred, Bækørred</div>
-                        <div class="text-smoke text-xs italic mt-1">Seriøst fiskeri for den øvede</div>
+                        <div class="text-[10px] uppercase tracking-[0.2em] text-rust mb-1" data-i18n="about.species.label">Arter</div>
+                        <div class="text-sand text-base font-semibold" data-i18n="about.species.value">Havørred, Bækørred</div>
+                        <div class="text-smoke text-xs italic mt-1" data-i18n="about.species.note">Seriøst fiskeri for den øvede</div>
                     </div>
 
                     <!-- Område -->
                     <div class="border-l-2 border-slate/30 pl-4 hover:border-copper transition-colors duration-300">
-                        <div class="text-[10px] uppercase tracking-[0.2em] text-rust mb-1">Område</div>
-                        <div class="text-sand text-base font-semibold">10+ Put & Take søer &lt; 20 km</div>
-                        <div class="text-smoke text-xs italic mt-1">Perfekt til backup eller begyndere</div>
+                        <div class="text-[10px] uppercase tracking-[0.2em] text-rust mb-1" data-i18n="about.area.label">Område</div>
+                        <div class="text-sand text-base font-semibold" data-i18n-html="about.area.value">10+ Put &amp; Take søer &lt; 20 km</div>
+                        <div class="text-smoke text-xs italic mt-1" data-i18n="about.area.note">Perfekt til backup eller begyndere</div>
                     </div>
 
                     <!-- Tech -->
                     <div class="border-l-2 border-slate/30 pl-4 hover:border-copper transition-colors duration-300">
-                        <div class="text-[10px] uppercase tracking-[0.2em] text-rust mb-1">Tech</div>
-                        <div class="text-sand text-base font-semibold">Ingen WiFi. Begrænset 4G</div>
-                        <div class="text-smoke text-xs italic mt-1">Medbring bøger, ikke PlayStation</div>
+                        <div class="text-[10px] uppercase tracking-[0.2em] text-rust mb-1" data-i18n="about.tech.label">Tech</div>
+                        <div class="text-sand text-base font-semibold" data-i18n="about.tech.value">Ingen WiFi. Begrænset 4G</div>
+                        <div class="text-smoke text-xs italic mt-1" data-i18n="about.tech.note">Medbring bøger, ikke PlayStation</div>
                     </div>
 
                     <!-- Sovepladser -->
                     <div class="border-l-2 border-slate/30 pl-4 hover:border-copper transition-colors duration-300">
-                        <div class="text-[10px] uppercase tracking-[0.2em] text-rust mb-1">Sovepladser</div>
-                        <div class="text-sand text-base font-semibold">3 Værelser (2 senge pr. rum)</div>
-                        <div class="text-smoke text-xs italic mt-1">Ideelt til 4-6 voksne</div>
+                        <div class="text-[10px] uppercase tracking-[0.2em] text-rust mb-1" data-i18n="about.beds.label">Sovepladser</div>
+                        <div class="text-sand text-base font-semibold" data-i18n="about.beds.value">3 Værelser (2 senge pr. rum)</div>
+                        <div class="text-smoke text-xs italic mt-1" data-i18n="about.beds.note">Ideelt til 4-6 voksne</div>
                     </div>
 
                     <!-- Lokation -->
                     <div class="border-l-2 border-slate/30 pl-4 hover:border-copper transition-colors duration-300">
-                        <div class="text-[10px] uppercase tracking-[0.2em] text-rust mb-1">Lokation</div>
-                        <div class="text-sand text-base font-semibold">Isoleret i skov. 100% Ro.</div>
-                        <div class="text-smoke text-xs italic mt-1">Kræver bil</div>
+                        <div class="text-[10px] uppercase tracking-[0.2em] text-rust mb-1" data-i18n="about.location.label">Lokation</div>
+                        <div class="text-sand text-base font-semibold" data-i18n="about.location.value">Isoleret i skov. 100% Ro.</div>
+                        <div class="text-smoke text-xs italic mt-1" data-i18n="about.location.note">Kræver bil</div>
                     </div>
                 </div>
             </div>
@@ -154,13 +165,13 @@
     <!-- GALLERY GRID -->
     <section id="gallery" class="py-32 bg-peat">
         <div class="px-6 mb-16 flex justify-between items-end border-b border-white/5 pb-8 mx-6">
-            <h2 class="text-4xl md:text-6xl font-bold uppercase tracking-tight text-sand">Gallery</h2>
-            <span class="text-xs tracking-[0.2em] text-rust hidden md:block">01 — ATMOSPHERE</span>
+            <h2 class="text-4xl md:text-6xl font-bold uppercase tracking-tight text-sand" data-i18n="gallery.title">Gallery</h2>
+            <span class="text-xs tracking-[0.2em] text-rust hidden md:block" data-i18n="gallery.subtitle">01 — ATMOSPHERE</span>
         </div>
 
         <div id="gallery-grid" class="grid grid-cols-1 md:grid-cols-12 gap-4 px-4 h-auto min-h-[300px]">
             <!-- Content will be loaded dynamically from gallery_data.json -->
-            <div class="md:col-span-12 text-center text-smoke py-20 italic">
+            <div class="md:col-span-12 text-center text-smoke py-20 italic" data-i18n="gallery.loading">
                 Loading gallery...
             </div>
         </div>
@@ -169,25 +180,28 @@
     <!-- FACILITIES -->
     <section id="features" class="py-32 bg-forest border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-xs font-bold tracking-[0.3em] uppercase text-copper mb-16">Designed for Anglers</h2>
+            <h2 class="text-xs font-bold tracking-[0.3em] uppercase text-copper mb-16" data-i18n="features.tagline">Designed for Anglers</h2>
 
             <div class="grid md:grid-cols-3 gap-12">
                 <div class="group border-t border-white/10 pt-8 hover:border-copper transition duration-500">
-                    <h3 class="text-2xl font-bold uppercase mb-4 text-sand group-hover:text-copper transition-colors">
+                    <h3 class="text-2xl font-bold uppercase mb-4 text-sand group-hover:text-copper transition-colors"
+                        data-i18n="features.cleaning.title">
                         Cleaning Station</h3>
-                    <p class="text-smoke text-sm leading-relaxed">Dedicated outdoor facility with running water and
+                    <p class="text-smoke text-sm leading-relaxed" data-i18n="features.cleaning.desc">Dedicated outdoor facility with running water and
                         stainless steel surfaces. Blends into the surroundings.</p>
                 </div>
                 <div class="group border-t border-white/10 pt-8 hover:border-copper transition duration-500">
-                    <h3 class="text-2xl font-bold uppercase mb-4 text-sand group-hover:text-copper transition-colors">
+                    <h3 class="text-2xl font-bold uppercase mb-4 text-sand group-hover:text-copper transition-colors"
+                        data-i18n="features.freezer.title">
                         Deep Freeze</h3>
-                    <p class="text-smoke text-sm leading-relaxed">Industrial grade freezer capacity ensures your catch
+                    <p class="text-smoke text-sm leading-relaxed" data-i18n="features.freezer.desc">Industrial grade freezer capacity ensures your catch
                         stays pristine. Reliable and spacious.</p>
                 </div>
                 <div class="group border-t border-white/10 pt-8 hover:border-copper transition duration-500">
-                    <h3 class="text-2xl font-bold uppercase mb-4 text-sand group-hover:text-copper transition-colors">
+                    <h3 class="text-2xl font-bold uppercase mb-4 text-sand group-hover:text-copper transition-colors"
+                        data-i18n="features.drying.title">
                         Gear Drying</h3>
-                    <p class="text-smoke text-sm leading-relaxed">Ventilated storage for waders and rods. Keep your gear
+                    <p class="text-smoke text-sm leading-relaxed" data-i18n="features.drying.desc">Ventilated storage for waders and rods. Keep your gear
                         dry and ready for the morning cast.</p>
                 </div>
             </div>
@@ -203,18 +217,19 @@
         </div>
 
         <div class="relative z-10 max-w-2xl mx-auto w-full">
-            <h2 class="text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-4 text-sand">
+            <h2 class="text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-4 text-sand"
+                data-i18n="booking.title">
                 Anmod om adgang
             </h2>
-            <p class="text-smoke mb-12 italic">"Vi værner om ro og privatliv – skriv til os for at høre om ledige perioder."</p>
+            <p class="text-smoke mb-12 italic" data-i18n="booking.quote">"Vi værner om ro og privatliv – skriv til os for at høre om ledige perioder."</p>
 
             <!-- Success message (hidden by default) -->
             <div id="booking-success" class="hidden w-full text-left bg-forest/80 backdrop-blur-md p-8 md:p-12 border border-copper/30 rounded-sm">
                 <div class="flex items-start gap-4">
                     <span class="text-copper text-2xl leading-none">✓</span>
                     <div>
-                        <p class="text-sand font-semibold text-lg mb-2">Forespørgsel modtaget</p>
-                        <p class="text-smoke text-sm leading-relaxed">
+                        <p class="text-sand font-semibold text-lg mb-2" data-i18n="booking.success.title">Forespørgsel modtaget</p>
+                        <p class="text-smoke text-sm leading-relaxed" data-i18n="booking.success.text">
                             Tak for din henvendelse. Vi vender tilbage hurtigst muligt med en bekræftelse eller afslag – hold øje med din indbakke.
                         </p>
                     </div>
@@ -235,55 +250,57 @@
 
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="space-y-2">
-                        <label for="bf-name" class="text-[10px] uppercase tracking-widest text-slate font-bold">Navn <span class="text-copper">*</span></label>
+                        <label for="bf-name" class="text-[10px] uppercase tracking-widest text-slate font-bold"><span data-i18n="booking.name">Navn</span> <span class="text-copper">*</span></label>
                         <input id="bf-name" type="text" name="name" required autocomplete="name" minlength="2" maxlength="100"
                             class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm">
                     </div>
                     <div class="space-y-2">
-                        <label for="bf-email" class="text-[10px] uppercase tracking-widest text-slate font-bold">E-mail <span class="text-copper">*</span></label>
+                        <label for="bf-email" class="text-[10px] uppercase tracking-widest text-slate font-bold"><span data-i18n="booking.email">E-mail</span> <span class="text-copper">*</span></label>
                         <input id="bf-email" type="email" name="email" required autocomplete="email" maxlength="200"
                             class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm">
                     </div>
                 </div>
 
                 <div class="space-y-2">
-                    <label for="bf-phone" class="text-[10px] uppercase tracking-widest text-slate font-bold">Telefon</label>
+                    <label for="bf-phone" class="text-[10px] uppercase tracking-widest text-slate font-bold" data-i18n="booking.phone">Telefon</label>
                     <input id="bf-phone" type="tel" name="phone" autocomplete="tel" maxlength="30"
                         class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm"
+                        data-i18n-placeholder="booking.phone.placeholder"
                         placeholder="+45 12 34 56 78">
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="space-y-2">
-                        <label for="bf-checkin" class="text-[10px] uppercase tracking-widest text-slate font-bold">Ankomst <span class="text-copper">*</span></label>
+                        <label for="bf-checkin" class="text-[10px] uppercase tracking-widest text-slate font-bold"><span data-i18n="booking.checkin">Ankomst</span> <span class="text-copper">*</span></label>
                         <input id="bf-checkin" type="date" name="checkin" required
                             class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm">
                     </div>
                     <div class="space-y-2">
-                        <label for="bf-checkout" class="text-[10px] uppercase tracking-widest text-slate font-bold">Afrejse <span class="text-copper">*</span></label>
+                        <label for="bf-checkout" class="text-[10px] uppercase tracking-widest text-slate font-bold"><span data-i18n="booking.checkout">Afrejse</span> <span class="text-copper">*</span></label>
                         <input id="bf-checkout" type="date" name="checkout" required
                             class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm">
                     </div>
                 </div>
 
                 <div class="space-y-2">
-                    <label for="bf-guests" class="text-[10px] uppercase tracking-widest text-slate font-bold">Antal gæster <span class="text-copper">*</span></label>
+                    <label for="bf-guests" class="text-[10px] uppercase tracking-widest text-slate font-bold"><span data-i18n="booking.guests.label">Antal gæster</span> <span class="text-copper">*</span></label>
                     <select id="bf-guests" name="guests" required
                         class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm appearance-none">
-                        <option value="" disabled selected>Vælg antal</option>
-                        <option value="1">1 person</option>
-                        <option value="2">2 personer</option>
-                        <option value="3">3 personer</option>
-                        <option value="4">4 personer</option>
-                        <option value="5">5 personer</option>
-                        <option value="6">6 personer</option>
+                        <option value="" disabled selected data-i18n="booking.guests.select">Vælg antal</option>
+                        <option value="1" data-i18n="booking.guests.1">1 person</option>
+                        <option value="2" data-i18n="booking.guests.2">2 personer</option>
+                        <option value="3" data-i18n="booking.guests.3">3 personer</option>
+                        <option value="4" data-i18n="booking.guests.4">4 personer</option>
+                        <option value="5" data-i18n="booking.guests.5">5 personer</option>
+                        <option value="6" data-i18n="booking.guests.6">6 personer</option>
                     </select>
                 </div>
 
                 <div class="space-y-2">
-                    <label for="bf-message" class="text-[10px] uppercase tracking-widest text-slate font-bold">Besked (valgfri)</label>
+                    <label for="bf-message" class="text-[10px] uppercase tracking-widest text-slate font-bold" data-i18n="booking.message.label">Besked (valgfri)</label>
                     <textarea id="bf-message" name="message" rows="3" maxlength="1000"
                         class="w-full bg-peat border border-white/10 p-3 text-sand focus:outline-none focus:border-copper transition-colors text-sm resize-none"
+                        data-i18n-placeholder="booking.message.placeholder"
                         placeholder="Fortæl os gerne lidt om jer og jeres fiskeerfaring…"></textarea>
                 </div>
 
@@ -302,11 +319,12 @@
 
         <div
             class="absolute bottom-6 w-full flex justify-between px-8 text-[10px] uppercase tracking-widest text-slate">
-            <span>&copy; 2024 Skovkrogen</span>
-            <span>Silkeborg, Denmark</span>
+            <span data-i18n="footer.copyright">&copy; 2024 Skovkrogen</span>
+            <span data-i18n="footer.location">Silkeborg, Denmark</span>
         </div>
     </footer>
 
+    <script src="assets/js/i18n.js"></script>
     <script src="assets/js/gallery.js"></script>
     <script src="assets/js/booking.js"></script>
 </body>
