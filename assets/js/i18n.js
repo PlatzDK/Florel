@@ -31,6 +31,7 @@
             'nav.about':      'Om stedet',
             'nav.gallery':    'Galleri',
             'nav.facilities': 'Faciliteter',
+            'nav.location':   'Vejen hertil',
             'nav.book':       'Book Nu',
 
             'hero.tagline':     'Anglerens Fristed',
@@ -125,6 +126,24 @@
             'booking.error.server':  'Der opstod en fejl. Prøv venligst igen.',
             'booking.error.network': 'Kunne ikke oprette forbindelse til serveren. Tjek din internetforbindelse og prøv igen.',
 
+            'location.tagline':         'Find Vej',
+            'location.title':           'Vejen Hertil',
+            'location.address.label':   'Adresse',
+            'location.address.value':   'Skovkrogen 37, Silkeborg',
+            'location.address.note':    'Midtjylland, Danmark',
+            'location.car.label':       'Bil',
+            'location.car.value':       'Ca. 20 min. fra Silkeborg centrum',
+            'location.car.note':        'Bil er eneste transportmulighed',
+            'location.parking.label':   'Parkering',
+            'location.parking.value':   'Direkte ved hytten',
+            'location.parking.note':    'Plads til 2–3 biler på grunden',
+            'location.gps.label':       'GPS / Navigation',
+            'location.gps.value':       'Skovkrogen 37, Silkeborg',
+            'location.gps.note':        'Download ruten offline – GPS kan miste signal i skoven',
+            'location.open.maps':       'Åbn i Google Maps',
+            'location.open.maps.new':   '(åbner i nyt vindue)',
+            'location.map.title':       'Kort over Skovkrogen 37, Silkeborg',
+
             'footer.copyright': '© 2024 Skovkrogen',
             'footer.location':  'Silkeborg, Danmark',
         },
@@ -134,6 +153,7 @@
             'nav.about':      'About',
             'nav.gallery':    'Gallery',
             'nav.facilities': 'Facilities',
+            'nav.location':   'Location',
             'nav.book':       'Book Now',
 
             'hero.tagline':     "The Angler's Sanctuary",
@@ -228,6 +248,24 @@
             'booking.error.server':  'An error occurred. Please try again.',
             'booking.error.network': 'Could not connect to the server. Check your internet connection and try again.',
 
+            'location.tagline':         'Find Us',
+            'location.title':           'How to Get Here',
+            'location.address.label':   'Address',
+            'location.address.value':   'Skovkrogen 37, Silkeborg',
+            'location.address.note':    'Central Jutland, Denmark',
+            'location.car.label':       'By Car',
+            'location.car.value':       'Approx. 20 min. from Silkeborg centre',
+            'location.car.note':        'Car is the only transport option',
+            'location.parking.label':   'Parking',
+            'location.parking.value':   'Directly at the lodge',
+            'location.parking.note':    'Space for 2–3 cars on the property',
+            'location.gps.label':       'GPS / Navigation',
+            'location.gps.value':       'Skovkrogen 37, Silkeborg',
+            'location.gps.note':        'Download the route offline – GPS may lose signal in the forest',
+            'location.open.maps':       'Open in Google Maps',
+            'location.open.maps.new':   '(opens in new window)',
+            'location.map.title':       'Map of Skovkrogen 37, Silkeborg',
+
             'footer.copyright': '© 2024 Skovkrogen',
             'footer.location':  'Silkeborg, Denmark',
         },
@@ -237,6 +275,7 @@
             'nav.about':      'Über uns',
             'nav.gallery':    'Galerie',
             'nav.facilities': 'Ausstattung',
+            'nav.location':   'Anreise',
             'nav.book':       'Jetzt Buchen',
 
             'hero.tagline':     'Das Angler-Refugium',
@@ -331,6 +370,24 @@
             'booking.error.server':  'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.',
             'booking.error.network': 'Verbindung zum Server nicht möglich. Überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.',
 
+            'location.tagline':         'Wegbeschreibung',
+            'location.title':           'Anreise',
+            'location.address.label':   'Adresse',
+            'location.address.value':   'Skovkrogen 37, Silkeborg',
+            'location.address.note':    'Mitteljütland, Dänemark',
+            'location.car.label':       'Mit dem Auto',
+            'location.car.value':       'Ca. 20 Min. vom Zentrum Silkeborg',
+            'location.car.note':        'Auto ist die einzige Verkehrsoption',
+            'location.parking.label':   'Parken',
+            'location.parking.value':   'Direkt an der Hütte',
+            'location.parking.note':    'Platz für 2–3 Fahrzeuge auf dem Grundstück',
+            'location.gps.label':       'GPS / Navigation',
+            'location.gps.value':       'Skovkrogen 37, Silkeborg',
+            'location.gps.note':        'Route offline herunterladen – GPS-Empfang im Wald kann eingeschränkt sein',
+            'location.open.maps':       'In Google Maps öffnen',
+            'location.open.maps.new':   '(öffnet in neuem Fenster)',
+            'location.map.title':       'Karte von Skovkrogen 37, Silkeborg',
+
             'footer.copyright': '© 2024 Skovkrogen',
             'footer.location':  'Silkeborg, Dänemark',
         },
@@ -371,6 +428,12 @@
         document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
             var key = el.dataset.i18nPlaceholder;
             if (t[key] !== undefined) el.placeholder = t[key];
+        });
+
+        /* Title attributes */
+        document.querySelectorAll('[data-i18n-title]').forEach(function (el) {
+            var key = el.dataset.i18nTitle;
+            if (t[key] !== undefined) el.title = t[key];
         });
 
         /* Language-switcher button states */
