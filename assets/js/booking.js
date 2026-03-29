@@ -79,10 +79,12 @@
                 form.classList.add('hidden');
                 successBox.classList.remove('hidden');
             } else {
-                showError(data.error || 'Der opstod en fejl. Prøv venligst igen.');
+                var t = window.__i18n || {};
+                showError(data.error || t['booking.error.server'] || 'An error occurred. Please try again.');
             }
         } catch {
-            showError('Kunne ikke oprette forbindelse til serveren. Tjek din internetforbindelse og prøv igen.');
+            var t = window.__i18n || {};
+            showError(t['booking.error.network'] || 'Could not connect to the server. Check your internet connection and try again.');
         } finally {
             setLoading(false);
         }
@@ -95,7 +97,10 @@
 
     function setLoading(loading) {
         submitBtn.disabled = loading;
-        submitText.textContent = loading ? 'Sender…' : 'Send forespørgsel';
+        var t = window.__i18n || {};
+        submitText.textContent = loading
+            ? (t['booking.sending'] || 'Sending…')
+            : (t['booking.submit'] || 'Send enquiry');
         spinner.classList.toggle('hidden', !loading);
     }
 

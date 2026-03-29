@@ -1,20 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('gallery-grid');
+
+    // Build category display names from i18n when available, fall back to English
+    function getCatMap() {
+        const t = window.__i18n || {};
+        return {
+            'living_room': t['gallery.cat.living_room'] || 'Living Space',
+            'kitchen':     t['gallery.cat.kitchen']     || 'Kitchen',
+            'rooms':       t['gallery.cat.rooms']       || 'Rooms',
+            'nature':      t['gallery.cat.nature']      || 'Nature',
+            'bathroom':    t['gallery.cat.bathroom']    || 'Bathroom',
+            'cover':       t['gallery.cat.cover']       || 'Exterior',
+        };
+    }
+
+    // Re-translate badge labels whenever the active language changes
+    document.addEventListener('langchange', () => {
+        if (!container) return;
+        const catMap = getCatMap();
+        container.querySelectorAll('[data-gallery-cat]').forEach(badge => {
+            const key = badge.dataset.galleryCat;
+            if (catMap[key]) badge.textContent = catMap[key];
+        });
+    });
+
+    if (!container) return;
+
     fetch('gallery_data.json')
         .then(r => r.json())
         .then(data => {
-            const container = document.getElementById('gallery-grid');
-            if (!container) return;
-
             const images = [];
-            // Map simplistic folder names to Nice Display Names
-            const catMap = {
-                'living_room': 'Living Space',
-                'kitchen': 'Kitchen',
-                'rooms': 'Rooms',
-                'nature': 'Nature',
-                'bathroom': 'Bathroom',
-                'cover': 'Exterior'
-            };
 
             // Handle Cover/Hero Image
             if (data.cover && data.cover.length > 0) {
@@ -32,8 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
             Object.entries(data).forEach(([key, imgs]) => {
                 if (key === 'cover') return; // Skip cover in grid as it is used in header
                 if (key === 'about') return; // Skip about in grid
+                const catMap = getCatMap();
                 const displayCat = catMap[key] || key.charAt(0).toUpperCase() + key.slice(1);
-                imgs.forEach(src => images.push({ src, category: displayCat }));
+                imgs.forEach(src => images.push({ src, category: displayCat, catKey: key }));
             });
 
             if (images.length === 0) {
@@ -70,9 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const overlayEl = document.createElement('div');
                 overlayEl.className = 'absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition duration-500';
 
-                // Create Badge/Label
+                // Create Badge/Label – store the category key for re-translation on lang change
                 const badgeEl = document.createElement('span');
                 badgeEl.className = 'text-xs font-bold tracking-widest uppercase bg-rust text-white px-3 py-1';
+                badgeEl.dataset.galleryCat = img.catKey;
                 badgeEl.textContent = img.category; // Safe text insertion
 
                 // Assemble
@@ -85,7 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(e => {
             console.error("Could not load gallery", e);
-            const container = document.getElementById('gallery-grid');
             if (container) container.innerHTML = '<div class="md:col-span-12 text-center text-smoke py-20">Gallery unavailable.</div>';
         });
 });
