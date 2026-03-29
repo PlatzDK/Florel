@@ -27,7 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!container) return;
 
     fetch('gallery_data.json')
-        .then(r => r.json())
+        .then(r => {
+            if (!r.ok) throw new Error(`HTTP ${r.status}`);
+            return r.json();
+        })
         .then(data => {
             const images = [];
 
@@ -53,7 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (images.length === 0) {
-                container.innerHTML = '<div class="md:col-span-12 text-center text-smoke py-20">No images found. Please add images to assets/images/gallery/</div>';
+                const t = window.__i18n || {};
+                container.innerHTML = `<div class="md:col-span-12 text-center text-smoke py-20">${t['gallery.error.empty'] || 'No images found.'}</div>`;
                 return;
             }
 

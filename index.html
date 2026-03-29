@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Skovkrogen 37 – Lystfiskerens fristed ved Skygge Å, Silkeborg. Direkte adgang til havørred og bækørred. Book dit ophold.">
     <title>SKOVKROGEN 37 | NATURE REIMAGINED</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdn.tailwindcss.com/3.4.5"
         integrity="sha384-r6SdLxFNrT+/0GxNHTD+RxE7wK3cZsdzxOJp1T7+PN1TNyyrDk6jn1RDdlObV95f"
         crossorigin="anonymous"></script>
@@ -60,12 +63,42 @@
                 <button data-lang-btn="de" class="text-smoke px-1 transition-colors hover:text-sand" aria-label="Deutsch">DE</button>
             </div>
             <a href="#booking"
-                class="border border-white/20 px-6 py-2 rounded-full text-xs font-bold tracking-[0.2em] uppercase text-sand hover:bg-copper hover:border-copper hover:text-white transition duration-300"
+                class="hidden md:inline-flex border border-white/20 px-6 py-2 rounded-full text-xs font-bold tracking-[0.2em] uppercase text-sand hover:bg-copper hover:border-copper hover:text-white transition duration-300"
                 data-i18n="nav.book">
                 Book Now
             </a>
+            <!-- Hamburger button (mobile only) -->
+            <button id="nav-menu-btn"
+                class="md:hidden flex flex-col gap-[5px] p-2 -mr-2"
+                aria-label="Menu"
+                aria-expanded="false"
+                aria-controls="nav-mobile">
+                <span class="block w-5 h-px bg-sand"></span>
+                <span class="block w-5 h-px bg-sand"></span>
+                <span class="block w-5 h-px bg-sand"></span>
+            </button>
         </div>
     </nav>
+
+    <!-- Mobile navigation overlay -->
+    <div id="nav-mobile"
+        class="hidden fixed inset-0 z-40 bg-forest/95 backdrop-blur-md flex flex-col items-center justify-center gap-10"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigationsmenu">
+        <button id="nav-close-btn"
+            class="absolute top-6 right-8 flex items-center gap-2 text-smoke hover:text-sand transition-colors">
+            <span class="sr-only" data-i18n="nav.close">Luk menu</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <a href="#about" class="text-2xl font-bold uppercase tracking-widest text-sand hover:text-copper transition-colors duration-300" data-i18n="nav.about">Om stedet</a>
+        <a href="#gallery" class="text-2xl font-bold uppercase tracking-widest text-sand hover:text-copper transition-colors duration-300" data-i18n="nav.gallery">Galleri</a>
+        <a href="#features" class="text-2xl font-bold uppercase tracking-widest text-sand hover:text-copper transition-colors duration-300" data-i18n="nav.facilities">Faciliteter</a>
+        <a href="#location" class="text-2xl font-bold uppercase tracking-widest text-sand hover:text-copper transition-colors duration-300" data-i18n="nav.location">Vejen hertil</a>
+        <a href="#booking" class="border border-copper px-8 py-3 text-sm font-bold tracking-[0.2em] uppercase text-copper hover:bg-copper hover:text-white transition duration-300" data-i18n="nav.book">Book Nu</a>
+    </div>
 
     <!-- HERO SECTION -->
     <section class="relative h-screen flex items-center justify-center overflow-hidden bg-forest">
@@ -311,6 +344,7 @@
         class="relative py-32 bg-peat overflow-hidden flex flex-col items-center justify-center text-center px-6 border-t border-white/5">
         <div class="absolute inset-0 z-0 opacity-10">
             <img src="https://images.unsplash.com/photo-1621801306639-651faa92437b?q=80&w=2000&auto=format&fit=crop"
+                alt=""
                 class="w-full h-full object-cover">
         </div>
 
@@ -322,7 +356,7 @@
             <p class="text-smoke mb-12 italic" data-i18n="booking.quote">"Vi værner om ro og privatliv – skriv til os for at høre om ledige perioder."</p>
 
             <!-- Success message (hidden by default) -->
-            <div id="booking-success" class="hidden w-full text-left bg-forest/80 backdrop-blur-md p-8 md:p-12 border border-copper/30 rounded-sm">
+            <div id="booking-success" class="hidden w-full text-left bg-forest/80 backdrop-blur-md p-8 md:p-12 border border-copper/30 rounded-sm" aria-live="polite">
                 <div class="flex items-start gap-4">
                     <span class="text-copper text-2xl leading-none">✓</span>
                     <div>
@@ -335,7 +369,7 @@
             </div>
 
             <!-- Error message (hidden by default) -->
-            <div id="booking-error" class="hidden w-full text-left bg-forest/80 backdrop-blur-md p-6 border border-rust/40 rounded-sm mb-6">
+            <div id="booking-error" class="hidden w-full text-left bg-forest/80 backdrop-blur-md p-6 border border-rust/40 rounded-sm mb-6" role="alert" aria-live="assertive">
                 <p class="text-rust text-sm" id="booking-error-text"></p>
             </div>
 
@@ -406,7 +440,7 @@
                     <button id="booking-submit" type="submit"
                         class="inline-flex items-center gap-3 border border-copper px-12 py-4 rounded-full text-sm font-bold tracking-[0.2em] uppercase text-copper hover:bg-copper hover:text-white transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
                         <span id="booking-submit-text">Send forespørgsel</span>
-                        <svg id="booking-spinner" class="hidden animate-spin w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <svg id="booking-spinner" class="hidden animate-spin w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
                         </svg>
@@ -425,6 +459,7 @@
     <script src="assets/js/i18n.js"></script>
     <script src="assets/js/gallery.js"></script>
     <script src="assets/js/booking.js"></script>
+    <script src="assets/js/nav.js"></script>
 </body>
 
 </html>
