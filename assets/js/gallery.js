@@ -44,10 +44,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Collect all images
+            const catMap = getCatMap();
             Object.entries(data).forEach(([key, imgs]) => {
                 if (key === 'cover') return; // Skip cover in grid as it is used in header
                 if (key === 'about') return; // Skip about in grid
-                const catMap = getCatMap();
                 const displayCat = catMap[key] || key.charAt(0).toUpperCase() + key.slice(1);
                 imgs.forEach(src => images.push({ src, category: displayCat, catKey: key }));
             });
