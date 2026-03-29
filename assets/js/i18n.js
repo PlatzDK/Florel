@@ -34,6 +34,7 @@
             'nav.location':   'Vejen hertil',
             'nav.book':       'Book Nu',
             'nav.close':      'Luk menu',
+            'nav.menu':       'Navigationsmenu',
 
             'hero.tagline':     'Anglerens Fristed',
             'hero.title':       'The Karup Å',
@@ -158,6 +159,7 @@
             'nav.location':   'Location',
             'nav.book':       'Book Now',
             'nav.close':      'Close menu',
+            'nav.menu':       'Navigation menu',
 
             'hero.tagline':     "The Angler's Sanctuary",
             'hero.title':       'The Karup Å',
@@ -282,6 +284,7 @@
             'nav.location':   'Anreise',
             'nav.book':       'Jetzt Buchen',
             'nav.close':      'Menü schließen',
+            'nav.menu':       'Navigationsmenü',
 
             'hero.tagline':     'Das Angler-Refugium',
             'hero.title':       'The Karup Å',

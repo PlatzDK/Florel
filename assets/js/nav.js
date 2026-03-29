@@ -15,6 +15,8 @@
 
     if (!menuBtn || !menu) return;
 
+    let isOpen = false;
+
     const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
     function getFocusable() {
@@ -41,6 +43,8 @@
     }
 
     function openMenu() {
+        if (isOpen) return;
+        isOpen = true;
         menu.classList.remove('hidden');
         menuBtn.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
@@ -48,26 +52,29 @@
         if (closeBtn) closeBtn.focus();
     }
 
-    function closeMenu() {
+    // restoreFocus controls whether the trigger regains focus on close.
+    // Pass false when a nav link was clicked, so focus moves naturally to the
+    // target section rather than jumping back to the hamburger button.
+    function closeMenu(restoreFocus) {
+        if (!isOpen) return;
+        isOpen = false;
         menu.classList.add('hidden');
         menuBtn.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
         menu.removeEventListener('keydown', trapFocus);
-        menuBtn.focus();
+        if (restoreFocus !== false) menuBtn.focus();
     }
 
     menuBtn.addEventListener('click', openMenu);
-    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+    if (closeBtn) closeBtn.addEventListener('click', function () { closeMenu(true); });
 
-    // Close when a nav link is clicked
+    // Nav link clicks: close menu without stealing focus from the target section
     menu.querySelectorAll('a').forEach(function (link) {
-        link.addEventListener('click', closeMenu);
+        link.addEventListener('click', function () { closeMenu(false); });
     });
 
-    // Close on Escape key
+    // Close on Escape key — always restore focus to trigger
     document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && !menu.classList.contains('hidden')) {
-            closeMenu();
-        }
+        if (e.key === 'Escape' && isOpen) closeMenu(true);
     });
 })();
