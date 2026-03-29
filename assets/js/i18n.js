@@ -464,5 +464,11 @@
 
     document.addEventListener('DOMContentLoaded', function () {
         applyLang(detectLang());
+
+        document.querySelectorAll('[data-lang-btn]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                window.setLang(btn.dataset.langBtn);
+            });
+        });
     });
 })();
