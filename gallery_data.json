@@ -1,9 +1,33 @@
 {
-  "cover": [],
+  "cover": [
+    "assets/images/gallery/cover/IMG_0345.webp"
+  ],
   "about": [],
-  "living_room": [],
-  "kitchen": [],
-  "rooms": [],
-  "nature": [],
-  "bathroom": []
+  "living_room": [
+    "assets/images/gallery/living_room/IMG_0704.webp",
+    "assets/images/gallery/living_room/IMG_0705.webp",
+    "assets/images/gallery/living_room/IMG_0715.webp",
+    "assets/images/gallery/living_room/IMG_0716.webp",
+    "assets/images/gallery/living_room/IMG_0717.webp"
+  ],
+  "kitchen": [
+    "assets/images/gallery/kitchen/IMG_0706.webp",
+    "assets/images/gallery/kitchen/IMG_0707.webp"
+  ],
+  "rooms": [
+    "assets/images/gallery/rooms/IMG_0711.webp",
+    "assets/images/gallery/rooms/IMG_0713.webp"
+  ],
+  "nature": [
+    "assets/images/gallery/nature/IMG_0259.webp",
+    "assets/images/gallery/nature/IMG_0345.webp",
+    "assets/images/gallery/nature/IMG_0353.webp",
+    "assets/images/gallery/nature/IMG_0720.webp",
+    "assets/images/gallery/nature/IMG_0721.webp"
+  ],
+  "bathroom": [
+    "assets/images/gallery/bathroom/IMG_0708.webp",
+    "assets/images/gallery/bathroom/IMG_0709.webp",
+    "assets/images/gallery/bathroom/IMG_0710.webp"
+  ]
 }
