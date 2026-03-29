@@ -57,7 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (images.length === 0) {
                 const t = window.__i18n || {};
-                container.innerHTML = `<div class="md:col-span-12 text-center text-smoke py-20">${t['gallery.error.empty'] || 'No images found.'}</div>`;
+                const emptyMsg = t['gallery.error.empty'] || 'No images found.';
+
+                const emptyDiv = document.createElement('div');
+                emptyDiv.className = 'md:col-span-12 text-center text-smoke py-20';
+                emptyDiv.textContent = emptyMsg;
+
+                container.innerHTML = '';
+                container.appendChild(emptyDiv);
                 return;
             }
 
