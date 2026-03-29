@@ -331,6 +331,7 @@
             btn.classList.toggle('text-sand', active);
             btn.classList.toggle('font-bold', active);
             btn.classList.toggle('text-smoke', !active);
+            btn.setAttribute('aria-pressed', active ? 'true' : 'false');
         });
 
         /* Expose for other scripts */
