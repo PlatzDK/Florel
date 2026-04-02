@@ -433,7 +433,12 @@ app.get('/health', (_req, res) => res.json({ status: 'ok' }));
 
 // POST /api/booking – submit a new booking request
 app.post('/api/booking', bookingLimiter, async (req, res) => {
-    const { name, email, phone, checkin, checkout, guests, message } = req.body || {};
+    const { name, email, phone, checkin, checkout, guests, message, website } = req.body || {};
+
+    // Honeypot check – bots often fill hidden fields; reject silently with a fake success
+    if (website) {
+        return res.status(201).json({ success: true, bookingId: crypto.randomUUID() });
+    }
 
     // Input validation
     const errors = [];

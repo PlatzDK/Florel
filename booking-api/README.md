@@ -53,6 +53,39 @@ cp .env.example .env
 | `PORT` | Port the server listens on (default: `3000`) |
 | `ALLOWED_ORIGINS` | Comma-separated list of allowed origins for CORS (e.g. `https://platzdk.github.io`) |
 
+### Gmail-opsætning (anbefalet)
+
+Google blokerer normale kodeord fra tredjepartsapps. Du skal i stedet bruge en **app-adgangskode**:
+
+1. Log ind på din Google-konto på [myaccount.google.com](https://myaccount.google.com).
+2. Aktivér **2-trins godkendelse** under *Sikkerhed* (kræves for app-adgangskoder).
+3. Søg efter **App-adgangskoder** i søgefeltet øverst (eller gå til *Sikkerhed → App-adgangskoder*).
+4. Vælg **Mail** som app og **Windows-computer** (eller valgfrit) som enhed, og klik *Generér*.
+5. Kopiér den 16-cifrede adgangskode (f.eks. `abcd efgh ijkl mnop`) og sæt den ind i `.env` som `SMTP_PASS`.
+
+Udfyld derefter disse værdier i `.env`:
+
+```
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=din-konto@gmail.com
+SMTP_PASS=abcd efgh ijkl mnop
+```
+
+> **Bemærk:** App-adgangskoder er kun tilgængelige, hvis 2-trins godkendelse er slået til på kontoen.
+
+### Botbeskyttelse
+
+Bookingsystemet bruger flere lag for at holde spam-forespørgsler ude:
+
+| Lag | Beskrivelse |
+|-----|-------------|
+| **Honeypot-felt** | Et skjult formularfelt (`website`) som normale brugere aldrig udfylder. Forespørgsler med en udfyldt honeypot afvises både på klienten og serveren. |
+| **Rate limiting** | Maks. 10 forespørgsler pr. IP pr. 15 minutter — forhindrer masseindsamling. |
+| **Input-validering** | Strenge tjek på alle felter (e-mail, datoer, gæstetal, feltstørrelser) — ugyldige forespørgsler afvises med 400. |
+| **Manuel godkendelse** | Ingen forespørgsler godkendes automatisk — admin vurderer hver enkelt via e-mail. |
+
 ### Occupancy privacy
 
 The booking form does **not** expose availability directly. Every submission lands in your inbox as a pending request — nothing is auto-approved. You decide to approve or reject each request after reviewing it, so no one can infer from an automated response whether the property is free on specific dates.
