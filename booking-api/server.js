@@ -23,6 +23,7 @@ const {
     SITE_URL = 'https://platzdk.github.io/Florel',
     PORT = '3000',
     ALLOWED_ORIGINS = '',
+    CALENDAR_ORGANIZER_NAME = 'Skovkrogen 37',
 } = process.env;
 
 const requiredEnv = ['SMTP_HOST', 'SMTP_USER', 'SMTP_PASS', 'ADMIN_EMAIL', 'API_BASE_URL'];
@@ -61,19 +62,20 @@ const transporter = nodemailer.createTransport({
     auth: { user: SMTP_USER, pass: SMTP_PASS },
 });
 
-async function sendMail(to, subject, html) {
+async function sendMail(to, subject, html, attachments = []) {
     await transporter.sendMail({
         from: `"Skovkrogen 37" <${SMTP_USER}>`,
         to,
         subject,
         html,
+        attachments,
     });
 }
 
 // ---------------------------------------------------------------------------
 // Email templates
 // ---------------------------------------------------------------------------
-function adminEmailHtml(booking, approveUrl, rejectUrl) {
+function adminEmailHtml(booking, approveUrl, rejectUrl, calendarUrl) {
     return `<!DOCTYPE html>
 <html lang="da">
 <head>
@@ -91,12 +93,14 @@ function adminEmailHtml(booking, approveUrl, rejectUrl) {
     .field-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #8A9694; margin-bottom: 4px; }
     .field-value { color: #E3DDD3; font-size: 15px; }
     .divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 24px 0; }
-    .actions { display: flex; gap: 16px; margin-top: 32px; }
+    .actions { display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
     .btn { display: inline-block; padding: 14px 32px; border-radius: 100px; text-decoration: none; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: bold; text-align: center; }
     .btn-approve { background: #B87D4B; color: #ffffff; }
     .btn-reject  { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #8A9694; }
+    .btn-calendar { background: transparent; border: 1px solid #1B3B36; color: #4A9B8A; }
     .footer { padding: 20px 40px; background: #0F1612; text-align: center; font-size: 11px; color: #8A9694; border-top: 1px solid rgba(255,255,255,0.06); }
     .notice { margin-top: 24px; font-size: 11px; color: #8A9694; line-height: 1.6; }
+    .cal-note { margin-top: 16px; font-size: 11px; color: #8A9694; line-height: 1.6; }
   </style>
 </head>
 <body>
@@ -142,7 +146,11 @@ function adminEmailHtml(booking, approveUrl, rejectUrl) {
       <div class="actions">
         <a href="${approveUrl}" class="btn btn-approve">✓ Godkend</a>
         <a href="${rejectUrl}"  class="btn btn-reject">✗ Afvis</a>
+        <a href="${escapeHtml(calendarUrl)}" class="btn btn-calendar">📅 Tilføj til Google Kalender</a>
       </div>
+      <p class="cal-note">
+        En kalenderbegivenhed er vedhæftet denne e-mail. Du kan åbne den for at tilføje perioden til din kalender.
+      </p>
       <p class="notice">
         Linkene er gyldige i 7 dage.<br>
         Forespørgslen blev sendt: ${new Date(booking.submittedAt).toLocaleString('da-DK')}<br>
@@ -155,7 +163,7 @@ function adminEmailHtml(booking, approveUrl, rejectUrl) {
 </html>`;
 }
 
-function confirmationEmailHtml(booking) {
+function confirmationEmailHtml(booking, calendarUrl) {
     return `<!DOCTYPE html>
 <html lang="da">
 <head>
@@ -174,6 +182,7 @@ function confirmationEmailHtml(booking) {
     .field-value { color: #E3DDD3; font-size: 15px; }
     .divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 24px 0; }
     .badge { display:inline-block; padding:6px 16px; background:#1B3B36; border:1px solid #B87D4B; border-radius:100px; color:#B87D4B; font-size:11px; letter-spacing:0.15em; text-transform:uppercase; font-weight:bold; margin-bottom:24px; }
+    .btn-calendar { display:inline-block; margin-top:24px; padding:12px 28px; border-radius:100px; border:1px solid #1B3B36; color:#4A9B8A; text-decoration:none; font-size:12px; letter-spacing:0.15em; text-transform:uppercase; font-weight:bold; }
     .footer { padding: 20px 40px; background: #0F1612; text-align: center; font-size: 11px; color: #8A9694; border-top: 1px solid rgba(255,255,255,0.06); }
   </style>
 </head>
@@ -202,6 +211,12 @@ function confirmationEmailHtml(booking) {
         <div class="field-label">Antal gæster</div>
         <div class="field-value">${escapeHtml(String(booking.guests))}</div>
       </div>
+      <hr class="divider">
+      <p style="color:#E3DDD3; font-size:14px; margin-bottom:4px;">Tilføj til din kalender</p>
+      <p style="color:#8A9694; font-size:13px; line-height:1.7; margin-top:0;">
+        En kalenderinvitation er vedhæftet denne e-mail. Klik på den for at tilføje bookingperioden til din kalender – eller brug knappen nedenfor.
+      </p>
+      <a href="${escapeHtml(calendarUrl)}" class="btn-calendar">📅 Tilføj til Google Kalender</a>
       <hr class="divider">
       <p style="color:#8A9694; font-size:13px; line-height:1.7;">
         Har du spørgsmål, er du altid velkommen til at svare på denne e-mail.<br>
@@ -269,6 +284,102 @@ function escapeHtml(str) {
 
 function generateToken() {
     return crypto.randomBytes(32).toString('hex');
+}
+
+/**
+ * Build an iCalendar (.ics) string for a booking.
+ * @param {object} booking
+ * @param {'PUBLISH'|'REQUEST'} method  PUBLISH = one-way event; REQUEST = invite with RSVP
+ * @param {'CONFIRMED'|'TENTATIVE'} status
+ */
+function generateICS(booking, method = 'PUBLISH', status = 'CONFIRMED') {
+    const now = new Date();
+    const pad = (n) => String(n).padStart(2, '0');
+    const dtstamp =
+        now.getUTCFullYear() +
+        pad(now.getUTCMonth() + 1) +
+        pad(now.getUTCDate()) +
+        'T' +
+        pad(now.getUTCHours()) +
+        pad(now.getUTCMinutes()) +
+        pad(now.getUTCSeconds()) +
+        'Z';
+
+    // All-day dates: strip dashes
+    const dtstart = booking.checkin.replace(/-/g, '');
+    const dtend   = booking.checkout.replace(/-/g, '');
+
+    const summary = `Skovkrogen 37 – ${escapeICS(booking.name)} (${booking.guests} gæster)`;
+
+    const descParts = [
+        `Booking af Skovkrogen 37`,
+        `Gæster: ${booking.guests}`,
+        booking.phone   ? `Telefon: ${booking.phone}`     : '',
+        booking.email   ? `E-mail: ${booking.email}`      : '',
+        booking.message ? `Besked: ${booking.message}`    : '',
+        `Booking-ID: ${booking.id}`,
+    ].filter(Boolean);
+    const description = escapeICS(descParts.join('\n'));
+
+    const lines = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        `PRODID:-//Skovkrogen 37//Booking//DA`,
+        'CALSCALE:GREGORIAN',
+        `METHOD:${method}`,
+        'BEGIN:VEVENT',
+        `DTSTART;VALUE=DATE:${dtstart}`,
+        `DTEND;VALUE=DATE:${dtend}`,
+        `DTSTAMP:${dtstamp}`,
+        `UID:skovkrogen37-${booking.id}@booking`,
+        `SUMMARY:${summary}`,
+        `DESCRIPTION:${description}`,
+        `LOCATION:${escapeICS('Skovkrogen 37, Silkeborg, Danmark')}`,
+        `STATUS:${status}`,
+        `ORGANIZER;CN=${escapeICS(CALENDAR_ORGANIZER_NAME)}:mailto:${SMTP_USER}`,
+    ];
+
+    if (method === 'REQUEST') {
+        lines.push(`ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=FALSE:mailto:${booking.email}`);
+    }
+
+    lines.push('END:VEVENT', 'END:VCALENDAR');
+
+    // iCalendar uses CRLF line endings
+    return lines.join('\r\n');
+}
+
+/** Escape special characters for iCalendar text values. */
+function escapeICS(str) {
+    return String(str)
+        .replace(/\\/g, '\\\\')
+        .replace(/;/g, '\\;')
+        .replace(/,/g, '\\,')
+        .replace(/\n/g, '\\n');
+}
+
+/**
+ * Build a Google Calendar "quick-add" deep-link for a booking.
+ * The link lets recipients add the event to any Google Calendar with one click.
+ */
+function googleCalendarUrl(booking) {
+    const title   = `Skovkrogen 37 – ${booking.name} (${booking.guests} gæster)`;
+    const start   = booking.checkin.replace(/-/g, '');
+    const end     = booking.checkout.replace(/-/g, '');
+    const details = [
+        `Booking-ID: ${booking.id}`,
+        `Gæster: ${booking.guests}`,
+        booking.phone ? `Telefon: ${booking.phone}` : '',
+    ].filter(Boolean).join('\n');
+
+    const params = new URLSearchParams({
+        action:   'TEMPLATE',
+        text:     title,
+        dates:    `${start}/${end}`,
+        details,
+        location: 'Skovkrogen 37, Silkeborg, Danmark',
+    });
+    return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
 const TOKEN_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
@@ -393,12 +504,21 @@ app.post('/api/booking', bookingLimiter, async (req, res) => {
     // Send admin notification
     const approveUrl = `${API_BASE_URL}/api/booking/approve/${approveToken}`;
     const rejectUrl = `${API_BASE_URL}/api/booking/reject/${rejectToken}`;
+    const calendarUrl = googleCalendarUrl(booking);
 
     try {
+        const icsContent = generateICS(booking, 'PUBLISH', 'TENTATIVE');
         await sendMail(
             ADMIN_EMAIL,
             `Ny bookingforespørgsel fra ${booking.name} (${booking.checkin} – ${booking.checkout})`,
-            adminEmailHtml(booking, approveUrl, rejectUrl)
+            adminEmailHtml(booking, approveUrl, rejectUrl, calendarUrl),
+            [
+                {
+                    filename: 'booking.ics',
+                    content: icsContent,
+                    contentType: 'text/calendar; charset=utf-8; method=PUBLISH',
+                },
+            ]
         );
     } catch (err) {
         console.error('Failed to send admin email:', err);
@@ -435,10 +555,19 @@ app.get('/api/booking/approve/:token', async (req, res) => {
     saveBookings(bookings);
 
     try {
+        const calendarUrl = googleCalendarUrl(booking);
+        const icsContent = generateICS(booking, 'REQUEST', 'CONFIRMED');
         await sendMail(
             booking.email,
             'Din booking på Skovkrogen 37 er bekræftet ✓',
-            confirmationEmailHtml(booking)
+            confirmationEmailHtml(booking, calendarUrl),
+            [
+                {
+                    filename: 'booking.ics',
+                    content: icsContent,
+                    contentType: 'text/calendar; charset=utf-8; method=REQUEST',
+                },
+            ]
         );
     } catch (err) {
         console.error('Failed to send confirmation email:', err);
