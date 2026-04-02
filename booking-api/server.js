@@ -214,7 +214,7 @@ function confirmationEmailHtml(booking, calendarUrl) {
       <hr class="divider">
       <p style="color:#E3DDD3; font-size:14px; margin-bottom:4px;">Tilføj til din kalender</p>
       <p style="color:#8A9694; font-size:13px; line-height:1.7; margin-top:0;">
-        En kalenderinvitation er vedhæftet denne e-mail. Klik på den for at tilføje bookingenperioden til din kalender – eller brug knappen nedenfor.
+        En kalenderinvitation er vedhæftet denne e-mail. Klik på den for at tilføje bookingperioden til din kalender – eller brug knappen nedenfor.
       </p>
       <a href="${escapeHtml(calendarUrl)}" class="btn-calendar">📅 Tilføj til Google Kalender</a>
       <hr class="divider">
@@ -334,7 +334,7 @@ function generateICS(booking, method = 'PUBLISH', status = 'CONFIRMED') {
         `UID:skovkrogen37-${booking.id}@booking`,
         `SUMMARY:${summary}`,
         `DESCRIPTION:${description}`,
-        `LOCATION:Skovkrogen 37\\, Silkeborg\\, Danmark`,
+        `LOCATION:${escapeICS('Skovkrogen 37, Silkeborg, Danmark')}`,
         `STATUS:${status}`,
         `ORGANIZER;CN=${escapeICS(CALENDAR_ORGANIZER_NAME)}:mailto:${SMTP_USER}`,
     ];
