@@ -1,0 +1,13 @@
+# Booking API (deployed separately)
+booking-api/
+
+# Keep build scripts included so Vercel can run scripts/generate_gallery.py
+
+# GitHub-specific files
+.github/
+.nojekyll
+.gitattributes
+
+# Documentation (not part of the deployed site)
+README.md
+LICENSE
