@@ -1,9 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "python3 scripts/generate_gallery.py",
+  "buildCommand": "rm -rf dist && mkdir -p dist && python3 scripts/generate_gallery.py && cp index.html gallery_data.json dist/ && cp -R assets dist/",
   "installCommand": "pip3 install Pillow",
-  "outputDirectory": ".",
+  "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
