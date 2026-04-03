@@ -45,7 +45,8 @@ The repository includes a `vercel.json` configuration for deploying to [Vercel](
 1. Import the repository in the Vercel dashboard.
 2. Vercel will auto-detect the configuration — no manual settings are required.
 3. The build step runs `scripts/generate_gallery.py` to regenerate `gallery_data.json`.
-4. Files listed in `.vercelignore` (booking API, scripts, docs) are excluded from the deployment output.
+4. Keep `scripts/` in the repository for Vercel builds. Do not exclude it via `.vercelignore`, because Vercel also excludes ignored files from the build inputs.
+5. If you want helper files such as scripts, docs, or other non-public sources omitted from the served site, publish a dedicated build output directory that contains only the static site files instead of relying on `.vercelignore` for build-time assets.
 
 ### GitHub Pages
 
