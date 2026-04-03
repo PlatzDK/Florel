@@ -1,8 +1,7 @@
 # Booking API (deployed separately)
 booking-api/
 
-# Build scripts (only needed at build time, not served)
-scripts/
+# Keep build scripts included so Vercel can run scripts/generate_gallery.py
 
 # GitHub-specific files
 .github/
