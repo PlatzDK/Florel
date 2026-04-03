@@ -1,0 +1,14 @@
+# Booking API (deployed separately)
+booking-api/
+
+# Build scripts (only needed at build time, not served)
+scripts/
+
+# GitHub-specific files
+.github/
+.nojekyll
+.gitattributes
+
+# Documentation (not part of the deployed site)
+README.md
+LICENSE
