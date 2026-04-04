@@ -20,7 +20,7 @@ const {
     SMTP_PASS,
     ADMIN_EMAIL,
     API_BASE_URL,
-    SITE_URL = 'https://platzdk.github.io/Florel',
+    SITE_URL = 'https://florel.vercel.app',
     PORT = '3000',
     ALLOWED_ORIGINS = '',
     CALENDAR_ORGANIZER_NAME = 'Skovkrogen 37',

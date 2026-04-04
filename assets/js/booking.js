@@ -9,7 +9,7 @@
  * The API URL is read from the form's `data-api-url` attribute so it can be
  * changed per environment without modifying this script:
  *
- *   <form id="booking-form" data-api-url="https://booking.skovkrogen.dk" …>
+ *   <form id="booking-form" data-api-url="https://florel.onrender.com" …>
  */
 
 (function () {
