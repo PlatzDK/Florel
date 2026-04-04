@@ -48,10 +48,10 @@ cp .env.example .env
 | `SMTP_USER` | Email address used to send mails |
 | `SMTP_PASS` | Password or app-specific password for the email account |
 | `ADMIN_EMAIL` | Where booking notifications are sent (the person who approves/rejects) |
-| `API_BASE_URL` | Public URL of this API (e.g. `https://booking.skovkrogen.dk`) |
+| `API_BASE_URL` | Public URL of this API (e.g. `https://florel.onrender.com`) |
 | `SITE_URL` | URL of the main website |
 | `PORT` | Port the server listens on (default: `3000`) |
-| `ALLOWED_ORIGINS` | Comma-separated list of allowed origins for CORS (e.g. `https://platzdk.github.io`) |
+| `ALLOWED_ORIGINS` | Comma-separated list of allowed origins for CORS (e.g. `https://florel.vercel.app`) |
 
 ### Gmail-opsætning (anbefalet)
 
@@ -170,5 +170,5 @@ Any Node.js-compatible hosting works:
 Remember to:
 1. Set all environment variables on your hosting platform.
 2. Point `API_BASE_URL` to the public URL of the deployed service.
-3. Update `BOOKING_API_URL` in `index.html` to the same URL.
+3. Update `data-api-url` on `#booking-form` in `index.html` to the same URL.
 4. Serve the API over **HTTPS**.
