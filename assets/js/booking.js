@@ -21,6 +21,7 @@
         console.warn('Booking form: data-api-url attribute is missing.');
         return;
     }
+    wakeApi();
 
     const submitBtn = document.getElementById('booking-submit');
     const submitText = document.getElementById('booking-submit-text');
@@ -94,6 +95,15 @@
     function getValue(name) {
         const el = form.elements[name];
         return el ? el.value.trim() : '';
+    }
+
+    function wakeApi() {
+        fetch(`${apiUrl}/health`, {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-store',
+            keepalive: true,
+        }).catch(() => {});
     }
 
     function setLoading(loading) {
